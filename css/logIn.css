@@ -1,0 +1,73 @@
+* {
+    border: 0.2px solid red;
+}
+
+.logInBody {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.wrap {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+}
+
+.logInBG {
+    width: 45vw;
+    border-bottom: 100vh solid black;
+
+    /* 오른쪽 사다리꼴 모양으로 */
+    border-right: 250px solid transparent;
+
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.logInBox {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+
+}
+
+.logInBox li {
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    list-style: none;
+    color: #a7a7a7;
+    font-size: 14px;
+}
+
+.logInBox h1 {
+    margin-top: 30%;
+    text-align: center;
+}
+
+.logInBox input,
+.logInBox div {
+    position: relative;
+    top: 0;
+    left: 25%;
+    width: 50%;
+    border: 1px solid black;
+}
+
+.logInBox input[type=text] {
+    height: 8%;
+    margin: 1% 0;
+    border-radius: 5px;
+}
+
+.logInBox div {
+    height: 5%;
+    border-radius: 20px;
+    text-align: center;
+}
