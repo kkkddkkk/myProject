@@ -1,5 +1,6 @@
 * {
-    border: 0.2px solid red;
+    /* border: 0.2px solid red; */
+    box-sizing: border-box;
 }
 
 .logInBody {
@@ -12,62 +13,116 @@
     position: absolute;
     height: 100vh;
     width: 100vw;
-    box-sizing: border-box;
+}
+
+/* 배경 CSS */
+.bgBlock{
+    /* border: 1px solid red; */
+    position: relative;
+    height: 100vh;
 }
 
 .logInBG {
-    width: 45vw;
+    width: 60vw;
     border-bottom: 100vh solid black;
 
-    /* 오른쪽 사다리꼴 모양으로 */
-    border-right: 250px solid transparent;
+    /* poligon: 도형 자르기. 왼쪽 위, 오른쪽 위, 오른쪽 아래, 왼쪽 아래 순서. x y */
+    clip-path: polygon(0 0, 70% 0%, 100% 100%, 0% 100%);
 
-    z-index: -1;
     position: absolute;
     top: 0;
     left: 0;
 }
 
-.logInBox {
-    position: fixed;
+.logInBG2 {
+    background-color: black;
+    height: 100vh;
+    width: 62vw;
+    clip-path: polygon(69% 0, 71% 0%, 100% 100%, 98.1% 100%);
+    position: absolute;
     top: 0;
-    right: 0;
-    width: 50%;
-    height: 100%;
-
+    left: 0;
 }
 
-.logInBox li {
-    display: inline-block;
-    width: 100px;
-    text-align: center;
-    list-style: none;
-    color: #a7a7a7;
-    font-size: 14px;
+.blackCover{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20vw;
+    height: 100%;
+    background-color: black;
+    z-index: 1;
+    border: none;
+}
+/* 배경 CSS 끝 */
+
+/* 로그인창 관련 CSS */
+.logInBox {
+    position: fixed;
+    top: 20%;
+    right: 0;
+    width: 50%;
+    height: 100vh;
 }
 
 .logInBox h1 {
-    margin-top: 30%;
     text-align: center;
+    font-size: 50px;
 }
 
 .logInBox input,
 .logInBox div {
-    position: relative;
-    top: 0;
-    left: 25%;
-    width: 50%;
+    width: 300px;
     border: 1px solid black;
 }
 
-.logInBox input[type=text] {
+/* ID, 비밀번호 입력 인풋 CSS */
+.IDPW {
+    /* 1줄 당 1개씩만 정렬 */
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+
     height: 8%;
-    margin: 1% 0;
+    margin: 10px auto;
+    padding-left: 10px;
     border-radius: 5px;
+    font-size: 18px;
 }
 
+/* 로그인 버튼 CSS */
 .logInBox div {
-    height: 5%;
+    height: 50px;
     border-radius: 20px;
     text-align: center;
+    margin: 5% auto 0 auto;
+    /* cursor: pointer; */
+    background-color: white;
+
+    /* 버튼 내 text 가운데 정렬 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 회원가입~비밀번호찾기 CSS */
+.logInBox ul {
+    /* display: flex; */
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.logInBox li {
+    /* 부모 요소가 text-align: center;일 때 가운데 정렬됨. */
+    display: inline-block;
+
+    text-align: center;
+    list-style: none;
+    color: #a7a7a7;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.logInBox li:not(:last-child)::after {
+    content: ' |';
 }
