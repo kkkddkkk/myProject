@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/findId.css">
+    <link rel="stylesheet" href="css/loginJoinFindIdPw.css">
+</head>
+
+<body class="logInBody">
+    <div class="wrap">
+        <!-- 아이디 찾기 창 -->
+        <div class="findIdWindow">
+            <h1>아이디 찾기</h1>
+            <div class="joinUsEmail">
+                <input class="input80" type="email" placeholder="E-MAIL">
+                <div class="joinUsBtn deact">인증번호 전송</div>
+            </div>
+            <!-- 이메일 형식이 올바르지 않습니다. / 인증 시간 표기(03:00) -->
+            <p class="forCheck emailMsg">&nbsp;</p>
+
+            <div class="joinUsCert">
+                <input class="input80" type="text" placeholder="인증번호">
+                <div class="joinUsBtn deact">인증번호 확인</div>
+            </div>
+            <!-- 인증번호가 일치하지 않습니다. -->
+            <p class="forCheck certMsg">&nbsp;</p>
+            <div class="helloBox">'ID'님, 안녕하세요!</div>
+            <div class="findPWBtn">비밀번호 찾기</div>
+        </div><!-- 아이디 찾기 창 끝 -->
+
+        <!-- 뒤로가기 버튼 -->
+        <div class="backToLogIn">
+            <img src="/img/whiwteArrow.png">
+            <p>&nbsp;LOG IN</p>
+        </div>
+    </div>
+
+    <script src="js/loginJoinFindIdPw.js"></script>
+    <script src="js/logIn.js"></script>
+</body>
+
+</html>

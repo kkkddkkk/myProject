@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/logIn.css">
+    <link rel="stylesheet" href="css/loginJoinFindIdPw.css">
+</head>
+
+<body class="logInBody">
+    <div class="wrap">
+        <div class="blackCover"></div>
+        <div class="bgBlock">
+            <div class="logInBG"></div>
+            <div class="logInBG2"></div>
+        </div>
+
+        <div class="logInBox">
+            <h1>LOG IN</h1>
+            <input type="text" placeholder="ID" class="IDPW">
+            <input type="password" placeholder="PASSWORD" class="IDPW">
+            <div class="logInBtn">로그인</div>
+            <ul>
+                <li class="newId">회원가입</li>
+                <li class="findId">아이디 찾기</li>
+                <li class="findPw">비밀번호 찾기</li>
+            </ul>
+        </div>
+
+        <!-- 회원가입 창 -->
+        <div class="joinUs">
+            <h1>회원가입</h1>
+            <input class="name" type="text" placeholder="이름(최대 10자)">
+            <!-- 최대 10자까지 입력하실 수 있습니다. -->
+            <p class="forCheck nameMsg">&nbsp;</p>
+
+            <div class="joinUsId">
+                <input class="input80" type="text" placeholder="ID">
+                <div class="joinUsBtn deact">중복 확인</div>
+            </div>
+            <!-- 공백 및 특수문자를 포함할 수 없습니다./이미 사용 중인 ID 입니다./사용 가능한 ID 입니다.-->
+            <p class="forCheck idMsg">&nbsp;</p>
+
+            <div class="joinUsPw">
+                <input type="password" placeholder="PASSWORD" class="writePw">
+                <img class="writePw" src="img/invisible.png">
+                <input type="password" placeholder="PASSWORD" class="checkPw" disabled>
+                <img src="img/invisible.png" class="checkPw">
+            </div>
+            <!-- 영문자, 숫자, 특수문자를 모두 포함하여 8자 이상 입력해주세요./비밀번호가 일치하지 않습니다. -->
+            <p class="forCheck pwCheck">&nbsp;</p>
+            <!-- 확인되었습니다. -->
+            <p class="forCheck pwCheck pwCheck2">&nbsp;</p>
+
+            <div class="joinUsEmail">
+                <input class="input80" type="email" placeholder="E-MAIL">
+                <div class="joinUsBtn deact">인증번호 전송</div>
+            </div>
+            <!-- 이메일 형식이 올바르지 않습니다./인증 시간 표기(03:00) -->
+            <p class="forCheck emailMsg">&nbsp;</p>
+
+            <div class="joinUsCert">
+                <input class="input80" type="text" placeholder="인증번호" maxlength="6">
+                <div class="joinUsBtn deact">회원가입</div>
+            </div>
+            <!-- 인증번호가 일치하지 않습니다. -->
+            <p class="forCheck certMsg">&nbsp;</p>
+        </div>
+
+        <!-- 아이디 찾기 창 -->
+        <div class="findIdWindow">
+            <h1>아이디 찾기</h1>
+            <div class="joinUsEmail">
+                <input class="input80" type="email" placeholder="E-MAIL">
+                <div class="joinUsBtn deact">인증번호 전송</div>
+            </div>
+            <!-- 이메일 형식이 올바르지 않습니다. / 인증 시간 표기(03:00) -->
+            <p class="forCheck emailMsg">&nbsp;</p>
+
+            <div class="joinUsCert">
+                <input class="input80" type="text" placeholder="인증번호">
+                <div class="joinUsBtn deact">인증번호 확인</div>
+            </div>
+            <!-- 인증번호가 일치하지 않습니다. -->
+            <p class="forCheck certMsg">&nbsp;</p>
+            <div class="helloBox">'ID'님, 안녕하세요!</div>
+            <div class="findPWBtn">비밀번호 찾기</div>
+        </div><!-- 아이디 찾기 창 끝 -->
+
+        <!-- 비밀번호찾기 창 -->
+        <div class="findPwWindow">
+            <h1>비밀번호 찾기</h1>
+            <input class="name" type="text" placeholder="ID">
+            <!-- 아이디가 존재하지 않습니다. -->
+            <p class="forCheck">&nbsp;</p>
+
+            <div>
+                <input class="input80" type="email" placeholder="E-MAIL">
+                <div class="joinUsBtn">인증번호 전송</div>
+            </div>
+            <!-- 이메일 형식이 올바르지 않습니다. / 인증 시간 표기(03:00) -->
+            <p class="forCheck forTest">&nbsp;</p>
+
+            <div>
+                <input class="input80" type="text" placeholder="인증번호">
+                <div class="joinUsBtn">인증번호 확인</div>
+            </div>
+            <!-- 인증번호가 일치하지 않습니다. -->
+            <p class="forCheck">&nbsp;</p>
+
+            <div class="joinUsPw">
+                <input type="password" placeholder="PASSWORD" class="writePwInFindPw">
+                <img class="writePwInFindPw" src="img/invisible.png">
+                <input type="password" placeholder="PASSWORD" class="checkPwInFindPw">
+                <img src="img/invisible.png" class="checkPwInFindPw">
+            </div>
+            <!-- 영문자, 숫자, 특수문자를 모두 포함하여 8자 이상 입력해주세요./비밀번호가 일치하지 않습니다. -->
+            <p class="forCheck pwCheck">&nbsp;</p>
+            <!-- 확인되었습니다. -->
+            <p class="forCheck pwCheck">&nbsp;</p>
+            <div class="findPWBtn changePw">확인</div>
+        </div><!-- 비밀번호찾기 창 -->
+
+
+        <!-- 뒤로가기 버튼 -->
+        <div class="backToLogIn">
+            <img src="/img/whiwteArrow.png">
+            <p>&nbsp;LOG IN</p>
+        </div>
+    </div>
+
+    <script src="js/loginJoinFindIdPw.js"></script>
+    <script src="js/logIn.js"></script>
+</body>
+
+</html>
