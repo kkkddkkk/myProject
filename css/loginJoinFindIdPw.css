@@ -13,6 +13,9 @@ Body {
     position: absolute;
     height: 100vh;
     width: 100vw;
+
+    /* 오차 줄이기. 대신 font-size는 각각 줘야함. */
+    font-size: 0;
 }
 
 /* 회원가입, 아이디 찾기, 비밀번호 찾기 공통 CSS  */
@@ -21,11 +24,20 @@ Body {
     color: white;
     width: 46%;
     max-width: 600px;
-    height: 100%;
+    min-width: 450px;
+
+    /* 화면정가운데 오게 하기기 */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .box h1 {
     text-align: center;
+    font-size: 32px;
+    margin-top: 0;
+    margin-bottom: 50px;
 }
 
 .box input {
@@ -50,7 +62,7 @@ Body {
     display: inline-block;
     width: 30%;
     height: 50px;
-    margin-left: 1.7%;
+    margin-left: 2%;
     background-color: white;
     color: black;
     border-radius: 50px;
@@ -58,10 +70,26 @@ Body {
     text-align: center;
     line-height: 50px;
     cursor: pointer;
+    font-size: 16px !important;
+}
+
+.findPWBtn {
+    height: 50px;
+    width: 70%;
+    border-radius: 30px;
+    text-align: center;
+    margin: 0 auto;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
 }
 
 .input80 {
-    width: 67.6%;
+    width: 68%;
 }
 
 .pwCheck {
@@ -84,6 +112,28 @@ Body {
     border: 1px solid #a7a7a7;
     cursor: auto;
 }
+
+/* pw input + visible 버튼 */
+.joinUsPw input {
+    width: 40%;
+}
+
+.joinUsPw img {
+    height: 30px;
+    width: 6%;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+img.writePw {
+    margin: 0 2.5%;
+}
+
+img.checkPw {
+    margin-left: 2.5%;
+    margin-right: 0;
+}
+
 
 
 /* 뒤로가기 버튼 */
@@ -114,7 +164,7 @@ Body {
 /* fade in 애니메이션 */
 .fadeIn {
     display: block !important;
-    animation: fadeIn 1s forwards;
+    animation: fadeIn 0.5s forwards;
 }
 
 @keyframes fadeIn {
@@ -129,7 +179,6 @@ Body {
 
 /* fade out 애니메이션 */
 .fadeOut {
-    display: none !important;
     animation: fadeOut 0.5s forwards;
 }
 

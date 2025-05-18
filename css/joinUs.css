@@ -1,40 +1,12 @@
 /* 배경 CSS */
-.wrap {
-    position: absolute;
-    height: 100vh;
-    width: 100vw;
+body {
+    height: 100%;
     background-color: black !important;
-    overflow: hidden;
-}
-
-/* 회원가입 창 관련 CSS */
-.box {
-    /* 화면정가운데 오게 하기기 */
-    position: absolute;
-    top: 65%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-/* pw input + visible 버튼 */
-.joinUsPw img {
-    height: 30px;
-    width: 30px;
-    margin: 0 1.6%;
-    vertical-align: middle;
-    cursor: pointer;
-}
-
-.joinUsPw input {
-    width: 40.5%;
 }
 
 .name {
     width: 100%;
 }
-
-/* 회원가입 창 관련 CSS 끝*/
-
 
 /* 뒤로가기 버튼 */
 .backToLogIn {

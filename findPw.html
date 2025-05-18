@@ -5,37 +5,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/logIn.css">
+    <link rel="stylesheet" href="css/findPw.css">
     <link rel="stylesheet" href="css/loginJoinFindIdPw.css">
 </head>
 
 <body class="logInBody">
     <div class="wrap">
-        <div class="findPwWindow">
+        <div class="box fadeIn">
             <h1>비밀번호 찾기</h1>
-            <input class="name" type="text" placeholder="ID">
+            <input class="joinUsId" type="text" placeholder="ID">
             <!-- 아이디가 존재하지 않습니다. -->
-            <p class="forCheck">&nbsp;</p>
+            <p class="forCheck idMsg">&nbsp;</p>
 
-            <div>
+            <div class="joinUsEmail">
                 <input class="input80" type="email" placeholder="E-MAIL">
-                <div class="joinUsBtn">인증번호 전송</div>
+                <div class="regBtn">인증번호 전송</div>
             </div>
             <!-- 이메일 형식이 올바르지 않습니다. / 인증 시간 표기(03:00) -->
-            <p class="forCheck forTest">&nbsp;</p>
+            <p class="forCheck emailMsg">&nbsp;</p>
 
-            <div>
+            <div class="joinUsCert">
                 <input class="input80" type="text" placeholder="인증번호">
-                <div class="joinUsBtn">인증번호 확인</div>
+                <div class="regBtn">인증번호 확인</div>
             </div>
             <!-- 인증번호가 일치하지 않습니다. -->
-            <p class="forCheck">&nbsp;</p>
+            <p class="forCheck certMsg">&nbsp;</p>
 
             <div class="joinUsPw">
-                <input type="password" placeholder="PASSWORD" class="writePwInFindPw">
-                <img class="writePwInFindPw" src="img/invisible.png">
-                <input type="password" placeholder="PASSWORD" class="checkPwInFindPw">
-                <img src="img/invisible.png" class="checkPwInFindPw">
+                <input type="password" placeholder="PASSWORD" class="writePw">
+                <img class="writePw" src="img/invisible.png">
+                <input type="password" placeholder="PASSWORD" class="checkPw" disabled>
+                <img src="img/invisible.png" class="checkPw">
             </div>
             <!-- 영문자, 숫자, 특수문자를 모두 포함하여 8자 이상 입력해주세요./비밀번호가 일치하지 않습니다. -->
             <p class="forCheck pwCheck">&nbsp;</p>
@@ -53,7 +53,7 @@
     </div>
 
     <script src="js/loginJoinFindIdPw.js"></script>
-    <script src="js/logIn.js"></script>
+    <script src="js/findPw.js"></script>
 </body>
 
 </html>

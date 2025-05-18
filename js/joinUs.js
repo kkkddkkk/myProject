@@ -1,36 +1,36 @@
 document.addEventListener('DOMContentLoaded', function () {
 
-
     //회원가입 버튼 활성화를 위한 임시 변수
     let namePoint, idPoint, pwPoint, emailPoint, certPoint;
 
-    //#region
     //인풋
-    let nameInput, idInput;
+    let nameInput, idInput, writePwInput, chkPwInput;
     nameInput = document.querySelector('.name');//이름 입력 인풋
     idInput = document.querySelector('.joinUsId').children[0];//ID 입력 인풋
+    writePwInput = document.querySelectorAll('.writePw')[0];//비밀번호 작성 인풋
+    chkPwInput = document.querySelectorAll('.checkPw')[0];//비밀번호 확인 인풋
+    emailInput = document.querySelector('.joinUsEmail').children[0];//이메일 인풋
+    certInput = document.querySelector('.joinUsCert').children[0];//인증번호 인풋
 
     //에러메시지
-    let nameMsg, idMsg, PwMsg, emailMsg, certMsg;
+    let nameMsg, idMsg, PwMsg1, PwMsg2, emailMsg, certMsg;
     nameMsg = document.querySelector('.nameMsg');//이름 오류 메세지
     idMsg = document.querySelector('.idMsg');//ID 에러 메시지
-    PwMsg = document.querySelectorAll('.pwCheck');//PW 에러 메시지 [0]작성란 [1]확인란
+    pwMsg1 = document.querySelectorAll('.pwCheck')[0];//비밀번호 작성란 메시지
+    pwMsg2 = document.querySelectorAll('.pwCheck')[1];//비밀번호 확인란 메시지
     emailMsg = document.querySelector('.emailMsg');//이메일 오류 메시지
     certMsg = document.querySelector('.certMsg');//인증번호 오류 메시지
 
-    //비밀번호 PW 관련. [0]=input, [1]=img
-    let writePw, checkPw;
-    writePw = document.querySelectorAll('.writePw');//비밀번호 작성
-    checkPw = document.querySelectorAll('.checkPw');//비밀번호 확인
-
-    //이메일 + 회원가입 관련. [0]=input, [1]=버튼
-    let joinUsEmail, joinUsCert;
-    joinUsEmail = document.querySelector('.joinUsEmail').children;//이메일+인증번호 전송
-    joinUsCert = document.querySelector('.joinUsCert').children;//인증번호+회원가입
+    //아이콘
+    let writePwIcon, chkPwIcon;
+    writePwIcon = document.querySelectorAll('.writePw')[1];//비밀번호 작성 아이콘
+    chkPwIcon = document.querySelectorAll('.checkPw')[1];//비밀번호 확인 아이콘
 
     //버튼
-    let idCheck;
+    let idCheck, emailCheck, certCheck;
     idCheck = document.querySelector('.joinUsId').querySelector('div');//중복 확인 버튼
+    emailCheck = document.querySelector('.joinUsEmail').children[1];//인증번호 전송 버튼
+    certCheck = document.querySelector('.joinUsCert').children[1];//회원가입 버튼
 
     // 이름 10자 초과 시 안내
     //#region
@@ -49,34 +49,13 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     //#endregion
 
-    //ID 유효성 검사
+    //ID 유효성 + 중복검사
     //#region
-    idInput.addEventListener('input', () => {
-        if (idInput.value.length == 0) {//ID란이 공란이면 기본 스타일
-            idInput.classList.remove('erMsg');
-            idMsg.innerHTML = "&nbsp;";
-            idCheck.classList.add('deact')
-        } else if (idInput.value.length < 6 || idInput.value.length > 20) {//글자 수 조건 어길 시 에러 스타일
-            idInput.classList.add('erMsg');
-            idMsg.innerHTML = "* ID는 6자~20자로 작성해주세요.";
-            idCheck.classList.add('deact')
-        } else {
-            if (!regId.test(idInput.value)) {//영숫자 조건 어길 시 에러 스타일
-                idInput.classList.add('erMsg');
-                idMsg.innerHTML = "* ID는 영어, 숫자로만 작성해주세요.";
-                idCheck.classList.add('deact')
-            } else {//조건 모두 충족할 시 기본 스타일 스타일
-                idInput.classList.remove('erMsg');
-                idMsg.innerHTML = "&nbsp;";
-                idCheck.classList.remove('deact')
-            }
-        }
+    idInput.addEventListener('input', () => {//유효성 검증증
+        chkId(idInput, idMsg, idCheck);
     })
-    //#endregion
 
-    //ID 중복 검사
-    //#region
-    idCheck.addEventListener('click', () => {
+    idCheck.addEventListener('click', () => {//ID 중복 검사
 
         if (!idCheck.classList.contains('deact')) {
             if (confirm('사용가능?')) {
@@ -85,160 +64,66 @@ document.addEventListener('DOMContentLoaded', function () {
                 idMsg.innerHTML = "* 이미 사용 중인 ID입니다.";
             }
         }
-
         sumPoint();
     })
     //#endregion
+
+    //PW 검증
+    //#region
 
     //PW 유효성 검사
-    //#region
-    writePw[0].addEventListener('input', () => {
-        if (writePw[0].value.length == 0) {//작성란 공란일 시 작성란 기본스타일 / 확인란 비활성화
-            writePw[0].classList.remove('erMsg');
-            PwMsg[0].innerHTML = "&nbsp;";
-            checkPw[0].disabled = true;
-        } else if (writePw[0].value.length < 8 || writePw[0].value.length > 15) {//글자 수 조건 미충족 시 에러 스타일 + 확인란 비활성화
-            writePw[0].classList.add('erMsg');
-            PwMsg[0].innerHTML = "* 비밀번호는 8자~15자로 작성해주세요.";
-            checkPw[0].disabled = true;
-        } else {
-            if (!regPw.test(writePw[0].value)) {//정규식 미충족 시 에러 스타일 + 확인란 비활성화
-                writePw[0].classList.add('erMsg');
-                PwMsg[0].innerHTML = "* 영어, 숫자, 특수문자를 모두 활용해주세요.";
-                checkPw[0].disabled = true;
-            } else {//조건 충족 시 작성란 기본스타일 / 확인란 활성화
-                writePw[0].classList.remove('erMsg');
-                PwMsg[0].innerHTML = "&nbsp;";
-                checkPw[0].disabled = false;
-            }
-        }
-
-        if (checkPw[0].value != writePw[0].value && !checkPw[0].value == '') {//확인란 작성 후 작성란 수정 시 확인란 에러스타일
-            checkPw[0].classList.add('erMsg');
-            PwMsg[1].innerHTML = "* 비밀번호가 일치하지 않습니다.";
-            PwMsg[0].innerHTML = "&nbsp;";
-        }
-
-        if (checkPw[0].disabled == true) {//확인란 비활성화 시 기본스타일 / 내용 삭제
-            checkPw[0].classList.remove('erMsg');
-            PwMsg[1].innerHTML = "&nbsp;";
-            checkPw[0].value = '';
-        }
-    })//PW 유효성 검사 끝.
-    //#endregion
+    writePwInput.addEventListener('input', () => {
+        chkPw(writePwInput, chkPwInput, pwMsg1, pwMsg2)
+    })
 
     //비밀번호 확인란
-    //#region
-    checkPw[0].addEventListener('input', () => {
-
-        if (checkPw[0].value.length == 0) {//확인란 공란일 시 기본스타일
-            checkPw[0].classList.remove('erMsg');
-            PwMsg[0].innerHTML = "&nbsp;";
-            PwMsg[1].innerHTML = "&nbsp;";
-        } else if (checkPw[0].value != writePw[0].value) {//작성란 != 확인란일 시 에러스타일
-            checkPw[0].classList.add('erMsg');
-            PwMsg[0].innerHTML = "&nbsp;";
-            PwMsg[1].innerHTML = "* 비밀번호가 일치하지 않습니다.";
-        } else {//작성란 == 확인란일 시 기본스타일
-            checkPw[0].classList.remove('erMsg');
-            PwMsg[0].innerHTML = "&nbsp;";
-            PwMsg[1].innerHTML = "* 확인되었습니다.";
-        }
+    chkPwInput.addEventListener('input', () => {
+        chkPw2(chkPwInput, writePwInput, pwMsg1, pwMsg2);
         sumPoint();
     })
-    //#endregion
 
     //PW 아이콘 visible로 변경 + input type 변경
-    //#region
-    writePw[1].addEventListener('click', () => {//작성란 visible 버튼
-        writePw[1].src = 'img/visible.png';
-        if (writePw[1].classList.contains('visible')) {//visible 클릭 시 이벤트
-            writePw[1].classList.remove('visible');
-            writePw[1].src = 'img/invisible.png';
-            writePw[0].type = 'password'
-        } else {//invisible 클릭 시 이벤트
-            writePw[1].classList.add('visible');
-            writePw[0].type = 'text'
-        }
+    writePwIcon.addEventListener('click', () => {//작성란 visible 버튼
+        iconChange(writePwIcon, writePwInput);
     })
-    checkPw[1].addEventListener('click', () => {//확인란 visible 버튼. 내용은 위와 같음.
-        checkPw[1].src = 'img/visible.png';
-        if (checkPw[1].classList.contains('visible')) {
-            checkPw[1].classList.remove('visible');
-            checkPw[1].src = 'img/invisible.png';
-            checkPw[0].type = 'password'
-        } else {
-            checkPw[1].classList.add('visible');
-            checkPw[0].type = 'text'
-        }
+    chkPwIcon.addEventListener('click', () => {//확인란 visible 버튼. 내용은 위와 같음.
+        iconChange(chkPwIcon, chkPwInput);
     })
     //#endregion
+
+    //이메일 유효성 + 인증번호 검증
+    //#region
 
     //이메일 유효성 검사
-    //#region
-    joinUsEmail[0].addEventListener('input', () => {
-        if (joinUsEmail[0].value.length == 0) {//이메일이 공란이면 기본 스타일 
-            joinUsEmail[0].classList.remove('erMsg');
-            emailMsg.innerHTML = "&nbsp;";
-            joinUsEmail[1].classList.add('deact');
-        } else {
-            if (!regEmail.test(joinUsEmail[0].value)) {//정규식과 맞지 않으면 에러 스타일
-                joinUsEmail[0].classList.add('erMsg');
-                emailMsg.innerHTML = "* E-MAIL 형식이 올바르지 않습니다.";
-                joinUsEmail[1].classList.add('deact');
-            } else {//정규식에 부합하면 기본스타일
-                joinUsEmail[0].classList.remove('erMsg');
-                emailMsg.innerHTML = "&nbsp;";
-            }
-        }
-
+    emailInput.addEventListener('input', () => {
+        chkEmail(emailInput, emailMsg, emailCheck);
         sumPoint();
-
     })
-    //#endregion
 
     //인증번호 전송 및 검증
-    //#region
-    joinUsEmail[1].addEventListener('click', () => {
-        if (!joinUsEmail[1].classList.contains('deact')) {
+    emailCheck.addEventListener('click', () => {
+        nameInput.readOnly = true;
+        idInput.readOnly = true;
+        writePwInput.readOnly = true;
+        chkPwInput.readOnly = true;
 
-            nameInput.readOnly = true;
-            idInput.readOnly = true;
-            writePw[0].readOnly = true;
-            checkPw[0].readOnly = true;
-
-            certNum = parseInt(Math.random() * 1000000)// 6자리 인증번호
-
-            console.log(certNum);
-            alert('인증번호를 발송하였습니다.');
-            joinUsEmail[1].innerHTML = '인증번호 재전송';
-
-            emailMsg.innerHTML = `* 05 : 00`;
-            timer5min(emailMsg);
-
-            if (emailMsg.innerHTML == `* 00 : 00`) {
-                alert(`인증번호 유효기간이 지났습니다.\n'인증번호 재전송' 버튼을 눌러주세요.`);
-                certNum = 1234567;
-            }
-
-        }
+        sendCert(emailCheck, emailMsg);
     })
 
     //인증번호 검증
-    joinUsCert[0].addEventListener('input', () => {
+    certInput.addEventListener('input', () => {
         certMsg.innerHTML = `&nbsp;`;
-        joinUsCert[0].classList.remove('erMsg');
+        certInput.classList.remove('erMsg');
         sumPoint();
     })
-
     //#endregion
 
     //회원가입 클릭 이벤트
     //#region
-    joinUsCert[1].addEventListener('click', () => {
+    certCheck.addEventListener('click', () => {
         certMsg.innerHTML = `&nbsp;`;
-        if (!joinUsCert[1].classList.contains('deact')) {
-            if (joinUsCert[0].value == certNum) {
+        if (!certCheck.classList.contains('deact')) {
+            let afterCert = function () {//인증번호 input == 인증번호 일 경우우
                 alert(`회원가입을 마쳤습니다.\n환영합니다, ${nameInput.value}님!`)
 
                 //회원가입 창 fade out
@@ -250,10 +135,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 backToLogIn.classList.add('fadeOut');
 
                 switchPage('logIn.html');
-            } else {
-                certMsg.innerHTML = '* 인증번호가 일치하지 않습니다.';
-                joinUsCert[0].classList.add('erMsg');
             }
+
+            chkCert(certMsg, certInput, afterCert);
         }
     })
     //#endregion
@@ -276,21 +160,21 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         //비밀번호 검증
-        if (PwMsg[1].innerHTML == "* 확인되었습니다.") {
+        if (pwMsg2.innerHTML == "* 확인되었습니다.") {
             pwPoint = 1;
         } else {
             pwPoint = 0;
         }
 
         //이메일 검증
-        if (joinUsEmail[0].value.length != 0 && !joinUsEmail[0].classList.contains('erMsg')) {
+        if (emailInput.value.length != 0 && !emailInput.classList.contains('erMsg')) {
             emailPoint = 1;
         } else {
             emailPoint = 0;
         }
 
         //인증번호 검증
-        if (joinUsCert[0].value.length != 0) {
+        if (certInput.value.length != 0) {
             certPoint = 1;
         } else {
             certPoint = 0;
@@ -300,21 +184,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
         //point의 합이 4면 비활성화 풀기
         if (namePoint + idPoint + pwPoint + emailPoint == 4) {
-            joinUsEmail[1].classList.remove('deact');
+            emailCheck.classList.remove('deact');
         } else {
-            joinUsEmail[1].classList.add('deact');
+            emailCheck.classList.add('deact');
         }
 
         //포인트의 합이 5면 회원가입 버튼 비활성화 풀기
         if (namePoint + idPoint + pwPoint + emailPoint + certPoint == 5) {
-            joinUsCert[1].classList.remove('deact');
+            certCheck.classList.remove('deact');
         } else {
-            joinUsCert[1].classList.add('deact');
+            certCheck.classList.add('deact');
         }
     }
     //#endregion
-
-    //#endregion --------------------------->회원가입 창 끝.
 
 
 
