@@ -11,19 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
     findId = document.querySelector('.findId');//아이디 찾기
     findPw = document.querySelector('.findPw');//비밀번호 찾기
 
-    //ID, PW 공란일 시 비활성화
-
-
     //배경
     let bgBlock, blackCover
     bgBlock = document.querySelector('.bgBlock');//배경 도형
     blackCover = document.querySelector('.blackCover');//검은 배경(애니메이션 용)
-
-    //버튼
-    let findPWBtn, changePw, backToLogIn;
-    findPWBtn = document.querySelector('.findPWBtn');//아이디 찾기 창 -> 비밀번호 찾기 버튼
-    changePw = document.querySelector('.changePw');//비밀번호 찾기 창 -> 확인 버튼
-    backToLogIn = document.querySelector('.backToLogIn');//뒤로가기 버튼(공통)
 
 
     window.addEventListener('load', () => {
@@ -54,8 +45,6 @@ document.addEventListener('DOMContentLoaded', function () {
             bgBlock.children[1].classList.remove('reverseRecoil');
             bgBlock.children[0].classList.add('recoil');
             bgBlock.children[1].classList.add('recoil');
-
-
         })
         btn.addEventListener('mouseleave', () => {
             bgBlock.children[0].classList.remove('recoil');

@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //페이지 전환 애니메이션 
     //#region
-    window.switchPage = function(page){
+    window.switchPage = function (page) {
         wrap.classList.remove('fadeIn');
         wrap.classList.add('fadeOut');
 
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //#endregion
 
     backToLogIn.addEventListener('click', () => {
-        switchPage('.logIn.html');
+        switchPage('logIn.html');
     })
 
     //5분 타이머 함수 (timer5min())
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     //#endregion
 
-    //PW 작성란 == 확인란 검증(function chkPw2(chkPwInput, writePwInput, PwMsg1, PwMsg2))
+    //PW 작성란 == 확인란 검증(function chkPw2(chkPwInput, writePwInput, pwMsg1, pwMsg2))
     //#region
     window.chkPw2 = function (chkPwInput, writePwInput, pwMsg1, pwMsg2) {
         if (chkPwInput.value.length == 0) {//확인란 공란일 시 기본스타일

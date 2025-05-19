@@ -179,15 +179,16 @@ img.checkPw {
 
 /* fade out 애니메이션 */
 .fadeOut {
+    display: block !important;
     animation: fadeOut 0.5s forwards;
 }
 
 @keyframes fadeOut {
-    100% {
-        opacity: 0;
-    }
-
     0% {
         opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
     }
 }

@@ -25,21 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let emailCheck, certCheck, changePw;
     emailCheck = document.querySelector('.joinUsEmail').children[1];//인증번호 전송 버튼
     certCheck = document.querySelector('.joinUsCert').children[1];//인증번호 확인 버튼
-    changePw = document.querySelector('.changePw');//확인(비밀번호 변경경) 버튼
-
-
-    //비밀번호 찾기 창 -> 확인 버튼 클릭 애니메이션 부여
-    //#region
-    changePw.addEventListener('click', () => {
-        box.classList.remove('fadeIn');
-        box.classList.add('fadeOut');
-        box.addEventListener('animationend', () => {
-            box.style.display = 'none';
-            switchPage('login.html');
-        }, {once: true});
-
-    })
-    //#endregion
+    changePw = document.querySelector('.changePw');//확인(비밀번호 변경) 버튼
 
 
     //이메일 유효성 검사
@@ -53,11 +39,24 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     //#endregion
 
-    //인증번호 전송 및 검증
+    //ID 검증 + 인증번호 전송 및 검증
     //#region
-    //인증번호 전송
+    //인증번호 전송 + ID 검증
     emailCheck.addEventListener('click', () => {
-        sendCert(emailCheck, emailMsg);
+        if (confirm('ID 존재?')) {
+            idInput.classList.remove('erMsg');
+            idMsg.innerHTML = '&nbsp;';
+            sendCert(emailCheck, emailMsg);
+        } else {
+            idInput.classList.add('erMsg');
+            idMsg.innerHTML = '존재하지 않는 ID입니다.';
+        }
+    })
+
+    //ID 검증
+    idInput.addEventListener('input', () => {
+        idInput.classList.remove('erMsg');
+        idMsg.innerHTML = '&nbsp;';
     })
 
     //인증번호 검증
@@ -77,19 +76,51 @@ document.addEventListener('DOMContentLoaded', function () {
     certCheck.addEventListener('click', () => {
         certMsg.innerHTML = `&nbsp;`;
         let afterCert = function () {
-            //ID 데이터 불러오기
-            let id = prompt('ID?');
-            helloBox.innerHTML = `'${id}'님, 안녕하세요!`;
-            helloBox.style.fontStyle = 'italic';
+            writePwInput.disabled = false;
+            certCheck.classList.add('deact');
+
         }
 
         chkCert(certMsg, certInput, afterCert);
     })
     //#endregion
 
+    //비밀번호 검증 
+    writePwInput.addEventListener('input', () => {
+        chkPw(writePwInput, chkPwInput, pwMsg1, pwMsg2);
+    })
+
+    //비밀번호 확인란 > 확인버튼 활성화
+    chkPwInput.addEventListener('input', () => {
+        chkPw2(chkPwInput, writePwInput, pwMsg1, pwMsg2);
+        if(pwMsg2.innerHTML == "* 확인되었습니다."){
+            changePw.classList.remove('deact');
+        }else{
+            changePw.classList.add('deact');
+        }
+    })
+
+    //비밀번호 icon 변경
+    writePwIcon.addEventListener('click', () => {
+        iconChange(writePwIcon, writePwInput);
+    })
+    chkPwIcon.addEventListener('click', () => {
+        iconChange(chkPwIcon, chkPwInput);
+    })
+
 
     // 비밀번호 찾기 창 관련 event 끝
     //#endregion
 
+
+    //확인 버튼 클릭 애니메이션 부여
+    //#region
+    changePw.addEventListener('click', () => {
+        if (confirm('저장하시겠습니까?')) {
+            switchPage('login.html');
+        }
+
+    })
+    //#endregion
 
 })
