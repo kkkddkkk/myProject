@@ -4,6 +4,10 @@ header {
     /* padding: 25px; */
 }
 
+.headeraBody{
+    margin: 0;
+}
+
 /* 로고 */
 header img {
     width: 50px;
@@ -68,4 +72,43 @@ header li div {
 
 .hamburger3 {
     top: 12px;
+}
+
+/* 우측 메뉴 */
+.modalBG{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0,0, 0.3);
+    z-index: 1;
+}
+
+.regNav{
+    background-color: white;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 30%;
+    height: 100%;
+    z-index: 2;
+}
+
+.profile p{
+    display: inline;
+}
+
+.friendsNum{
+    display: inline-block;
+}
+
+.navMenu{
+    display: inline-block;
+    list-style-type: none;
+}
+
+.navMenu li{
+    display: inline-block;
 }
