@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/header.css">
+    <script src="https://kit.fontawesome.com/232704dd57.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="headerBody">
     <header>
         <img src='img/otter3.jpg'>
-        <ul>
+        <!-- <ul>
             <li class="plus">
                 <div class="plus1"></div>
                 <div class="plus2"></div>
@@ -21,32 +22,79 @@
                 <div class="hamburger2"></div>
                 <div class="hamburger3"></div>
             </li>
-        </ul>
+        </ul> -->
     </header>
-    <div class="modalBG"> </div>
-    <div class = "regNav">
-        <div class="profile">
-            <img src="img/otter3.jpg">
-            <p>NAME</p>
-            <p>@ID</p>
+    <div class="wrap">
+        <div class="nav">
+            <div class="regNav">
+                <div class="profile">
+                    <img class="profileImg" src="img/otter3.jpg">
+                    <p class="name">NAME</p>
+                    <p class="id">@ID</p>
 
-            <div class="friendsNum">
-                <div><img src="img/otter3.jpg"></div>
-                <p>n</p>
+                    <div class="friendsNum">
+                        <i class="fa-solid fa-user userIcon"></i>
+                        <p>99</p>
+                    </div>
+
+                    <button class="setAccount">계정 설정</button>
+                </div>
+
+                <div class="menu">
+                    <ul class="navMenu">
+                        <li>나의 업무관리</li>
+                        <li>세부 업무 확인</li>
+                        <li>테마 설정</li>
+                        <li>알람</li>
+                    </ul>
+                    <div class="navLine"></div>
+                </div>
+                <div class="btnArea">
+                    <button class="logOutBtn">로그아웃</button>
+                </div>
+            </div>
+            <!-- regNav 끝. -->
+            <div class="setNav">
+                <div class="myImg">
+                    <img class="bigProfileImg" src="img/otter.jpg">
+                    <div class="addImg"></div>
+                </div>
+
+                <div class="chkPwDiv">
+                    <input class="myName" type="password" placeholder="PASSWORD">
+                    <!-- <img class="pwIcon" src="img/invisible.png"> -->
+                    <!-- 확인되었습니다. -->
+                    <p class="forCheck pwCheck pwCheck2">&nbsp;</p>
+                    <button class="chkPw deact">비밀번호 확인</button>
+                </div>
+
+                <div class="setNamePw">
+                    <input class="myPw" type="text" placeholder="NAME" value="NAME">
+                    <!-- 확인되었습니다. -->
+                    <p class="forCheck pwCheck pwCheck2">&nbsp;</p>
+
+                    <input class="myPw2" type="password" placeholder="PASSWORD">
+                    <!-- 확인되었습니다. -->
+                    <p class="forCheck pwCheck pwCheck2">&nbsp;</p>
+                    <input class="myPw2" type="password" placeholder="PASSWORD">
+                    <!-- 확인되었습니다. -->
+                    <p class="forCheck pwCheck pwCheck2">&nbsp;</p>
+                    <button class="chkPw2 deact">비밀번호 확인</button>
+
+                </div>
+
+
+                <div class="backBtn">
+                    <img src="img/leftArrow.png">
+                    <p>&nbsp;뒤로가기</p>
+                </div>
+
             </div>
 
-            <button>계정 설정</button>
-        </div>
 
-        <div class="navLine"></div>
-        <ul class="navMenu">
-            <li>나의 업무관리</li>
-            <li>세부 업무 확인</li>
-            <li>테마 설정</li>
-            <li>알람</li>
-        </ul>
-     <div class="navLine"></div>
-        <button class="logOutBtn">로그아웃</button>
+
+
+        </div>
     </div>
 
 </body>

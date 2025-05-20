@@ -4,7 +4,7 @@ header {
     /* padding: 25px; */
 }
 
-.headeraBody{
+.headeraBody {
     margin: 0;
 }
 
@@ -14,7 +14,7 @@ header img {
     height: 50px;
     position: absolute;
     top: 50px;
-    left: 80px;
+    left: 50px;
 }
 
 /* 버튼들 */
@@ -74,41 +74,215 @@ header li div {
     top: 12px;
 }
 
+
+
 /* 우측 메뉴 */
-.modalBG{
+.modalBG {
     display: block;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0,0, 0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     z-index: 1;
 }
 
-.regNav{
+.nav {
     background-color: white;
     position: fixed;
     top: 0;
     right: 0;
-    width: 30%;
+    width: 25%;
     height: 100%;
     z-index: 2;
+    box-shadow: -4px 0 10px #555555;
 }
 
-.profile p{
-    display: inline;
+.profile {
+    margin: 10% 10% 0 10%;
+    height: 31%;
+    min-height: 200px;
+    max-height: 250px;
+    border-bottom: 2px solid #a7a7a7;
+    position: relative;
 }
 
-.friendsNum{
+.profile img {
+    position: absolute;
+    top: 8%;
+    left: 8%;
+    border-radius: 100%;
+}
+
+.profileImg {
+    width: 30%;
+    aspect-ratio: 1/1;
+
+    float: left;
+}
+
+.name,
+.id {
+    margin-left: 42%;
+    position: relative;
+    top: 5%;
+}
+
+.name {
+    margin-bottom: 0;
+    font-size: 2vw;
+}
+
+.id {
+    margin-top: 0;
+    font-size: 1vw;
+    font-style: italic;
+}
+
+/* font awesome 사용 */
+.userIcon {
+    /* font-size로 크기 조절 */
+    font-size: 30px;
+    margin-left: 11%;
+}
+
+.friendsNum {
+    position: absolute;
+    left: 9%;
+    bottom: 0;
+    font-size: 20px;
+    width: 45%;
+    margin-bottom: 5%;
+    margin-left: 0%;
+}
+
+.friendsNum p {
     display: inline-block;
+    margin: 0 0 0 3%;
+    font-size: 25px;
 }
 
-.navMenu{
-    display: inline-block;
+.setAccount {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 5%;
+    margin-right: 10%;
+    width: 40%;
+    height: 15%;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: white;
+
+}
+
+.menu {
+    margin: 10% 10% 0 10%;
+    height: 45%;
+}
+
+.navMenu {
     list-style-type: none;
+
 }
 
-.navMenu li{
+.navMenu li {
+    margin: 0;
+    font-size: 20px;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+}
+
+/* 로그아웃버튼 */
+.btnArea {
+    position: relative;
+    height: 20%;
+    margin: 5% 10%;
+    border-top: 2px solid #a7a7a7;
+}
+
+.logOutBtn {
+    background-color: white;
+    width: 100%;
+    height: 30%;
+    border-radius: 5px;
+    border: 1px solid red;
+    color: red;
+    background-color: white;
+    margin-top: 7%;
+
+    /* position: absolute;
+    bottom: 0; */
+}
+
+/* 임시 */
+.profile,
+.menu,
+.btnArea, .chkPwDiv{
+    display: none;
+}
+
+/* 비밀번호 확인 창 */
+
+.setNav, .setNamePw {
+    margin: 10%;
+    height: 100%;
+    position: relative;
+}
+
+.setNav p {
+    margin: 0;
+}
+
+.bigProfileImg {
+    width: 70%;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    position: relative;
+    left: 15%;
+}
+
+.myPw,
+.chkPw, .myName, .myPw2, .chkPw2 {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.myPw {
+    height: 50px;
+    border-radius: 5px;
+    font-size: 17px;
+    border: 1.5px solid black;
+    margin: 30% 0 0 0;
+    padding-left: 3%;
+
+    /* input img 등등 한 줄로 정렬하고 싶을 때. 다른 쪽도 추가해야함. */
+    /* vertical-align: middle; */
+}
+
+.chkPw {
+    height: 40px;
+    padding: 0;
+    border: 1px solid black;
+    background-color: white;
+    border-radius: 50px;
+    margin: 5% 0 0 0;
+}
+
+.backBtn{
+    position: absolute;
+    bottom: 10%;
+    cursor: pointer;
+}
+
+.backBtn img {
+    width: 20px;
+    vertical-align: middle;
+}
+
+.backBtn p {
     display: inline-block;
+    vertical-align: middle;
 }
