@@ -1,3 +1,8 @@
+* {
+    /* 임시 */
+    /* border: 1px solid red; */
+}
+
 header {
     width: 100%;
     height: 100px;
@@ -94,7 +99,7 @@ header li div {
     top: 0;
     right: 0;
     width: 25%;
-    height: 100%;
+    height: 100vh;
     z-index: 2;
     box-shadow: -4px 0 10px #555555;
 }
@@ -146,7 +151,7 @@ header li div {
 /* font awesome */
 .userIcon {
     /* font-size로 크기 조절 */
-    font-size: 30px;
+    font-size: 25px;
     margin-left: 11%;
 }
 
@@ -154,7 +159,6 @@ header li div {
     position: absolute;
     left: 9%;
     bottom: 0;
-    font-size: 20px;
     width: 45%;
     margin-bottom: 5%;
     margin-left: 0%;
@@ -163,7 +167,7 @@ header li div {
 .friendsNum p {
     display: inline-block;
     margin: 0 0 0 3%;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .setAccount {
@@ -180,9 +184,9 @@ header li div {
 
 }
 
-.menu {
+.menu,
+.searchUser {
     margin: 10% 10% 0 10%;
-    height: 45%;
 }
 
 .navMenu {
@@ -198,23 +202,158 @@ header li div {
     line-height: 60px;
 }
 
-/* 친구검색 창창 */
+
+/* 친구검색 창 */
 .friends {
     margin: 10% 10% 0 10%;
 }
 
-.friendN img{
+.search {
+    height: 10%;
+    position: relative;
+    margin-bottom: 10%;
+}
+
+.search input {
+    width: 75%;
+    aspect-ratio: 7/1;
+    padding-left: 2%;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.search button {
+    width: 18%;
+    aspect-ratio: 6/4;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.friendN,
+.addFriend {
+    width: 100%;
+    height: 20%;
+    position: relative;
+    margin-top: 5%;
+    margin-bottom: 7%;
+}
+
+.friendN img,
+.addFriend img {
     width: 20%;
     aspect-ratio: 1/1;
     border-radius: 100%;
     float: left;
 }
 
-.friendN p{
+.friendN p,
+.addFriend p {
     display: inline-block;
-    margin: 0;
+    margin-left: 3%;
     font-size: 1.1vw;
 }
+
+.friendN ul,
+.addFriend ul {
+    display: flex;
+    justify-content: space-around;
+    width: 30%;
+    margin-top: 5%;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.friendN li,
+.addFriend li {
+    display: inline-block;
+    margin: 0;
+    list-style: none;
+    font-size: 1.3vw;
+    cursor: pointer;
+}
+
+
+/* 친구 검색 화면 */
+.closeBtn {
+    font-size: 18px;
+    position: absolute;
+    top: 5%;
+    right: 5%;
+}
+
+
+.searchUser {
+    position: relative;
+    border-radius: 15px;
+    background-color: #E8E8E8;
+}
+
+.searchImg {
+    width: 60%;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    margin: 10% 20% 5% 20%;
+}
+
+.searchUser p {
+    margin: 0;
+    text-align: center;
+}
+
+.searchName {
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 25px;
+}
+
+.searchId {
+    font-style: italic;
+    color: #a7a7a7;
+}
+
+/* 친구신청 버튼 */
+.askFriend {
+    margin: 5% 20% 10% 20%;
+    width: 60%;
+    aspect-ratio: 5/1;
+    border-radius: 30px;
+    border: 1px solid black;
+    background-color: white;
+    cursor: pointer;
+
+    /* 임시 */
+    display: none;
+}
+
+.friendMenuDiv {}
+
+.friendMenu {
+
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 0;
+    width: 60%;
+    aspect-ratio: 5/1;
+    margin: 5% 20%;
+
+    /* 임시 */
+    /* display: none; */
+}
+
+.friendMenu li {
+    display: inline-block;
+    font-size: 20px;
+}
+
 
 
 /* 로그아웃버튼 */
@@ -240,15 +379,14 @@ header li div {
 }
 
 /* 임시 */
-
 .menu,
 .btnArea,
-.setNav {
+.setNav,
+.friends {
     display: none;
 }
 
 /* 비밀번호 확인 창 */
-
 .setNav,
 .setNamePw {
     margin: 10%;
@@ -350,8 +488,8 @@ header li div {
 
 /* 뒤로가기 버튼 */
 .backBtn {
-    position: absolute;
-    bottom: 10%;
+    position: fixed;
+    bottom: 5%;
     cursor: pointer;
 }
 
