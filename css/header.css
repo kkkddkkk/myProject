@@ -99,9 +99,11 @@ header li div {
     top: 0;
     right: 0;
     width: 25%;
-    height: 100vh;
+    height: 100%;
     z-index: 2;
     box-shadow: -4px 0 10px #555555;
+    flex-direction: column;
+    /* 위→아래 배치 */
 }
 
 .profile {
@@ -185,13 +187,15 @@ header li div {
 }
 
 .menu,
-.searchUser {
+.searchUser,
+.friends,
+.profile,
+.alarmDiv {
     margin: 10% 10% 0 10%;
 }
 
 .navMenu {
     list-style-type: none;
-
 }
 
 .navMenu li {
@@ -204,10 +208,6 @@ header li div {
 
 
 /* 친구검색 창 */
-.friends {
-    margin: 10% 10% 0 10%;
-}
-
 .search {
     height: 10%;
     position: relative;
@@ -288,7 +288,8 @@ header li div {
 }
 
 
-.searchUser {
+.searchUser,
+.alarmN {
     position: relative;
     border-radius: 15px;
     background-color: #E8E8E8;
@@ -331,12 +332,13 @@ header li div {
     display: none;
 }
 
-.friendMenuDiv {}
+.friendMenuDiv,
+.alarmN {
+    /* 하위요소의 margin까지 포함 */
+    overflow: hidden;
+}
 
 .friendMenu {
-
-    box-sizing: border-box;
-
     display: flex;
     justify-content: space-around;
     list-style: none;
@@ -344,14 +346,78 @@ header li div {
     width: 60%;
     aspect-ratio: 5/1;
     margin: 5% 20%;
-
-    /* 임시 */
-    /* display: none; */
 }
 
 .friendMenu li {
     display: inline-block;
     font-size: 20px;
+}
+
+/* 알람화면 */
+.alarmDiv {
+    overflow-y: scroll;
+    height: calc(59%);
+    background-color: rgba(0, 0, 255, 0.05);
+}
+
+.alarmDiv::-webkit-scrollbar {
+    width: 20px;
+}
+
+.alarmDiv::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 4px;
+}
+
+.alarmDiv::-webkit-scrollbar-track {
+    background-color: white;
+}
+
+
+.alarmN {
+    margin: 0 0 4% 0;
+}
+
+.forNew {
+    margin-top: 3% !important;
+    margin-bottom: 3%;
+    padding-left: 6%;
+    font-size: 1rem !important;
+    font-weight: bold;
+}
+
+.alarmN img,
+.alarmColor {
+    border-radius: 100%;
+    width: 20%;
+    aspect-ratio: 1/1;
+    float: left;
+    margin: 0 6%;
+}
+
+.alarmMsg {
+    margin: 4.5% 0 0 0;
+    font-size: 0.8rem;
+}
+
+.alarmN ul {
+    list-style: none;
+    width: 30%;
+    display: flex;
+    justify-content: space-around;
+    padding-left: 65%;
+    margin: 5% 0;
+}
+
+.alarmColor {
+    background-color: pink;
+}
+
+.alarmGoBtn {
+    background-color: #E8E8E8;
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 1% 0 5% 75%;
 }
 
 
@@ -382,7 +448,8 @@ header li div {
 .menu,
 .btnArea,
 .setNav,
-.friends {
+.friends,
+.searchUser {
     display: none;
 }
 
