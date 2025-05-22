@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/header.css">
     <script src="https://kit.fontawesome.com/232704dd57.js" crossorigin="anonymous"></script>
 </head>
 
-<body class="headerBody">
+<body class="headerBody BGColor">
     <header>
         <img src='img/otter3.jpg'>
         <!-- <ul>
@@ -25,155 +26,155 @@
         </ul> -->
     </header>
     <div class="wrap">
-        <div class="nav">
+        <div class="nav BGColor">
             <div class="regNav">
                 <div class="profile">
                     <img class="profileImg" src="img/otter3.jpg">
-                    <p class="name">NAME</p>
-                    <p class="id">@ID</p>
+                    <p class="name textColor">NAME</p>
+                    <p class="id textColor">@ID</p>
 
                     <div class="friendsNum">
-                        <i class="fa-solid fa-user userIcon"></i>
-                        <p>99</p>
+                        <i class="fa-solid fa-user userIcon textColor"></i>
+                        <p class="textColor">99</p>
                     </div>
 
-                    <button class="setAccount">계정 설정</button>
+                    <button class="setAccount BGColor textColor borderColor">계정 설정</button>
                 </div>
-
-                <div class="friends">
-                    <div class="search">
-                        <input class="text" placeholder="ID로 검색">
-                        <button>검색</button>
-                    </div>
-
-                    <div class="addFriend">
-                        <img src="img/otter3.jpg">
-                        <p>NAME1</p>
-                        <ul>
-                            <li><!--plus-->
-                                <i class="fa-solid fa-plus"></i>
-                            </li>
-                            <li><!-- 쓰레기통 -->
-                                <i class="fa-solid fa-trash-can"></i>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="friendN">
-                        <img src="img/otter3.jpg">
-                        <p>NICKNAME2</p>
-                        <ul>
-                            <li> <!-- 빈 하트 -->
-                                <i class="fa-regular fa-heart"></i>
-                                <!-- 꽉 찬 하트 -->
-                                <!-- <i class="fa-solid fa-heart"></i> -->
-                            </li>
-                            <li><!-- 수정 -->
-                                <i class="fa-solid fa-pen-to-square"></i>
-                                <!-- 쓰레기통 -->
-                                <!-- <i class="fa-solid fa-trash-can"></i> -->
-                            </li>
-                            <li> <!-- X -->
-                                <i class="fa-solid fa-xmark"></i>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- 친구 검색 화면 -->
-                <div class="searchUser">
-                    <i class="fa-solid fa-xmark closeBtn"></i>
-                    <img class="searchImg" src="img/otter3.jpg">
-                    <p class="searchName">NAME</p>
-                    <p class="searchId">@ID</p>
-
-                    <button class="askFriend">
-                        <i class="fa-solid fa-user-plus"></i>
-                        친구신청
-                    </button>
-
-                    <div class="friendMenuDiv">
-                        <ul class="friendMenu">
-                            <li> <!-- 빈 하트 -->
-                                <i class="fa-regular fa-heart"></i>
-                                <!-- 꽉 찬 하트 -->
-                                <!-- <i class="fa-solid fa-heart"></i> -->
-                            </li>
-                            <li><!-- 수정 -->
-                                <i class="fa-solid fa-pen-to-square"></i>
-                                <!-- 쓰레기통 -->
-                                <!-- <i class="fa-solid fa-trash-can"></i> -->
-                            </li>
-                            <li> <!-- X -->
-                                <i class="fa-solid fa-xmark"></i>
-                            </li>
-                        </ul>
-                    </div>
-
-                </div>
-
-
-                <!-- 알람화면 -->
-                <div class="alarmDiv">
-                    <div class="alarmN">
-                        <i class="fa-solid fa-xmark closeBtn"></i>
-                        <p class="forNew">NEW!</p>
-                        <img src="img/otter.jpg">
-                        <p class="alarmMsg">NAME님이<br>친구맺기를 요청했습니다.</p>
-                        <ul>
-                            <li><!--plus-->
-                                <i class="fa-solid fa-plus"></i>
-                            </li>
-                            <li><!-- 쓰레기통 -->
-                                <i class="fa-solid fa-trash-can"></i>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="alarmN">
-                        <i class="fa-solid fa-xmark closeBtn"></i>
-                        <p class="forNew">NEW!</p>
-                        <div class="alarmColor"></div>
-                        <p class="alarmMsg">새 업무가<br>추가되었습니다.</p>
-                        <button class="alarmGoBtn">GO</button>
-                    </div>
-
-                    <div class="alarmN">
-                        <i class="fa-solid fa-xmark closeBtn"></i>
-                        <p class="forNew">NEW!</p>
-                        <div class="alarmColor"></div>
-                        <p class="alarmMsg">새 업무가<br>추가되었습니다.</p>
-                        <button class="alarmGoBtn">GO</button>
-                    </div>
-
-                    <div class="alarmN">
-                        <i class="fa-solid fa-xmark closeBtn"></i>
-                        <p class="forNew">NEW!</p>
-                        <div class="alarmColor"></div>
-                        <p class="alarmMsg">새 업무가<br>추가되었습니다.</p>
-                        <button class="alarmGoBtn">GO</button>
-                    </div>
-
-                    <div class="backBtn">
-                        <img src="img/leftArrow.png">
-                        <p>&nbsp;뒤로가기</p>
-                    </div>
-                </div>
-
-
-
 
                 <!-- 메뉴 -->
                 <div class="menu">
-                    <ul class="navMenu">
+                    <ul class="navMenu textColor">
                         <li>나의 업무관리</li>
                         <li>세부 업무 확인</li>
                         <li>테마 설정</li>
                         <li>알람</li>
                     </ul>
-                    <div class="navLine"></div>
+
+
                 </div>
                 <div class="btnArea">
-                    <button class="logOutBtn">로그아웃</button>
+                    <button class="logOutBtn BGColor">로그아웃</button>
+                </div>
+            </div>
+
+            <div class="friends">
+                <div class="search">
+                    <input class="text BGColor borderColor" placeholder="ID로 검색">
+                    <button class="BGColor borderColor">검색</button>
+                </div>
+
+                <div class="addFriend">
+                    <img src="img/otter3.jpg">
+                    <p class="textColor">NAME1</p>
+                    <ul class="yesOrNo textColor">
+                        <li><!--plus-->
+                            <i class="fa-solid fa-plus"></i>
+                        </li>
+                        <li><!-- 쓰레기통 -->
+                            <i class="fa-solid fa-trash-can"></i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="friendN">
+                    <img src="img/otter3.jpg">
+                    <p class="textColor">NICKNAME2</p>
+                    <ul class="modiFriend textColor">
+                        <li> <!-- 빈 하트 -->
+                            <i class="fa-regular fa-heart"></i>
+                            <!-- 꽉 찬 하트 -->
+                            <!-- <i class="fa-solid fa-heart"></i> -->
+                        </li>
+                        <li><!-- 수정 -->
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            <!-- 쓰레기통 -->
+                            <!-- <i class="fa-solid fa-trash-can"></i> -->
+                        </li>
+                        <li> <!-- X -->
+                            <i class="fa-solid fa-xmark"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 친구 검색 화면 -->
+            <div class="searchUser">
+                <i class="fa-solid fa-xmark closeBtn"></i>
+                <img class="searchImg" src="img/otter3.jpg">
+                <p class="searchName textColor">NAME</p>
+                <p class="searchId textColor">@ID</p>
+
+                <button class="askFriend BGColor textColor borderColor">
+                    <i class="fa-solid fa-user-plus textColor"></i>
+                    친구신청
+                </button>
+
+                <div class="friendMenuDiv">
+                    <ul class="friendMenu modiFriend textColor">
+                        <li> <!-- 빈 하트 -->
+                            <i class="fa-regular fa-heart"></i>
+                            <!-- 꽉 찬 하트 -->
+                            <!-- <i class="fa-solid fa-heart"></i> -->
+                        </li>
+                        <li><!-- 수정 -->
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            <!-- 쓰레기통 -->
+                            <!-- <i class="fa-solid fa-trash-can"></i> -->
+                        </li>
+                        <li> <!-- X -->
+                            <i class="fa-solid fa-xmark"></i>
+                        </li>
+                    </ul>
+
+                    <ul class="yesOrNo textColor">
+                        <li><!--plus-->
+                            <i class="fa-solid fa-plus"></i>
+                        </li>
+                        <li><!-- 쓰레기통 -->
+                            <i class="fa-solid fa-trash-can"></i>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+
+            <!-- 알람화면 -->
+            <div class="alarmDiv">
+                <div class="requestFriend">
+                    <i class="fa-solid fa-xmark closeBtn textColor"></i>
+                    <p class="forNew textColor">NEW!</p>
+                    <img src="img/otter.jpg">
+                    <p class="alarmMsg textColor">NAME님이<br>친구맺기를 요청했습니다.</p>
+                    <ul class="yesOrNo textColor">
+                        <li><!--plus-->
+                            <i class="fa-solid fa-plus"></i>
+                        </li>
+                        <li><!-- 쓰레기통 -->
+                            <i class="fa-solid fa-trash-can"></i>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="alarmN">
+                    <i class="fa-solid fa-xmark closeBtn textColor"></i>
+                    <p class="forNew textColor">NEW!</p>
+                    <div class="alarmColor"></div>
+                    <p class="alarmMsg textColor">새 업무가<br>추가되었습니다.</p>
+                    <button class="alarmGoBtn textColor borderColor">GO</button>
+                </div>
+
+                <div class="alarmN">
+                    <i class="fa-solid fa-xmark closeBtn textColor"></i>
+                    <p class="forNew textColor">NEW!</p>
+                    <div class="alarmColor"></div>
+                    <p class="alarmMsg textColor">새 업무가<br>추가되었습니다.</p>
+                    <button class="alarmGoBtn textColor borderColor">GO</button>
+                </div>
+
+                <div class="backBtn2 BGColor">
+                    <!-- leftArrow -->
+                    <i class="fa-solid fa-chevron-left textColor"></i>
+                    <p class="textColor">&nbsp;뒤로가기</p>
                 </div>
             </div>
             <!-- regNav 끝. -->
@@ -182,50 +183,48 @@
             <div class="setNav">
                 <div class="myImg">
                     <img class="bigProfileImg" src="img/otter.jpg">
-                    <div class="addImg">
-                        <i class="fa-solid fa-plus plusIcon"></i>
+                    <div class="addImg BGColor">
+                        <div class="addImgBG">
+                            <i class="fa-solid fa-plus plusIcon textColor"></i>
+                        </div>
+
                     </div>
                 </div>
 
                 <div class="chkPwDiv">
-                    <input class="myPw" type="password" placeholder="PASSWORD">
-                    <!-- <img class="pwIcon" src="img/invisible.png"> -->
+                    <input class="myPw BGColor textColor borderColor" type="password" placeholder="PASSWORD">
                     <!-- 확인되었습니다. -->
                     <p class="chkMsg">&nbsp;</p>
-                    <button class="chkPw deact">비밀번호 확인</button>
+                    <button class="chkPw deact BGColor textColor borderColor">비밀번호 확인</button>
                 </div>
 
                 <div class="setNamePw">
-                    <p class="topMsg">* 이름 변경</p>
-                    <input class="myName" type="text" placeholder="NAME" value="NAME">
+                    <p class="topMsg textColor">* 이름 변경</p>
+                    <input class="myName BGColor textColor borderColor" type="text" placeholder="NAME" value="NAME">
 
-                    <p class="topMsg">* 비밀번호 변경</p>
-                    <input class="myPw2" type="password" placeholder="PASSWORD">
+                    <p class="topMsg textColor">* 비밀번호 변경</p>
+                    <input class="myPw2 BGColor textColor borderColor" type="password" placeholder="PASSWORD">
                     <!-- 비밀번호 유효성 검사 -->
-                    <p class="pwMsg">&nbsp;</p>
+                    <p class="pwMsg textColor">&nbsp;</p>
 
-                    <input class="myPw2" type="password" placeholder="PASSWORD">
+                    <input class="myPw2 BGColor textColor borderColor" type="password" placeholder="PASSWORD">
                     <!-- 확인되었습니다. -->
-                    <p class="chkMsg">&nbsp;</p>
+                    <p class="chkMsg textColor">&nbsp;</p>
 
-                    <button class="chkPw2 deact">계정정보 변경</button>
-
+                    <button class="chkPw2 deact BGColor textColor borderColor">계정정보 변경</button>
                 </div>
 
 
-                <div class="backBtn">
-                    <img src="img/leftArrow.png">
-                    <p>&nbsp;뒤로가기</p>
+                <div class="backBtn2 BGColor">
+                    <!-- leftArrow -->
+                    <i class="fa-solid fa-chevron-left textColor"></i>
+                    <p class="textColor">&nbsp;뒤로가기</p>
                 </div>
-
             </div>
-
-
-
-
         </div>
     </div>
 
+    <script src="js/header.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,18 @@
+/* 테마 CSS */
+/* 배경색 */
+.BGColor {
+    background-color: white;
+}
+
+/* 텍스트 색 + 버튼 보더 색 + 스크롤바 색*/
+.textColor {
+    color: black;
+}
+.borderColor {
+    border: 1px solid black;
+}
+.alarmDiv::-webkit-scrollbar-thumb,
+.setNav::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 10px;
+}
