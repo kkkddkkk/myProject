@@ -12,7 +12,7 @@
     border: 1px solid black;
 }
 .alarmDiv::-webkit-scrollbar-thumb,
-.setNav::-webkit-scrollbar-thumb {
+.friendArea::-webkit-scrollbar-thumb {
     background-color: black;
     border-radius: 10px;
 }
