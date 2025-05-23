@@ -90,8 +90,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //친구목록 페이지
     let friends = document.querySelector('.friends');//기본 nav - 친구목록
-    let addFriendI = nameI(friends, 'addFriend', 'addFriend');//친구신청 div 배열
-    let friendNI = nameI(friends, 'friendN', 'friendN');//친구목록 div 배열
+    let addFriendDiv = friends.querySelector('.addFriendDiv');//친구신청 div
+    let addFriendI = nameI(addFriendDiv, 'addFriend', 'addFriend');//친구신청 목록 배열
+    let friendNDiv = friends.querySelector('.friendNDiv');//친구목록 div
+    let friendNI = nameI(friendNDiv, 'friendN', 'friendN');//친구목록 배열
 
     //친구목록 버튼
     let acceptFriendI = nameI0(friends, 'yesOrNo', 'acceptFriend');//친구 수락 버튼
@@ -103,6 +105,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //친구목록 인풋
     let searchFriendInput = friends.querySelector('.search').children[0]//친구검색 인풋
+
+    //친구목록 이름
+    let addFriendNameI = nameI(friends, 'addFriendName', 'addFriendName');//친구신청 목록 친구 이름
+    let friendNameI = nameI(friends, 'friendName', 'friendName');//친구목록 친구 이름
+
 
     //#endregion ============================================================================> 친구목록 변수 끝.
 
@@ -163,44 +170,88 @@ document.addEventListener('DOMContentLoaded', () => {
     //#endregion ============================================> 개인정보 수정 끝.
 
 
-    function moveToSet(btn) {
-        btn.addEventListener('click', () => {
-            regNav.style.display = 'none';
-            setNav.style.display = 'block';
-        })
-    }
-    function moveToOthers(btn, movingArea) {
-        btn.addEventListener('click', () => {
-            menu.style.display = 'none';
-            logOutArea.style.display = 'none';
-            movingArea.style.display = 'block';
-        })
-    }
-    function navMoves(btn, oldArea, newArea) {
-        btn.addEventListener('click', () => {
-            oldArea.style.display = 'none';
-            newArea.style.display = 'block';
-        })
-    }
-
-    //기본 nav
+    //기본 nav 화면이동
     moveToOthers(friendsNum, friends);
     moveToOthers(friendsNumIcon, friends);//user icon + 친구 수 클릭 시 친구목록 창 이동
     moveToSet(setAccount);//계정설정 버튼 클릭 시 개인정보 수정 화면으로 이동
     moveToOthers(alarm, alarmNav);//알람버튼 클릭 시 알람 화면으로 이동
 
-    //친구목록 창
+    //친구목록 창 화면 이동
     navMoves(SearchBtn, friends, searchUser);//검색버튼 클릭 시 친구검색 화면으로 이동
 
+    //임시버튼
+    let myBtn = document.querySelector('header').querySelector('button');
+
+
+
+
     for (let i = 0; i < acceptFriendI.length; i++) {
+
         acceptFriendI[i].addEventListener('click', () => {
-            addFriendI[i].classList.remove('addFriend');
-            addFriendI[i].classList.remove(`addFriend${i}`);
-            addFriendI[i].classList.add('friendN');
+
+            //클래스명 정리
+            addFriendI[i].classList.remove('addFriend');;//친구신청 목록 클래스명 삭제
+            addFriendNameI[i].classList.remove('addFriendName');;//친구신청 이름 클래스명 삭제
+            addFriendI[i].classList.add('friendN');//친구목록 클래스명 추가
+            addFriendNameI[i].classList.add(`friendName`);//친구이름 클래스명 추가
+            for (let j = 0; j < friendNameI.length; j++) {
+                addFriendNameI[i].classList.remove(`addFriendName${j}`);
+                addFriendI[i].classList.remove(`addFriend${i}`)
+            }
+
+            //추가된 친구를 친구목록에 추가
+            let newFriend = friendNI[0].cloneNode(true);
+            newFriend.classList.remove(`friendN0`);
+            newFriend.querySelector('.friendName').classList.remove(`friendName0`);
+            newFriend.querySelector('.friendName').innerHTML = addFriendNameI[i].innerHTML;
+            friendNDiv.appendChild(newFriend);
+            newFriend.style.display = 'block';
+
+            //추가된 친구를 친구신청목록에서 제거
+            addFriendDiv.removeChild(addFriendI[i]);
+            console.log();
+
+            //클래스명 재정리
+            friendNI = nameI(friendNDiv, 'friendN', 'friendN');//
+            friendNameI = nameI(friends, 'friendName', 'friendName')
+
+            //이름으로 배열 생성 후 정렬
+            let nameSort = [];//이름 정렬
+            let obSort = [];//이름에 따른 div 순서 정렬
+            for (let j = 0; j < friendNI.length; j++) {
+                nameSort.push(friendNameI[j].innerHTML);
+            }
+            nameSort.sort();
+            for (let j = 0; j < nameSort.length; j++) {
+                for (let k = 0; k < friendNameI.length; k++) {
+                    if (nameSort[j] == friendNameI[k].innerHTML) {
+                        obSort.push(friendNI[k]);
+                    }
+                }
+            }
+            console.log(obSort);
+
+
+            for (let j = 0; j < obSort.length; j++) {
+                friendNDiv.insertBefore(obSort[j], obSort[j + 1]);
+            }
+            obSort.splice(0, obSort.length);
+            console.log(obSort);
+
+            console.log(friendNameI[i].classList);
+            for (let j = 0; j < friendNameI.length; j++) {
+                friendNameI[i].classList.remove(`friendName${j}`);
+                friendNI[i].classList.remove(`friendN${i}`)
+            }
+            friendNameI = nameI(friends, 'friendName', 'friendName')
         })
+
+        //이름에 따른 정렬 안끝남~~! 친추 여러번 하면 클래스명이 초기화되지 않음...
+
     }
 
 
+    //함수
 
 
     //여러 div 구분용 함수 (function nameI(0, 1, 2)nav, className, variable))
@@ -222,8 +273,8 @@ document.addEventListener('DOMContentLoaded', () => {
         result = [];
         for (let i = 0; i < temp.length; i++) {
             newClassName = `${variable}${i}`;
-            temp[i].classList.add(newClassName);
-            result[i] = nav.querySelector(`.${variable}${i}`).querySelectorAll('li')[0];
+            temp[i].querySelectorAll('li')[0].classList.add(newClassName);
+            result[i] = nav.querySelector(`.${variable}${i}`);
         }
         return result;
     }
@@ -233,8 +284,8 @@ document.addEventListener('DOMContentLoaded', () => {
         result = [];
         for (let i = 0; i < temp.length; i++) {
             newClassName = `${variable}${i}`;
-            temp[i].classList.add(newClassName);
-            result[i] = nav.querySelector(`.${variable}${i}`).children[1];
+            temp[i].querySelectorAll('li')[1].classList.add(newClassName);
+            result[i] = nav.querySelector(`.${variable}${i}`);
         }
         return result;
     }
@@ -244,14 +295,38 @@ document.addEventListener('DOMContentLoaded', () => {
         result = [];
         for (let i = 0; i < temp.length; i++) {
             newClassName = `${variable}${i}`;
-            temp[i].classList.add(newClassName);
-            result[i] = nav.querySelector(`.${variable}${i}`).children[2];
+            temp[i].querySelectorAll('li')[2].classList.add(newClassName);
+            result[i] = nav.querySelector(`.${variable}${i}`);
         }
         return result;
     }
 
     //#endregion ================================================================> 변수명 지정 함수 끝.
 
+    //화면 이동 함수
+    //#region
+
+    function moveToSet(btn) {
+        btn.addEventListener('click', () => {
+            regNav.style.display = 'none';
+            setNav.style.display = 'block';
+        })
+    }
+    function moveToOthers(btn, movingArea) {
+        btn.addEventListener('click', () => {
+            menu.style.display = 'none';
+            logOutArea.style.display = 'none';
+            movingArea.style.display = 'block';
+        })
+    }
+    function navMoves(btn, oldArea, newArea) {
+        btn.addEventListener('click', () => {
+            oldArea.style.display = 'none';
+            newArea.style.display = 'block';
+        })
+    }
+
+    //#endregion =====================================================> 화면이동함수 끝.
 
 
 })
