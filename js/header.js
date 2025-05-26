@@ -91,25 +91,18 @@ document.addEventListener('DOMContentLoaded', () => {
     //친구목록 페이지
     let friends = document.querySelector('.friends');//기본 nav - 친구목록
     let addFriendDiv = friends.querySelector('.addFriendDiv');//친구신청 div
-    let addFriendI = nameI(addFriendDiv, 'addFriend', 'addFriend');//친구신청 목록 배열
+    let addFriend = friends.querySelectorAll('.addFriend');//친구신청 목록
     let friendNDiv = friends.querySelector('.friendNDiv');//친구목록 div
-    let friendNI = nameI(friendNDiv, 'friendN', 'friendN');//친구목록 배열
+    let friendN = friends.querySelectorAll('.friendN');//친구목록
+    let likeFriendDiv = friends.querySelector('.likeFriendDiv')//즐겨찾기 친구 div
+    let normalLikeFriendDiv = friends.querySelector('.normalLikeFriendDiv');
 
     //친구목록 버튼
-    let acceptFriendI = nameI0(friends, 'yesOrNo', 'acceptFriend');//친구 수락 버튼
-    let denyFriendI = nameI1(friends, 'yesOrNo', 'denyFriend');//친구 거절 버튼
-    let addLikeFriendI = nameI0(friends, 'modiFriend', 'addLikeFriend');//즐겨찾기 친구 추가
-    let modiNickNameI = nameI1(friends, 'modiFriend', 'modiNickName');//친구 별명 변경
-    let delFriendI = nameI2(friends, 'modiFriend', 'delFriend');//친구삭제
     let SearchBtn = friends.querySelector('.search').children[1]//친구검색 버튼
 
     //친구목록 인풋
     let searchFriendInput = friends.querySelector('.search').children[0]//친구검색 인풋
-
-    //친구목록 이름
-    let addFriendNameI = nameI(friends, 'addFriendName', 'addFriendName');//친구신청 목록 친구 이름
-    let friendNameI = nameI(friends, 'friendName', 'friendName');//친구목록 친구 이름
-
+    let modiNickName = friends.querySelectorAll('.modiNickName');
 
     //#endregion ============================================================================> 친구목록 변수 끝.
 
@@ -138,8 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let alarmI = nameI(alarmNav, 'alarmN', 'alarmN');//알람 div
 
     //알람 창 버튼
-    let acceptFriendAtAlarmI = nameI0(alarmNav, 'yesOrNo', 'acceptFriendAtAlarm');//친구 수락 버튼
-    let denyFriendAtAlarmI = nameI1(alarmNav, 'yesOrNo', 'denyFriendAtAlarm');//친구 거절 버튼
     let alarmGoBtnI = nameI(alarmNav, 'alarmGoBtn', 'alarmGoBtn');//상세업무 화면 이동 버튼
 
     //#endregion ============================================================================> 알람창 변수 끝.
@@ -176,96 +167,140 @@ document.addEventListener('DOMContentLoaded', () => {
     moveToSet(setAccount);//계정설정 버튼 클릭 시 개인정보 수정 화면으로 이동
     moveToOthers(alarm, alarmNav);//알람버튼 클릭 시 알람 화면으로 이동
 
-    //친구목록 창 화면 이동
-    navMoves(SearchBtn, friends, searchUser);//검색버튼 클릭 시 친구검색 화면으로 이동
-
     //임시버튼
     let myBtn = document.querySelector('header').querySelector('button');
 
 
-    //친구신청 - 수락 버튼 클릭 시 친구 목록으로 위치 변환 + 이름 정렬
+    //친구신청 - 수락 거절버튼 클릭 이벤트
     //#region
 
-    for (let i = 0; i < addFriendDiv.children.length; i++) {
-        acceptFriendI[i].addEventListener('click', () => {
-            //추가된 친구를 친구목록에 추가
-            let newFriend = friendNI[0].cloneNode(true);//기본 친구목록 복사
-            newFriend.classList.remove(`friendN0`);//기본 친구목록 클래스명 정리
-            newFriend.querySelector('.friendName').classList.remove(`friendName0`);//기본 친구이름 클래스명 정리
+    // friends.addEventListener('click',(event)=>{
+    //     let clickedFriend = event.target.parentNode.parentNode.parentNode;//클릭된 친구
+    //     let clickedBtn = event.target.parentNode;//클릭된 버튼
 
-            // div children의 동적 변화에 따른 i 정리
-            if (i >= addFriendDiv.children.length) {
-                i = addFriendDiv.children.length - 1
-            }
+    //     if(clickedBtn.classList.contains('accept')){
 
-            newFriend.querySelector('.friendName').innerHTML = addFriendDiv.children[i].querySelector('p').innerHTML;//친구 이름 복사
+    //     }
 
-            delClass(friendNI, 'friendN');
-            delClass(friendNameI, 'friendName');//친구목록 클래스명+n 삭제
+    // })
+
+    addFriendDiv.addEventListener('click', (event) => {
+        let clickedAddFriend = event.target.parentNode.parentNode.parentNode;//addFriend
+
+        if (event.target.parentNode.classList.contains('accept')) {
+            //친구신청 - 수락 버튼 클릭 시 친구 목록으로 위치 변환 + 이름 정렬
+            let newFriend = friendN[0].cloneNode(true);//기본 친구목록 복사
+            newFriend.querySelector('.fa-heart').classList.remove('fa-solid');
+            newFriend.querySelector('.fa-heart').classList.add('fa-regular');//아이콘 변경
+
+            newFriend.querySelector('.friendName').innerHTML = clickedAddFriend.querySelector('p').innerHTML;//친구 이름 복사
 
             friendNDiv.appendChild(newFriend);//붙여넣기
             newFriend.style.display = 'block';
 
             forSort(friendNDiv, 'friendName');//이름에 따른 정렬
 
-            friendNI = nameI(friendNDiv, 'friendN', 'friendN');
-            friendNameI = nameI(friends, 'friendName', 'friendName');//클래스명 재정리
-
-            addFriendDiv.removeChild(addFriendI[i]);//추가된 친구를 친구신청목록에서 제거
-
-            delClass(addFriendI, 'addFriend');
-            delClass(addFriendNameI, 'addFriendName');//친구목록 클래스명+n 삭제
-
-            addFriendI = nameI(addFriendDiv, 'addFriend', 'addFriend');//친구신청 목록 배열
-            addFriendNameI = nameI(friends, 'addFriendName', 'addFriendName');//친구신청 목록 친구 이름
-        })
-    }
+            addFriendDiv.removeChild(clickedAddFriend);//추가된 친구를 친구신청목록에서 제거
+        } else if (event.target.parentNode.classList.contains('deny')) {
+            //친구신청 - 거절 버튼 클릭 시 node 삭제
+            addFriendDiv.removeChild(clickedAddFriend);//노드 삭제
+        }
+    })
 
     //#endregion
 
-    //친구신청 - 거절 버튼 클릭 시 node 삭제
-    //#region
-    for (let i = 0; i < addFriendDiv.children.length; i++) {
-        denyFriendI[i].addEventListener('click', () => {
 
-            if (i >= addFriendDiv.children.length) {
-                i = addFriendDiv.children.length - 1
-            }
-
-            addFriendDiv.removeChild(addFriendI[i]);//노드 삭제제
-
-            delClass(addFriendI, 'addFriend');
-            delClass(addFriendNameI, 'addFriendName');//전체 친구신청목록 클래스명+n 삭제
-
-            addFriendI = nameI(addFriendDiv, 'addFriend', 'addFriend');//친구신청 목록 배열
-            addFriendNameI = nameI(friends, 'addFriendName', 'addFriendName');//친구신청 목록 친구 이름
-        })
-    }
-
-    //#endregion
-
-    //친구 - 즐겨찾기 추가 + 즐겨찾기 제거 -- 동적으로 추가된 친구들은 적용 안됨! event Target 알아보기
+    //친구 목록 이벤트(즐겨찾기, 닉네임 수정, 친구삭제)
     //#region
 
-    for (let i = 0; i < friendNDiv.children.length; i++) {
-        addLikeFriendI[i].addEventListener('click', () => {
-            console.log(friendNDiv.children.length);
-            if (addLikeFriendI[i].querySelector('i').classList.contains('fa-regular')) {
-                addLikeFriendI[i].querySelector('i').classList.remove('fa-regular');
-                addLikeFriendI[i].querySelector('i').classList.add('fa-solid');
-            }else{
-                addLikeFriendI[i].querySelector('i').classList.remove('fa-solid');
-                addLikeFriendI[i].querySelector('i').classList.add('fa-regular');
+
+    normalLikeFriendDiv.addEventListener('click', (event) => {
+        let clickedFriend = event.target.parentNode.parentNode.parentNode;//Friend
+
+        if (event.target.parentNode.classList.contains('heart')) {
+            //하트 버튼 클릭 시 친구목록 최상단으로 이동
+            if (event.target.classList.contains('fa-regular')) {//즐겨찾기 등록
+                changeIcon('fa-regular', 'fa-solid');//아이콘 변경
+
+                let copiedFriend = clickedFriend.cloneNode(true);
+
+                likeFriendDiv.appendChild(copiedFriend);
+                friendNDiv.removeChild(clickedFriend);
+                forSort(likeFriendDiv, 'friendName');//즐겨찾기 친구 정렬
+            } else {//즐겨찾기 해제
+                changeIcon('fa-solid', 'fa-regular');//아이콘 변경
+
+                let copiedFriend = clickedFriend.cloneNode(true);
+
+                likeFriendDiv.removeChild(clickedFriend);
+                friendNDiv.appendChild(copiedFriend);
+
+                forSort(friendNDiv, 'friendName');//즐겨찾기 친구 정렬
             }
-        })
-    }
+        } else if (event.target.parentNode.classList.contains('modify')) {//수정 버튼 클릭 시 닉네임 수정
+            if (event.target.classList.contains('fa-pen-to-square')) {//닉네임 수정
+                clickedFriend.querySelector('p').style.display = 'none';
+                clickedFriend.querySelector('input').style.display = 'inline-block';
+                clickedFriend.querySelector('input').placeholder = clickedFriend.querySelector('p').innerHTML;//닉네임 변경 input 생성
+
+                changeIcon('fa-pen-to-square', 'fa-check');//아이콘 변경
+
+            } else {//닉네임 수정 완료
+                clickedFriend.querySelector('input').style.display = 'none';
+                clickedFriend.querySelector('p').style.display = 'inline-block';
+
+                changeIcon('fa-check', 'fa-pen-to-square');//아이콘 변경
+
+                if (clickedFriend.querySelector('input').value != '') {//input에 아무것도 쓰지 않을 경우
+                    clickedFriend.querySelector('p').innerHTML = clickedFriend.querySelector('input').value;
+                    clickedFriend.querySelector('input').value = '';
+                    forSort(friendNDiv, 'friendName');
+                }
+            }
+        } else if (event.target.parentNode.classList.contains('xMark')) {//X 버튼 클릭 시 이벤트(친구삭제)
+            if (clickedFriend.parentNode.classList.contains("friendNDiv")) {
+                if (confirm("친구를 삭제하시겠습니까?")) {
+                    friendNDiv.removeChild(clickedFriend);
+                }
+            } else if (clickedFriend.parentNode.classList.contains("likeFriendDiv")) {
+                if (confirm("친구를 삭제하시겠습니까?")) {
+                    likeFriendDiv.removeChild(clickedFriend);
+                }
+            }
+        }
+
+        //icon 변경 이벤트
+        function changeIcon(oldIcon, newIcon) {
+            event.target.classList.remove(oldIcon);
+            event.target.classList.add(newIcon);//아이콘 변경
+        }
+    })
 
     //#endregion
 
-    //친구 - 닉네임 수정
+    //친구 목록(상세) 이벤트
+    //#region
+
+    //친구목록 창 화면 이동
+    SearchBtn.addEventListener('click',()=>{
+        searchUser.style.display = 'block';
+    })
+    // navMoves(SearchBtn, friends, searchUser);//검색버튼 클릭 시 친구검색 화면으로 이동
+
+    searchUser.addEventListener('click',(event)=>{
+        console.log(event.target);
+        if(event.target.classList.contains('closeBtn')){//X버튼 클릭 이벤트
+            searchUser.style.display = 'none';
+            friends.style.display = 'block';
+        }
+        if(event.target.classList.contains('askFriend')){
+            event.target.innerHTML = `수락 대기 중...&nbsp;<i class="fa-solid fa-paper-plane"></i>`;
+        }
+    })
 
 
-    //친구 - 친구삭제
+
+    //#endregion
 
 
 
@@ -285,50 +320,6 @@ document.addEventListener('DOMContentLoaded', () => {
             result[i] = nav.querySelector(`.${variable}${i}`);
         }
         return result;
-    }
-
-    function nameI0(nav, className, variable) {
-        temp = nav.querySelectorAll(`.${className}`);
-        result = [];
-        for (let i = 0; i < temp.length; i++) {
-            newClassName = `${variable}${i}`;
-            temp[i].querySelectorAll('li')[0].classList.add(newClassName);
-            result[i] = nav.querySelector(`.${variable}${i}`);
-        }
-        return result;
-    }
-
-    function nameI1(nav, className, variable) {
-        temp = nav.querySelectorAll(`.${className}`);
-        result = [];
-        for (let i = 0; i < temp.length; i++) {
-            newClassName = `${variable}${i}`;
-            temp[i].querySelectorAll('li')[1].classList.add(newClassName);
-            result[i] = nav.querySelector(`.${variable}${i}`);
-        }
-        return result;
-    }
-
-    function nameI2(nav, className, variable) {
-        temp = nav.querySelectorAll(`.${className}`);
-        result = [];
-        for (let i = 0; i < temp.length; i++) {
-            newClassName = `${variable}${i}`;
-            temp[i].querySelectorAll('li')[2].classList.add(newClassName);
-            result[i] = nav.querySelector(`.${variable}${i}`);
-        }
-        return result;
-    }
-
-    function delClass(className, classNameMinusI) {
-        const regEx = new RegExp(`${classNameMinusI}\\d+`, '');
-        for (let j = 0; j < className.length; j++) {
-            for (let k = 0; k < className[j].classList.length; k++) {
-                if (regEx.test(className[j].classList[k])) {
-                    className[j].classList.remove(className[j].classList[k]);
-                }
-            }
-        }
     }
 
     function forSort(sortDiv, classNameMinusI) {
