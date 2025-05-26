@@ -188,19 +188,20 @@
 
             <!-- 친구 검색 화면 -->
             <div class="searchUserBG">
-                <div class="searchUser">
-                    <i class="fa-solid fa-xmark closeBtn"></i>
-                    <img class="searchImg" src="img/otter3.jpg">
-                    <p class="searchName textColor">NAME</p>
-                    <p class="searchId textColor">@ID</p>
+                <div class="searchUserBG2 BGColor">
+                    <div class="searchUser">
+                        <i class="fa-solid fa-xmark closeBtn"></i>
+                        <img class="searchImg" src="img/otter3.jpg">
+                        <p class="searchName textColor">NAME</p>
+                        <p class="searchId textColor">@ID</p>
 
-                    <button class="askFriend BGColor textColor borderColor">
-                        <i class="fa-solid fa-user-plus textColor"></i>
-                        친구신청
-                    </button>
+                        <button class="askFriend BGColor textColor borderColor">
+                            <i class="fa-solid fa-user-plus textColor"></i>
+                            친구신청
+                        </button>
 
-                    <div class="friendMenuDiv">
-                        <ul class="friendMenu modiFriend textColor">
+
+                        <ul class="friendMenu modiFriend2 textColor">
                             <li> <!-- 빈 하트 -->
                                 <i class="fa-regular fa-heart"></i>
                                 &nbsp;즐겨찾기
@@ -227,55 +228,53 @@
                                 &nbsp;거절
                             </li>
                         </ul>
+                    </div>
 
+                </div>
+
+
+
+                <!-- 알람화면 -->
+                <div class="alarmDiv">
+                    <div class="requestFriend">
+                        <i class="fa-solid fa-xmark closeBtn textColor"></i>
+                        <p class="forNew textColor">NEW!</p>
+                        <img src="img/otter.jpg">
+                        <p class="alarmMsg textColor">NAME님이<br>친구맺기를 요청했습니다.</p>
+                        <ul class="yesOrNo textColor">
+                            <li><!--plus-->
+                                <i class="fa-solid fa-plus"></i>
+                            </li>
+                            <li><!-- 쓰레기통 -->
+                                <i class="fa-solid fa-trash-can"></i>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="alarmN">
+                        <i class="fa-solid fa-xmark closeBtn textColor"></i>
+                        <p class="forNew textColor">NEW!</p>
+                        <div class="alarmColor"></div>
+                        <p class="alarmMsg textColor">새 업무가<br>추가되었습니다.</p>
+                        <button class="alarmGoBtn textColor borderColor">GO</button>
+                    </div>
+
+                    <div class="alarmN">
+                        <i class="fa-solid fa-xmark closeBtn textColor"></i>
+                        <p class="forNew textColor">NEW!</p>
+                        <div class="alarmColor"></div>
+                        <p class="alarmMsg textColor">새 업무가<br>추가되었습니다.</p>
+                        <button class="alarmGoBtn textColor borderColor">GO</button>
+                    </div>
+
+                    <div class="backBtn2 BGColor">
+                        <!-- leftArrow -->
+                        <i class="fa-solid fa-chevron-left textColor"></i>
+                        <p class="textColor">&nbsp;뒤로가기</p>
                     </div>
                 </div>
+                <!-- regNav 끝. -->
             </div>
-
-
-
-            <!-- 알람화면 -->
-            <div class="alarmDiv">
-                <div class="requestFriend">
-                    <i class="fa-solid fa-xmark closeBtn textColor"></i>
-                    <p class="forNew textColor">NEW!</p>
-                    <img src="img/otter.jpg">
-                    <p class="alarmMsg textColor">NAME님이<br>친구맺기를 요청했습니다.</p>
-                    <ul class="yesOrNo textColor">
-                        <li><!--plus-->
-                            <i class="fa-solid fa-plus"></i>
-                        </li>
-                        <li><!-- 쓰레기통 -->
-                            <i class="fa-solid fa-trash-can"></i>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="alarmN">
-                    <i class="fa-solid fa-xmark closeBtn textColor"></i>
-                    <p class="forNew textColor">NEW!</p>
-                    <div class="alarmColor"></div>
-                    <p class="alarmMsg textColor">새 업무가<br>추가되었습니다.</p>
-                    <button class="alarmGoBtn textColor borderColor">GO</button>
-                </div>
-
-                <div class="alarmN">
-                    <i class="fa-solid fa-xmark closeBtn textColor"></i>
-                    <p class="forNew textColor">NEW!</p>
-                    <div class="alarmColor"></div>
-                    <p class="alarmMsg textColor">새 업무가<br>추가되었습니다.</p>
-                    <button class="alarmGoBtn textColor borderColor">GO</button>
-                </div>
-
-                <div class="backBtn2 BGColor">
-                    <!-- leftArrow -->
-                    <i class="fa-solid fa-chevron-left textColor"></i>
-                    <p class="textColor">&nbsp;뒤로가기</p>
-                </div>
-            </div>
-            <!-- regNav 끝. -->
-
-
             <div class="setNav">
                 <div class="myImg">
                     <img class="bigProfileImg" src="img/otter.jpg">
@@ -318,9 +317,8 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <script src="js/header.js"></script>
+        <script src="js/header.js"></script>
 </body>
 
 </html>

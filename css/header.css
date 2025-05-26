@@ -172,7 +172,7 @@ header li {
 /* 버튼 - 커서 */
 .friendsNum,
 .setAccount,
-.navMenu li, 
+.navMenu li,
 .closeBtn {
     cursor: pointer;
 }
@@ -277,8 +277,8 @@ header li {
 }
 
 .search button {
-    width: 20px;
-    aspect-ratio: 6/4;
+    width: 20%;
+    aspect-ratio: 5/3;
     position: absolute;
     right: 0;
     border-radius: 5px;
@@ -298,6 +298,7 @@ header li {
 .addFriend img {
     width: 20%;
     float: left;
+    cursor: pointer;
 }
 
 .friendN p,
@@ -313,7 +314,7 @@ header li {
     display: flex;
     justify-content: space-around;
     width: 30%;
-    margin-top: 5%;
+    margin: 5% 5% 0 0;
     padding: 0;
     position: absolute;
     top: 0;
@@ -324,8 +325,13 @@ header li {
 .addFriend li {
     display: inline-block;
     margin: 0;
-    font-size: 1.3vw;
+    font-size: 1.5vw !important;
     cursor: pointer;
+}
+
+.likeFriendDiv{
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 
@@ -337,31 +343,39 @@ header li {
     right: 5%;
 }
 
-
 .searchUser,
 .alarmN,
 .requestFriend {
     position: relative;
     border-radius: 15px;
-    background-color: rgba(0, 0, 0, 0.1);
+
 }
 
-.searchUserBG{
+.searchUserBG {
     width: 100%;
     height: 100%;
     z-index: 3;
     position: fixed;
     top: 0;
     background-color: rgba(0, 0, 0, 0.1);
+    backdrop-filter:blur(1px);
     display: none;
 }
 
-.searchUser{
+.searchUserBG2 {
     position: fixed;
+    min-height: 350px;
+    border-radius: 15px;
     top: 30%;
     width: 20%;
     height: 40%;
     margin: 2.5%;
+}
+
+.searchUser {
+    margin: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .searchImg {
@@ -382,8 +396,26 @@ header li {
 
 .searchId {
     font-style: italic;
-    color: #a7a7a7;
+    color: rgba(0, 0, 0, 0.4);
 }
+
+.searchUser .askFriend {
+    display: none;
+}
+
+.searchUser .yesOrNo {
+    height: 28px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-around;
+}
+
+.searchUser .friendMenu {
+    /* display: flex !important; */
+    justify-content: space-around;
+}
+
 
 /* 친구신청 버튼 */
 .askFriend {
@@ -394,7 +426,6 @@ header li {
     cursor: pointer;
 }
 
-.friendMenuDiv,
 .alarmN,
 .requestFriend {
     /* 하위요소의 margin까지 포함 */
@@ -414,29 +445,21 @@ header li {
     display: none;
 }
 
-.modiFriend li {
-    font-size: 2vh !important;
-    font-weight: bold;
-}
-
-.searchUser .yesOrNo {
-    width: 70% !important;
-    height: 28px;
-    margin: 5% 15%;
-    font-size: 2vh !important;
+.modiFriend2 li {
+    font-size: 2vh;
     font-weight: bold;
 }
 
 .friendMenu li {
     display: inline-block;
-    font-size: 20px;
+    /* font-size: 20px; */
 }
 
 .modiNickName {
-    width: 40%;
+    width: 35%;
     height: 60%;
     border-radius: 6px;
-    margin: 6% 0 5% 3%;
+    margin: 7% 0 5% 3%;
     padding-left: 5px;
     display: none;
 }
@@ -498,6 +521,11 @@ header li {
 
 .backBtn2 p {
     display: inline-block;
+    cursor: pointer;
+}
+
+.backBtn2 i{
+    cursor: pointer;
 }
 
 
@@ -522,7 +550,6 @@ header li {
 /* 임시 */
 /* .menu,
 .btnArea, */
-.searchUser,
 .setNav,
 /* .profile, */
 .friends,

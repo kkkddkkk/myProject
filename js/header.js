@@ -99,27 +99,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //친구목록 버튼
     let SearchBtn = friends.querySelector('.search').children[1]//친구검색 버튼
+    let backBtn = friends.querySelector('.backBtn2');
 
     //친구목록 인풋
     let searchFriendInput = friends.querySelector('.search').children[0]//친구검색 인풋
-    let modiNickName = friends.querySelectorAll('.modiNickName');
 
     //#endregion ============================================================================> 친구목록 변수 끝.
 
     //친구검색 변수
     //#region
     //친구검색 페이지
+    let searchUserBG = document.querySelector('.searchUserBG');//nav 전체모달 배경
     let searchUser = document.querySelector('.searchUser');//기본 nav - 친구검색
+
 
     //친구검색 버튼
     let closeBtnAtSearch = searchUser.querySelector('.closeBtn');//X 버튼
     let askFriend = searchUser.querySelector('.askFriend');//친구신청
-    let acceptFriendAtSearch = searchUser.querySelector('.yesOrNo').children[0]//친구 수락 버튼
-    let denyFriendAtSearch = searchUser.querySelector('.yesOrNo').children[1]//친구 거절 버튼
-    let addLikeFriendAtSearch = searchUser.querySelector('.modiFriend').children[0]//즐겨찾기 친구 추가
-    let modiNickNameAtSearch = searchUser.querySelector('.modiFriend').children[1]//친구 별명 변경
-    let delFriendAtSearch = searchUser.querySelector('.modiFriend').children[2]//친구삭제
-
+    let yesOrNoAtSearch = searchUser.querySelector('.yesOrNo');
+    let modiFriendAtSearch = searchUser.querySelector('.modiFriend2');
     //#endregion ======================================================================> 친구목록 변수 끝.
 
     //알람 창 변수
@@ -164,7 +162,14 @@ document.addEventListener('DOMContentLoaded', () => {
     //기본 nav 화면이동
     moveToOthers(friendsNum, friends);
     moveToOthers(friendsNumIcon, friends);//user icon + 친구 수 클릭 시 친구목록 창 이동
-    moveToSet(setAccount);//계정설정 버튼 클릭 시 개인정보 수정 화면으로 이동
+    // moveToSet(setAccount);//계정설정 버튼 클릭 시 개인정보 수정 화면으로 이동
+    setAccount.addEventListener('click',()=>{
+        console.log('clicked');
+        regNav.style.display = 'none';
+        setNav.style.display = 'block';
+        
+    })
+
     moveToOthers(alarm, alarmNav);//알람버튼 클릭 시 알람 화면으로 이동
 
     //임시버튼
@@ -173,16 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //친구신청 - 수락 거절버튼 클릭 이벤트
     //#region
-
-    // friends.addEventListener('click',(event)=>{
-    //     let clickedFriend = event.target.parentNode.parentNode.parentNode;//클릭된 친구
-    //     let clickedBtn = event.target.parentNode;//클릭된 버튼
-
-    //     if(clickedBtn.classList.contains('accept')){
-
-    //     }
-
-    // })
 
     addFriendDiv.addEventListener('click', (event) => {
         let clickedAddFriend = event.target.parentNode.parentNode.parentNode;//addFriend
@@ -205,6 +200,12 @@ document.addEventListener('DOMContentLoaded', () => {
             //친구신청 - 거절 버튼 클릭 시 node 삭제
             addFriendDiv.removeChild(clickedAddFriend);//노드 삭제
         }
+        if (event.target.tagName == 'IMG') {//이미지 클릭 시 친구 상세페이지
+            searchUserBG.style.display = 'block';
+            searchUser.querySelector('p').innerHTML = event.target.parentNode.querySelector('p').innerHTML
+            yesOrNoAtSearch.style.display = 'flex';
+            modiFriendAtSearch.style.display = 'none';
+        }
     })
 
     //#endregion
@@ -212,7 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //친구 목록 이벤트(즐겨찾기, 닉네임 수정, 친구삭제)
     //#region
-
 
     normalLikeFriendDiv.addEventListener('click', (event) => {
         let clickedFriend = event.target.parentNode.parentNode.parentNode;//Friend
@@ -267,6 +267,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     likeFriendDiv.removeChild(clickedFriend);
                 }
             }
+        } else if (event.target.tagName == 'IMG') {//이미지 클릭 시 친구 상세페이지
+            searchUserBG.style.display = 'block';
+            searchUser.querySelector('p').innerHTML = event.target.parentNode.querySelector('p').innerHTML
+            yesOrNoAtSearch.style.display = 'none';
+            modiFriendAtSearch.style.display = 'flex';
+            console.log(yesOrNoAtSearch.style.display);
         }
 
         //icon 변경 이벤트
@@ -276,25 +282,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+    backBtn.addEventListener('click', (event) => {//뒤로가기 클릭 시 기본메뉴로 화면 이동
+        if (event.target.tagName == 'P' || event.target.tagName == 'I') {
+            friends.style.display = 'none';
+            menu.style.display = 'block';
+        }
+    })
+
     //#endregion
 
     //친구 목록(상세) 이벤트
     //#region
 
     //친구목록 창 화면 이동
-    SearchBtn.addEventListener('click',()=>{
-        searchUser.style.display = 'block';
+    SearchBtn.addEventListener('click', () => {
+        searchUserBG.style.display = 'block';
     })
     // navMoves(SearchBtn, friends, searchUser);//검색버튼 클릭 시 친구검색 화면으로 이동
 
-    searchUser.addEventListener('click',(event)=>{
-        console.log(event.target);
-        if(event.target.classList.contains('closeBtn')){//X버튼 클릭 이벤트
-            searchUser.style.display = 'none';
-            friends.style.display = 'block';
+    searchUser.addEventListener('click', (event) => {
+        if (event.target.classList.contains('closeBtn')) {//X버튼 클릭 이벤트
+            searchUserBG.style.display = 'none';
         }
-        if(event.target.classList.contains('askFriend')){
+        if (event.target.classList.contains('askFriend')) {
             event.target.innerHTML = `수락 대기 중...&nbsp;<i class="fa-solid fa-paper-plane"></i>`;
+            event.target.classList.remove('askFriend');
+            event.target.classList.add('askFriendAfter');
+        }
+        if (event.target.classList.contains('askFriendAfter')) {
+            event.target.classList.remove('askFriendAfter');
+            event.target.classList.add('askFriend');
+            event.target.innerHTML = `<i class="fa-solid fa-user-plus textColor"></i>&nbsp;친구신청`;
+            event.target.classList.remove('after');
         }
     })
 
