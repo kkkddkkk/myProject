@@ -3,68 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     //여러 div 구분용 변수
     let temp, result, newClassName;
 
-    //PW 검증(function chkPw(writePwInput, chkPwInput, pwMsg1, pwMsg2))
-    //#region
-
-    //정규식
-    window.regPw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;//pw 정규식
-
-    window.chkPw = function (writePwInput, chkPwInput, pwMsg1, pwMsg2) {
-        if (writePwInput.value.length == 0) {//작성란 공란일 시 작성란 기본스타일 / 확인란 비활성화
-            writePwInput.classList.remove('erMsg');
-            pwMsg1.innerHTML = "&nbsp;";
-            chkPwInput.disabled = true;
-        } else if (writePwInput.value.length < 8 || writePwInput.value.length > 15) {//글자 수 조건 미충족 시 에러 스타일 + 확인란 비활성화
-            writePwInput.classList.add('erMsg');
-            pwMsg1.innerHTML = "* 비밀번호는 8자~15자로 작성해주세요.";
-            chkPwInput.disabled = true;
-        } else {
-            if (!regPw.test(writePwInput.value)) {//정규식 미충족 시 에러 스타일 + 확인란 비활성화
-                writePwInput.classList.add('erMsg');
-                pwMsg1.innerHTML = "* 영어, 숫자, 특수문자를 모두 활용해주세요.";
-                chkPwInput.disabled = true;
-            } else {//조건 충족 시 작성란 기본스타일 / 확인란 활성화
-                writePwInput.classList.remove('erMsg');
-                pwMsg1.innerHTML = "&nbsp;";
-                chkPwInput.disabled = false;
-            }
-        }
-
-        if (chkPwInput.value != writePwInput.value && !chkPwInput.value == '') {//확인란 작성 후 작성란 수정 시 확인란 에러스타일
-            chkPwInput.classList.add('erMsg');
-            pwMsg2.innerHTML = "* 비밀번호가 일치하지 않습니다.";
-            pwMsg1.innerHTML = "&nbsp;";
-        }
-
-        if (chkPwInput.disabled == true) {//확인란 비활성화 시 기본스타일 / 내용 삭제
-            chkPwInput.classList.remove('erMsg');
-            pwMsg2.innerHTML = "&nbsp;";
-            chkPwInput.value = '';
-        }
-    }
-    //#endregion
-
-    //PW 작성란 == 확인란 검증(function chkPw2(chkPwInput, writePwInput, pwMsg1, pwMsg2))
-    //#region
-    window.chkPw2 = function (chkPwInput, writePwInput, pwMsg1, pwMsg2) {
-        if (chkPwInput.value.length == 0) {//확인란 공란일 시 기본스타일
-            chkPwInput.classList.remove('erMsg');
-            pwMsg1.innerHTML = "&nbsp;";
-            pwMsg2.innerHTML = "&nbsp;";
-        } else if (chkPwInput.value != writePwInput.value) {//작성란 != 확인란일 시 에러스타일
-            chkPwInput.classList.add('erMsg');
-            pwMsg1.innerHTML = "&nbsp;";
-            pwMsg2.innerHTML = "* 비밀번호가 일치하지 않습니다.";
-        } else {//작성란 == 확인란일 시 기본스타일
-            chkPwInput.classList.remove('erMsg');
-            pwMsg1.innerHTML = "&nbsp;";
-            pwMsg2.innerHTML = "* 확인되었습니다.";
-        }
-    }
-    //#endregion
-
-
-
     //기본 nav 변수
     //#region
 
@@ -83,6 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let alarm = menu.querySelector('.navMenu').children[3];//menu - 알람
     let logOut = logOutArea.querySelector('.logOutbtn');//로그아웃 버튼
 
+    //프로필 요소
+    let name = regNav.querySelector('.name');//프로필 - 이름
+    let profileImg = regNav.querySelector('.profileImg');//프로필 - 사진
+
     //#endregion ======================================================================> 기본 nav 변수 끝.
 
     //친구목록 변수
@@ -91,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //친구목록 페이지
     let friends = document.querySelector('.friends');//기본 nav - 친구목록
     let addFriendDiv = friends.querySelector('.addFriendDiv');//친구신청 div
-    let addFriend = friends.querySelectorAll('.addFriend');//친구신청 목록
+    // let addFriend = friends.querySelectorAll('.addFriend');//친구신청 목록
     let friendNDiv = friends.querySelector('.friendNDiv');//친구목록 div
     let friendN = friends.querySelectorAll('.friendN');//친구목록
     let likeFriendDiv = friends.querySelector('.likeFriendDiv')//즐겨찾기 친구 div
@@ -114,7 +56,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     //친구검색 버튼
-    let closeBtnAtSearch = searchUser.querySelector('.closeBtn');//X 버튼
     let askFriend = searchUser.querySelector('.askFriend');//친구신청
     let yesOrNoAtSearch = searchUser.querySelector('.yesOrNo');
     let modiFriendAtSearch = searchUser.querySelector('.modiFriend2');
@@ -145,8 +86,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let addImg = setNav.querySelector('.addImg');//이미지 변경 버튼
     let chkPw = setNav.querySelector('.chkPw');//비밀번호 검증 버튼
     let chkPw2 = setNav.querySelector('.chkPw2');//개인정보 수정 버튼
+    let backBtnAtSet = setNav.querySelector('.backBtn2');//뒤로가기버튼
 
     //개인정보 수정 인풋
+    let bigProfileImg = setNav.querySelector('.bigProfileImg');//프로필 사진
+    let file = setNav.querySelector('#file');//사진 변경 인풋
+    let myName = setNav.querySelector('.myName');//이름 인풋
     let myPw = setNav.querySelector('.myPw');//비밀번호 검증 인풋
     let changePw = setNav.querySelectorAll('.myPw2')[0]//비밀번호 변경 인풋
     let chkChangePw = setNav.querySelectorAll('.myPw2')[1]//비밀번호 검증 인풋(변경)
@@ -158,16 +103,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //#endregion ============================================> 개인정보 수정 끝.
 
-
     //기본 nav 화면이동
     moveToOthers(friendsNum, friends);
     moveToOthers(friendsNumIcon, friends);//user icon + 친구 수 클릭 시 친구목록 창 이동
     // moveToSet(setAccount);//계정설정 버튼 클릭 시 개인정보 수정 화면으로 이동
-    setAccount.addEventListener('click',()=>{
-        console.log('clicked');
+    setAccount.addEventListener('click', () => {
         regNav.style.display = 'none';
+        friends.style.display = 'none';
         setNav.style.display = 'block';
-        
+        chkPwDiv.style.display = 'block';
     })
 
     moveToOthers(alarm, alarmNav);//알람버튼 클릭 시 알람 화면으로 이동
@@ -205,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
             searchUser.querySelector('p').innerHTML = event.target.parentNode.querySelector('p').innerHTML
             yesOrNoAtSearch.style.display = 'flex';
             modiFriendAtSearch.style.display = 'none';
+            askFriend.style.display = 'none';
         }
     })
 
@@ -272,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
             searchUser.querySelector('p').innerHTML = event.target.parentNode.querySelector('p').innerHTML
             yesOrNoAtSearch.style.display = 'none';
             modiFriendAtSearch.style.display = 'flex';
-            console.log(yesOrNoAtSearch.style.display);
+            askFriend.style.display = 'none';
         }
 
         //icon 변경 이벤트
@@ -297,31 +242,157 @@ document.addEventListener('DOMContentLoaded', () => {
     //친구목록 창 화면 이동
     SearchBtn.addEventListener('click', () => {
         searchUserBG.style.display = 'block';
+        if (confirm("친구인가요?")) {//db 연결 후 수정
+            yesOrNoAtSearch.style.display = 'none';
+            modiFriendAtSearch.style.display = 'flex';
+            askFriend.style.display = 'none';
+        } else if (confirm("친구 신청 상태인가요?")) {//db 연결 후 수정
+            yesOrNoAtSearch.style.display = 'flex';
+            modiFriendAtSearch.style.display = 'none';
+            askFriend.style.display = 'none';
+        } else {//db 연결 후 수정
+            yesOrNoAtSearch.style.display = 'none';
+            modiFriendAtSearch.style.display = 'none';
+            askFriend.style.display = 'block';
+        }
     })
-    // navMoves(SearchBtn, friends, searchUser);//검색버튼 클릭 시 친구검색 화면으로 이동
 
     searchUser.addEventListener('click', (event) => {
         if (event.target.classList.contains('closeBtn')) {//X버튼 클릭 이벤트
             searchUserBG.style.display = 'none';
         }
-        if (event.target.classList.contains('askFriend')) {
+        if (event.target.tagName == 'BUTTON' && event.target.children[0].classList.contains('fa-user-plus')) {
+            console.log(event.target.children);
             event.target.innerHTML = `수락 대기 중...&nbsp;<i class="fa-solid fa-paper-plane"></i>`;
-            event.target.classList.remove('askFriend');
-            event.target.classList.add('askFriendAfter');
-        }
-        if (event.target.classList.contains('askFriendAfter')) {
-            event.target.classList.remove('askFriendAfter');
-            event.target.classList.add('askFriend');
+        } else if (event.target.tagName == 'BUTTON' && event.target.children[0].classList.contains('fa-paper-plane')) {
             event.target.innerHTML = `<i class="fa-solid fa-user-plus textColor"></i>&nbsp;친구신청`;
-            event.target.classList.remove('after');
         }
     })
 
+    //#endregion
 
+    //설정 이벤트
+    //#region
+
+    //비밀번호 확인 클릭 이벤트
+    chkPw.addEventListener('click', () => {
+        if (confirm("비밀번호 일치?")) {//db 추가 후 수정
+            chkPwDiv.style.display = 'none';
+            setNamePw.style.display = 'block';
+            addImg.style.display = 'block';
+
+            changePw.value = myPw.value;
+            chkChangePw.value = myPw.value;
+            myPw.value = '';//input 초기화
+        } else {
+            myPw.classList.add('erMsg');
+            chkMsg.innerHTML = '* 비밀번호가 일치하지 않습니다.';
+        }
+    })
+    myPw.addEventListener('input', () => {
+        myPw.classList.remove('erMsg');
+        chkMsg.innerHTML = `&nbsp;`;
+    })
+
+    //비밀번호 변경 이벤트
+    window.regPw = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;//pw 정규식
+
+    changePw.addEventListener('input', () => {
+        if (changePw.value.length == 0) {//작성란 공란일 시 작성란 기본스타일 / 확인란 비활성화
+            changePw.classList.remove('erMsg');
+            pwMsg.innerHTML = "&nbsp;";
+            chkChangePw.disabled = true;
+        } else if (changePw.value.length < 8 || changePw.value.length > 15) {//글자 수 조건 미충족 시 에러 스타일 + 확인란 비활성화
+            changePw.classList.add('erMsg');
+            pwMsg.innerHTML = "* 비밀번호는 8자~15자로 작성해주세요.";
+            chkChangePw.disabled = true;
+        } else {
+            if (!regPw.test(changePw.value)) {//정규식 미충족 시 에러 스타일 + 확인란 비활성화
+                changePw.classList.add('erMsg');
+                pwMsg.innerHTML = "* 영어, 숫자, 특수문자를 모두 활용해주세요.";
+                chkChangePw.disabled = true;
+            } else {//조건 충족 시 작성란 기본스타일 / 확인란 활성화
+                changePw.classList.remove('erMsg');
+                pwMsg.innerHTML = "&nbsp;";
+                chkChangePw.disabled = false;
+            }
+        }
+        if (chkChangePw.value != changePw.value && !chkChangePw.value == '') {//확인란 작성 후 작성란 수정 시 확인란 에러스타일
+            chkChangePw.classList.add('erMsg');
+            chkMsg2.innerHTML = "* 비밀번호가 일치하지 않습니다.";
+            pwMsg.innerHTML = "&nbsp;";
+        }
+        if (chkChangePw.disabled == true) {//확인란 비활성화 시 기본스타일 / 내용 삭제
+            chkChangePw.classList.remove('erMsg');
+            chkMsg2.innerHTML = "&nbsp;";
+            chkChangePw.value = '';
+        }
+    })
+    chkPw2.addEventListener('click', () => {
+        if (chkChangePw.value.length == 0) {//확인란 공란일 시 기본스타일
+            chkChangePw.classList.remove('erMsg');
+            pwMsg.innerHTML = "&nbsp;";
+            chkMsg2.innerHTML = "&nbsp;";
+        } else if (chkChangePw.value != changePw.value) {//작성란 != 확인란일 시 에러스타일
+            console.log('chkChangePw.value != changePw.value');
+            chkChangePw.classList.add('erMsg');
+            pwMsg.innerHTML = "&nbsp;";
+            chkMsg2.innerHTML = "* 비밀번호가 일치하지 않습니다.";
+        } else {//작성란 == 확인란일 시 기본스타일
+            chkChangePw.classList.remove('erMsg');
+            pwMsg.innerHTML = "&nbsp;";
+            chkMsg2.innerHTML = "&nbsp;";
+            if (confirm('저장하시겠습니까?')) {
+                name.innerHTML = myName.value;//이름 변경
+                profileImg.src = bigProfileImg.src//사진 변경
+                setNav.style.display = 'none';
+                setNamePw.style.display = 'none';
+                addImg.style.display = 'none';
+                regNav.style.display = 'block';
+                menu.style.display = 'block';//화면전환
+            }
+        }
+    })
+
+    chkChangePw.addEventListener('input', () => {
+        chkChangePw.classList.remove('erMsg');
+        pwMsg.innerHTML = "&nbsp;";
+        chkMsg2.innerHTML = "&nbsp;";
+    })
+
+    //프로필 사진 선택
+    file.addEventListener('change', (event) => {
+        let getFile = event.target.files[0];
+        if (getFile) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                bigProfileImg.src = e.target.result;
+            };
+            reader.readAsDataURL(getFile);
+        }
+    })
 
     //#endregion
 
 
+    //뒤로가기 버튼 이벤트
+    backBtnAtSet.addEventListener('click', (event) => {//뒤로가기 클릭 시 기본메뉴로 화면 이동
+        if (event.target.tagName == 'P' || event.target.tagName == 'I') {
+            if (chkPwDiv.style.display == 'block') {
+                setNav.style.display = 'none';
+                chkPwDiv.style.display = 'none';
+                regNav.style.display = 'block';
+                menu.style.display = 'block';
+            } else if (setNamePw.style.display == 'block') {
+                setNamePw.style.display = 'none';
+                setNav.style.display = 'block';
+                chkPwDiv.style.display = 'block';
+                addImg.style.display = 'none';
+            }
+        }
+    })
+
+    //#endregion ================================================ 설정 이벤트 끝
 
     //함수
 
@@ -376,13 +447,6 @@ document.addEventListener('DOMContentLoaded', () => {
     //============(세팅 nav로 변환, 기본 nav -> 타 구역으로 이동, profile 유지하며 타 구역으로 이동)
     //화면 이동 함수(moveToSet(btn), moveToOthers(btn, movingArea), mavMoves(btn,oldArea, newArea))
     //#region
-
-    function moveToSet(btn) {
-        btn.addEventListener('click', () => {
-            regNav.style.display = 'none';
-            setNav.style.display = 'block';
-        })
-    }
     function moveToOthers(btn, movingArea) {
         btn.addEventListener('click', () => {
             menu.style.display = 'none';

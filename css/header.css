@@ -368,7 +368,7 @@ header li {
     border-radius: 15px;
     top: 30%;
     width: 20%;
-    height: 40%;
+    height: 45%;
     margin: 2.5%;
 }
 
@@ -522,6 +522,7 @@ header li {
 .backBtn2 p {
     display: inline-block;
     cursor: pointer;
+    margin: 1% 0 !important;
 }
 
 .backBtn2 i{
@@ -573,17 +574,18 @@ header li {
 }
 
 .bigProfileImg {
-    width: 50%;
+    width: 70%;
     position: relative;
-    left: 25%;
+    left: 15%;
 }
 
 .addImg {
     width: 15%;
     position: absolute;
     bottom: 1%;
-    right: 24%;
+    right: 20%;
     overflow: hidden;
+    display: none;
 }
 
 .addImgBG {
@@ -592,10 +594,15 @@ header li {
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+#file{
+    display: none;
 }
 
 .plusIcon {
-    font-size: 2em;
+    font-size: 1em;
     font-weight: 100;
 }
 
@@ -617,6 +624,7 @@ header li {
     padding: 0;
     border-radius: 50px;
     margin: 0 0 0 0;
+    cursor: pointer;
 }
 
 /* 회원정보수정 */
@@ -626,6 +634,10 @@ header li {
     position: relative;
 
     display: none;
+}
+
+.myPw:focus, .myPw2:focus{
+    outline: none;
 }
 
 .myName,
@@ -644,4 +656,33 @@ header li {
 
 .setNamePw p {
     height: 20px;
+}
+
+.chkPw{
+    cursor: pointer;
+}
+
+.chkMsg{
+    font-size: 14px;
+    margin-bottom: 7% !important;
+    color: red;
+}
+
+.pwMsg{
+    font-size: 12px;
+    margin-bottom: 5% !important;
+    color: red;
+}
+
+/* 에러메시지 */
+.erMsg {
+    border: 2px solid red !important;
+}
+
+/* 버튼 비활성화 */
+.deact {
+    color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    cursor: auto;
 }
