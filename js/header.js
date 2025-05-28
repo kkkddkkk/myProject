@@ -65,12 +65,12 @@ document.addEventListener('DOMContentLoaded', () => {
     //#region
 
     //알람 창 페이지
-    let alarmNav = document.querySelector('.alarmDiv');//기본 nav - 알람
-    let requestFriendI = nameI(alarmNav, 'requestFriend', 'requestFriend');//친구요청 div
-    let alarmI = nameI(alarmNav, 'alarmN', 'alarmN');//알람 div
+    let alarmDiv = document.querySelector('.alarmDiv');//기본 nav - 알람
+    let requestFriend = alarmDiv.querySelectorAll('.requestFriend');//친구요청 div
+    let alarmN = alarmDiv.querySelectorAll('.alarmN')//알람 div
 
     //알람 창 버튼
-    let alarmGoBtnI = nameI(alarmNav, 'alarmGoBtn', 'alarmGoBtn');//상세업무 화면 이동 버튼
+    let backBtn2 = alarmDiv.querySelector('.backBtn2');//뒤로가기 버튼튼
 
     //#endregion ============================================================================> 알람창 변수 끝.
 
@@ -110,14 +110,15 @@ document.addEventListener('DOMContentLoaded', () => {
     setAccount.addEventListener('click', () => {
         regNav.style.display = 'none';
         friends.style.display = 'none';
+        alarmDiv.style.display = 'none';
         setNav.style.display = 'block';
         chkPwDiv.style.display = 'block';
     })
 
-    moveToOthers(alarm, alarmNav);//알람버튼 클릭 시 알람 화면으로 이동
+    moveToOthers(alarm, alarmDiv);//알람버튼 클릭 시 알람 화면으로 이동
 
     //임시버튼
-    let myBtn = document.querySelector('header').querySelector('button');
+    // let myBtn = document.querySelector('header').querySelector('button');
 
 
     //친구신청 - 수락 거절버튼 클릭 이벤트
@@ -154,7 +155,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
 
     //#endregion
-
 
     //친구 목록 이벤트(즐겨찾기, 닉네임 수정, 친구삭제)
     //#region
@@ -219,20 +219,9 @@ document.addEventListener('DOMContentLoaded', () => {
             modiFriendAtSearch.style.display = 'flex';
             askFriend.style.display = 'none';
         }
-
-        //icon 변경 이벤트
-        function changeIcon(oldIcon, newIcon) {
-            event.target.classList.remove(oldIcon);
-            event.target.classList.add(newIcon);//아이콘 변경
-        }
     })
 
-    backBtn.addEventListener('click', (event) => {//뒤로가기 클릭 시 기본메뉴로 화면 이동
-        if (event.target.tagName == 'P' || event.target.tagName == 'I') {
-            friends.style.display = 'none';
-            menu.style.display = 'block';
-        }
-    })
+    backToMenu(backBtn, friends)//뒤로가기 클릭 시 메뉴로 이동
 
     //#endregion
 
@@ -267,9 +256,69 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (event.target.tagName == 'BUTTON' && event.target.children[0].classList.contains('fa-paper-plane')) {
             event.target.innerHTML = `<i class="fa-solid fa-user-plus textColor"></i>&nbsp;친구신청`;
         }
+
+        let icon, userDiv;
+        if (event.target.tagName == 'I') {
+            icon = event.target;
+            userDiv = event.target.parentNode.parentNode.parentNode.querySelector('p').innerHTML;
+        } else if (event.target.tagName == 'LI') {
+            icon = event.target.querySelector('i');
+            userDiv = event.target.parentNode.parentNode;
+        }
+        console.log(userDiv);
+
+        if (icon.classList.contains('fa-heart') && icon.classList.contains('fa-regular')) {
+            changeIconList(icon, 'fa-regular', 'fa-solid');//아이콘 변경
+        } else if (icon.classList.contains('fa-heart') && icon.classList.contains('fa-solid')) {
+            changeIconList(icon, 'fa-solid', 'fa-regular');//아이콘 변경
+        }
     })
 
     //#endregion
+
+    //알람 이벤트
+    //#region
+
+    //
+
+    for (let i of requestFriend) {//requestFriend 배열 순회 =====================================>여기부터 확인!(5/29)
+        let observe1 = new MutationObserver((list) => {
+            for (let mutation of list) {//MutationRecord를 순회하며
+                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {//attribute의 style 을 감시
+                    if (window.getComputedStyle(alarmDiv).display === 'block') {//alarmDiv가 block 상태라면
+
+                        for (let j = 1; j <= 2; j++) {//NEW! 문자 깜빡임.
+                            setTimeout(() => {
+                                i.querySelector('.forNew').innerHTML = "&nbsp;";
+                            }, 600 * j + 600 * (j - 1));
+                            setTimeout(() => {
+                                i.querySelector('.forNew').innerHTML = "NEW!";
+                            }, 600 * j * 2);
+                        }
+
+
+                        let observe2 = new IntersectionObserver((entries, observer) => {//요소가 뷰포인트 안에 있는지 감시
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    observer.unobserve(entry.target);
+                                }
+                            });
+                        });
+                        observe2.observe(i);
+                    }
+                }
+            }
+        })
+        observe1.observe(alarmDiv, { attributes: true });
+    }
+
+
+
+    // requestFriend
+
+
+    backToMenu(backBtn2, alarmDiv)//뒤로가기 클릭 시 메뉴로 이동
+    //#endregion =============================================================> 알람창 이벤트 끝끝
 
     //설정 이벤트
     //#region
@@ -372,9 +421,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
-    //#endregion
-
-
     //뒤로가기 버튼 이벤트
     backBtnAtSet.addEventListener('click', (event) => {//뒤로가기 클릭 시 기본메뉴로 화면 이동
         if (event.target.tagName == 'P' || event.target.tagName == 'I') {
@@ -383,6 +429,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 chkPwDiv.style.display = 'none';
                 regNav.style.display = 'block';
                 menu.style.display = 'block';
+                logOutArea.style.display = 'block';
             } else if (setNamePw.style.display == 'block') {
                 setNamePw.style.display = 'none';
                 setNav.style.display = 'block';
@@ -397,20 +444,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //함수
 
     //이름 정렬 함수(function forSort(sortDiv, classNameMinusI))
-    //여러 div 구분용 함수 (function nameI(0, 1, 2)nav, className, variable))
-    //클래스명+n 전체삭제 함수(function delClass(className, classNameMinusI))
     //#region
-
-    function nameI(nav, className, variable) {
-        temp = nav.querySelectorAll(`.${className}`);
-        result = [];
-        for (let i = 0; i < temp.length; i++) {
-            newClassName = `${variable}${i}`;
-            temp[i].classList.add(newClassName);
-            result[i] = nav.querySelector(`.${variable}${i}`);
-        }
-        return result;
-    }
 
     function forSort(sortDiv, classNameMinusI) {
         let nameSort = [];//이름 정렬
@@ -443,9 +477,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //#endregion ================================================================> 변수명 지정 함수 끝.
 
+    //icon 변경 함수(changeIcon(oldIcon, newIcon))
+    //#region
+    function changeIcon(oldIcon, newIcon) {
+        event.target.classList.remove(oldIcon);
+        event.target.classList.add(newIcon);//아이콘 변경
+    }
+    function changeIconList(event, oldIcon, newIcon) {
+        event.classList.remove(oldIcon);
+        event.classList.add(newIcon);//아이콘 변경
 
-    //============(세팅 nav로 변환, 기본 nav -> 타 구역으로 이동, profile 유지하며 타 구역으로 이동)
-    //화면 이동 함수(moveToSet(btn), moveToOthers(btn, movingArea), mavMoves(btn,oldArea, newArea))
+    }
+
+    //#endregion
+
+    //화면 이동 함수(moveToOthers(btn, movingArea))
     //#region
     function moveToOthers(btn, movingArea) {
         btn.addEventListener('click', () => {
@@ -454,14 +500,19 @@ document.addEventListener('DOMContentLoaded', () => {
             movingArea.style.display = 'block';
         })
     }
-    function navMoves(btn, oldArea, newArea) {
-        btn.addEventListener('click', () => {
-            oldArea.style.display = 'none';
-            newArea.style.display = 'block';
+
+    function backToMenu(btn, oldArea) {
+        btn.addEventListener('click', (event) => {//뒤로가기 클릭 시 기본메뉴로 화면 이동
+            if (event.target.tagName == 'P' || event.target.tagName == 'I') {
+                oldArea.style.display = 'none';
+                menu.style.display = 'block';
+                logOutArea.style.display = 'block';
+            }
         })
     }
+
 
     //#endregion =====================================================> 화면이동함수 끝.
 
 
-})
+})//참고: 친구 목록 - 친구 검색 결과 없을 시 화면 구현 아직 안함. 친구 상세 - 친구 목록 이벤트 연동 구현 안함.(db 연결 시 ID로 ㄱ)

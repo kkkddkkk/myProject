@@ -1,3 +1,4 @@
+
 /* 헤더 */
 header {
     width: 100%;
@@ -98,6 +99,7 @@ header li div {
     top: 0;
     right: 0;
     width: 25%;
+    min-width: 300px;
     height: 100%;
     z-index: 2;
     box-shadow: -4px 0 10px #555555;
@@ -469,6 +471,7 @@ header li {
 .requestFriend {
     margin: 0 0 4% 0;
     width: 98%;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .forNew {
