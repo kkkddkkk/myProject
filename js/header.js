@@ -281,42 +281,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //
 
-    for (let i of requestFriend) {//requestFriend 배열 순회 =====================================>여기부터 확인!(5/29)
-        let observe1 = new MutationObserver((list) => {
-            for (let mutation of list) {//MutationRecord를 순회하며
-                if (mutation.type === 'attributes' && mutation.attributeName === 'style') {//attribute의 style 을 감시
-                    if (window.getComputedStyle(alarmDiv).display === 'block') {//alarmDiv가 block 상태라면
+    forNew(requestFriend);//친구신청 new 이벤트
+    forNew(alarmN)//task 관련 new 이벤트
 
-                        for (let j = 1; j <= 2; j++) {//NEW! 문자 깜빡임.
-                            setTimeout(() => {
-                                i.querySelector('.forNew').innerHTML = "&nbsp;";
-                            }, 600 * j + 600 * (j - 1));
-                            setTimeout(() => {
-                                i.querySelector('.forNew').innerHTML = "NEW!";
-                            }, 600 * j * 2);
-                        }
-
-
-                        let observe2 = new IntersectionObserver((entries, observer) => {//요소가 뷰포인트 안에 있는지 감시
-                            entries.forEach(entry => {
-                                if (entry.isIntersecting) {
-                                    observer.unobserve(entry.target);
-                                }
-                            });
-                        });
-                        observe2.observe(i);
-                    }
-                }
-            }
-        })
-        observe1.observe(alarmDiv, { attributes: true });
-    }
-
-
-
-    // requestFriend
-
-
+    alarmDiv.addEventListener('click', (event) => {
+        if (event.target.classList.contains('fa-xmark')) {//X 버튼 클릭 시 삭제
+            event.target.parentNode.parentNode.removeChild(event.target.parentNode);
+        }
+    })
     backToMenu(backBtn2, alarmDiv)//뒤로가기 클릭 시 메뉴로 이동
     //#endregion =============================================================> 알람창 이벤트 끝끝
 
@@ -515,4 +487,51 @@ document.addEventListener('DOMContentLoaded', () => {
     //#endregion =====================================================> 화면이동함수 끝.
 
 
-})//참고: 친구 목록 - 친구 검색 결과 없을 시 화면 구현 아직 안함. 친구 상세 - 친구 목록 이벤트 연동 구현 안함.(db 연결 시 ID로 ㄱ)
+    //alarm new 깜빡임 + 사라짐 효과 이벤트
+    //#region
+
+    function forNew(alarmOne) {
+        let date = new Date();
+        let fullDate = "&nbsp;" + date.getFullYear() + "." + date.getMonth() + "." + date.getDate();
+        for (let i of alarmOne) {//requestFriend 배열 순회 =====================================>여기부터 확인!(5/29)
+            i.querySelector('.forNew').innerHTML = fullDate + "&nbsp;&nbsp;NEW!";
+            let observe1 = new MutationObserver((list) => {
+                for (let mutation of list) {//MutationRecord를 순회하며
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'style') {//attribute의 style 을 감시
+                        if (window.getComputedStyle(alarmDiv).display === 'block') {//alarmDiv가 block 상태라면
+
+                            let observe2 = new IntersectionObserver((entries, observer) => {//요소가 뷰포인트 안에 있는지 감시
+                                entries.forEach(entry => {
+                                    if (entry.isIntersecting) {
+
+                                        for (let j = 1; j <= 2; j++) {//NEW! 문자 깜빡임.(2번)
+                                            setTimeout(() => {
+                                                if (i.querySelector('.forDate').classList.contains('forNew')) {
+                                                    i.querySelector('.forNew').innerHTML = fullDate;
+                                                }
+                                            }, 600 * j + 600 * (j - 1));
+                                            setTimeout(() => {
+                                                if (i.querySelector('.forDate').classList.contains('forNew')) {
+                                                    i.querySelector('.forNew').innerHTML = fullDate + "&nbsp;&nbsp;NEW!";
+                                                }
+
+                                            }, 600 * j * 2);
+                                        }
+                                        observer.unobserve(entry.target);
+                                    }
+                                });
+                            });
+                            observe2.observe(i);
+                        } else if (window.getComputedStyle(alarmDiv).display === 'none') {//최초 한 번만 수행함.
+                            i.querySelector('.forNew').innerHTML = fullDate;
+                            i.querySelector('.forDate').classList.remove('forNew');
+                        }
+                    }
+                }
+            })
+            observe1.observe(alarmDiv, { attributes: true });
+        }
+    }
+
+    //#endregion
+})

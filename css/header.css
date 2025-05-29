@@ -474,7 +474,7 @@ header li {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.forNew {
+.forDate {
     margin-top: 3% !important;
     margin-bottom: 3%;
     padding-left: 6%;
@@ -487,12 +487,12 @@ header li {
 .alarmColor {
     width: 20%;
     float: left;
-    margin: 0 6%;
+    margin: 4% 6% 0 6%;
 }
 
 .alarmMsg {
-    margin: 4.5% 0 0 0;
-    font-size: 0.8rem;
+    margin: 9% 0 0 0;
+    font-size: 1rem;
 }
 
 .alarmN ul,
@@ -501,7 +501,7 @@ header li {
     display: flex;
     justify-content: space-around;
     padding-left: 65%;
-    margin: 5% 0;
+    margin: 4% 0 5% 0;
 }
 
 .alarmColor {
@@ -509,8 +509,11 @@ header li {
 }
 
 .alarmGoBtn {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: none;
+    border-radius: 20px;
+    width: 15%;
+    aspect-ratio: 5/3;
     margin: 1% 0 5% 75%;
 }
 
