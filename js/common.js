@@ -24,6 +24,8 @@
 // $(function () {
 //     $("#header").load("header.html");
 // })
-$("#header").load("header.html", function(){
-    $.getScript("header.js");
-});
+document.addEventListener('DOMContentLoaded', function () {
+    $("#header").load("header.html", function () {
+        $.getScript("header.js");
+    });
+})

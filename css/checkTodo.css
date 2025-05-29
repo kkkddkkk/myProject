@@ -1,0 +1,111 @@
+* {
+    /* border: 0.5px solid red; */
+}
+
+body {
+    margin: 0 !important;
+}
+
+.wrap {
+    width: 75%;
+    display: flex;
+}
+
+/* ==============차트 영역============== */
+.chartArea {
+    width: 50%;
+    padding: 0 3%;
+}
+
+/* 원형 그래프 */
+.pieChart {
+    width: 50%;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    margin: 10% 25%;
+
+    /* 임시 */
+    background-color: aquamarine;
+}
+
+
+.taskAtChartDiv {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: 10%;
+}
+
+.taskAtChart {
+    width: 50%;
+    display: flex;
+    margin: 3% 0;
+}
+
+.taskOdd {
+    justify-content: flex-end;
+}
+
+.taskAtChart p {
+    display: inline-block;
+    margin: 0;
+    padding-left: 5%;
+    padding-top: 2%;
+}
+
+.taskColor {
+    width: 20%;
+    aspect-ratio: 1/1;
+
+    /* 임시 */
+    background-color: pink;
+}
+
+
+
+/*  ============== 업무 영역 ============== */
+.taskArea {
+    width: 50%;
+}
+
+.taskList {
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+li {
+    display: inline-block;
+}
+
+li p {
+    display: inline-block;
+    margin: 0;
+}
+
+.taskAtList {
+    display: flex;
+    margin: 2% 0;
+}
+
+.listImg {
+    width: 8%;
+    aspect-ratio: 1/1;
+    background-color: cadetblue;
+}
+
+.taskAtList p{
+    font-size: 18px;
+    font-weight: bold;
+    padding-left: 3%;
+}
+
+.subDivision{
+    padding-left: 12%;
+}
+
+.subDivision li p{
+    margin-bottom: 2%;
+}

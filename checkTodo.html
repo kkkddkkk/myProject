@@ -17,15 +17,21 @@
         <div class="chartArea">
             <div class="pieChart"></div>
 
-            <p class="taskTxt">
-            <div class="taskColor task0"></div>
-            </p>
-            <p class="taskTxt">
-            <div class="taskColor task1"></div>
-            </p>
-            <p class="taskTxt">
-            <div class="taskColor task2"></div>
-            </p>
+            <div class="taskAtChartDiv">
+                <div class="taskAtChart taskEven">
+                    <div class="taskColor task0"></div>
+                    <p class="taskTxt">division1</p>
+                </div>
+                <div class="taskAtChart taskOdd">
+                    <div class="taskColor task1"></div>
+                    <p class="taskTxt">division2</p>
+                </div>
+                <div class="taskAtChart taskEven">
+                    <div class="taskColor task2"></div>
+                    <p class="taskTxt">division3</p>
+                </div>
+            </div>
+
         </div>
         <div class="taskArea">
             <input type="checkbox">내 업무만 확인
@@ -33,8 +39,10 @@
             <ul class="taskList">
                 <li class="division">
                     <div>
-                        <div class="listImg task0"></div>
-                        <p>division1</p>
+                        <div class="taskAtList">
+                            <div class="listImg task0"></div>
+                            <p>division1</p>
+                        </div>
                         <ul class="subDivision">
                             <li>
                                 <p>subDivision1</p>
@@ -60,9 +68,10 @@
 
 
     </div>
-
-    <script src="js/common.js"></script>
+    
     <script src="js/header.js"></script>
+    <script src="js/common.js"></script>
+
 </body>
 
 </html>
