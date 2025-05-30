@@ -15,63 +15,175 @@
 
     <div class="wrap BGColor">
         <div class="chartArea">
-            <div class="pieChart"></div>
-
-            <div class="taskAtChartDiv">
-                <div class="taskAtChart taskEven">
-                    <div class="taskColor task0"></div>
-                    <p class="taskTxt">division1</p>
-                </div>
-                <div class="taskAtChart taskOdd">
-                    <div class="taskColor task1"></div>
-                    <p class="taskTxt">division2</p>
-                </div>
-                <div class="taskAtChart taskEven">
-                    <div class="taskColor task2"></div>
-                    <p class="taskTxt">division3</p>
+            <div class="forFixed">
+                <div class="pieChart"></div>
+                <div class="taskAtChartDiv">
+                    <div class="taskAtChart taskEven">
+                        <div class="taskColor task0"></div>
+                        <p class="taskTxt">division1</p>
+                    </div>
+                    <div class="taskAtChart taskOdd">
+                        <div class="taskColor task1"></div>
+                        <p class="taskTxt">division2</p>
+                    </div>
+                    <div class="taskAtChart taskEven">
+                        <div class="taskColor task2"></div>
+                        <p class="taskTxt">division3</p>
+                    </div>
                 </div>
             </div>
-
         </div>
         <div class="taskArea">
             <input type="checkbox">내 업무만 확인
 
-            <ul class="taskList">
-                <li class="division">
+            <ul class="divisionUl">
+                <li class="divisionLi">
                     <div>
-                        <div class="taskAtList">
-                            <div class="listImg task0"></div>
-                            <p>division1</p>
-                        </div>
-                        <ul class="subDivision">
-                            <li>
-                                <p>subDivision1</p>
-                                <ul class="task">
-                                    <li>
-                                        task1
-                                        <p>~month/date time</p>
-                                    </li>
-                                    <li>
-                                        task2
-                                        <p>~month/date time</p>
-                                    </li>
+                        <div class="taskAtListDiv">
+                            <div class="forFlex">
+                                <div class="taskAtList">
+                                    <div class="listImg task0"></div>
+                                    <p>division1</p>
+                                </div>
+                            </div>
+                            <div class="forFlex">
+                                <div class="taskAtList2">
+                                    <div class="withFriends">
+                                        <img class="friendImg" src="img/otter10.jpg">
+                                        <img class="friendImg" src="img/otter11.jpg">
+                                        <!-- <img class="friendImg" src="img/otter.jpg">
+                                        <img class="friendImg" src="img/otter3.jpg"> -->
+                                        <div class="openImgsModal textColorBut">
+                                            <i class="fa-solid fa-ellipsis BGColorBut"></i>
+                                        </div>
+                                    </div>
+                                    <i class="fa-solid fa-chevron-down textColor"></i>
+                                </div>
+                            </div>
 
+                        </div>
+                        <ul class="subDivisionUl">
+                            <li class="subDivisionLi">
+                                <div class="subDivisionDiv">
+                                    <div class="forFlex">
+                                        <div class="subDiviList">
+                                            <i class="fa-solid fa-angle-right"></i>
+                                            <p>subDivision1</p>
+                                        </div>
+                                    </div>
+                                    <div class="forFlex forI">
+                                        <i class="fa-solid fa-chevron-down textColor"></i>
+                                    </div>
+                                </div>
+                                <ul class="taskUl">
+                                    <li class="taskLi">
+                                        <div class="taskDiv">
+                                            <div class="taskNameDiv">
+                                                <p class="taskName">
+                                                    <i class="fa-solid fa-angles-right"></i>
+                                                    task1
+                                                </p>
+                                            </div>
+                                            <p class="until">~2025.05.30. 18:00</p>
+                                        </div>
+                                    </li>
+                                    <li class="taskLi">
+                                        <div class="taskDiv">
+                                            <div class="taskNameDiv">
+                                                <p class="taskName">
+                                                    <i class="fa-solid fa-angles-right"></i>
+                                                    task2
+                                                </p>
+                                            </div>
+                                            <p class="until">~2025.05.30. 18:00</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="subDivisionLi">
+                                <div class="subDivisionDiv">
+                                    <div class="forFlex">
+                                        <div class="subDiviList">
+                                            <i class="fa-solid fa-angle-right"></i>
+                                            <p>subDivision2</p>
+                                        </div>
+                                    </div>
+                                    <div class="forFlex forI">
+                                        <i class="fa-solid fa-chevron-down textColor"></i>
+                                    </div>
+                                </div>
+                                <ul class="taskUl">
+                                    <li class="taskLi">
+                                        <div class="taskDiv">
+                                            <div class="taskNameDiv">
+                                                <p class="taskName">
+                                                    <i class="fa-solid fa-angles-right"></i>
+                                                    task3
+                                                </p>
+                                            </div>
+                                            <p class="until">~2025.05.30. 18:00</p>
+                                        </div>
+                                    </li>
+                                    <li class="taskLi">
+                                        <div class="taskDiv">
+                                            <div class="taskNameDiv">
+                                                <p class="taskName">
+                                                    <i class="fa-solid fa-angles-right"></i>
+                                                    task4
+                                                </p>
+                                            </div>
+                                            <p class="until">~2025.05.30. 18:00</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="subDivisionLi">
+                                <div class="subDivisionDiv">
+                                    <div class="forFlex">
+                                        <div class="subDiviList">
+                                            <i class="fa-solid fa-angle-right"></i>
+                                            <p>subDivision3</p>
+                                        </div>
+                                    </div>
+                                    <div class="forFlex forI">
+                                        <i class="fa-solid fa-chevron-down textColor"></i>
+                                    </div>
+                                </div>
+                                <ul class="taskUl">
+                                    <li class="taskLi">
+                                        <div class="taskDiv">
+                                            <div class="taskNameDiv">
+                                                <p class="taskName">
+                                                    <i class="fa-solid fa-angles-right"></i>
+                                                    task5
+                                                </p>
+                                            </div>
+                                            <p class="until">~2025.05.30. 18:00</p>
+                                        </div>
+                                    </li>
+                                    <li class="taskLi">
+                                        <div class="taskDiv">
+                                            <div class="taskNameDiv">
+                                                <p class="taskName">
+                                                    <i class="fa-solid fa-angles-right"></i>
+                                                    task6
+                                                </p>
+                                            </div>
+                                            <p class="until">~2025.05.30. 18:00</p>
+                                        </div>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
-
                     </div>
                 </li>
             </ul>
         </div>
-
-
-
     </div>
-    
-    <script src="js/header.js"></script>
-    <script src="js/common.js"></script>
 
+    <script src="js/common.js"></script>
+    <script src="js/test.js"></script>
+    <script src="js/checkTodo.js"></script>
 </body>
 
 </html>

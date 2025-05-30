@@ -1,7 +1,5 @@
-document.addEventListener('DOMContentLoaded', () => {
-
-    //여러 div 구분용 변수
-    let temp, result, newClassName;
+// document.addEventListener('DOMContentLoaded', () => {
+function headerFunction(){
 
     //기본 nav 변수
     //#region
@@ -534,4 +532,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //#endregion
-})
+}
