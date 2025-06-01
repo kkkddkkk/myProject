@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="css/checkTodo.css">
     <link rel="stylesheet" href="css/common.css">
 </head>
@@ -16,19 +17,15 @@
     <div class="wrap BGColor">
         <div class="chartArea">
             <div class="forFixed">
-                <div class="pieChart"></div>
+                <canvas class="pieChart"></canvas>
                 <div class="taskAtChartDiv">
                     <div class="taskAtChart taskEven">
-                        <div class="taskColor task0"></div>
+                        <div class="taskColor"></div>
                         <p class="taskTxt">division1</p>
                     </div>
                     <div class="taskAtChart taskOdd">
-                        <div class="taskColor task1"></div>
+                        <div class="taskColor"></div>
                         <p class="taskTxt">division2</p>
-                    </div>
-                    <div class="taskAtChart taskEven">
-                        <div class="taskColor task2"></div>
-                        <p class="taskTxt">division3</p>
                     </div>
                 </div>
             </div>

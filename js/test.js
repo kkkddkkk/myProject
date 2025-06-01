@@ -4,25 +4,26 @@ document.addEventListener('DOMContentLoaded', () => {
     //임시 - taskArea 2번 추가
     let divisionUl = document.querySelector('.divisionUl');
     let taskArea = document.querySelector('.taskArea');
+    let taskAtChartDiv = document.querySelector('.taskAtChartDiv');
     let taskAtChart = document.querySelectorAll('.taskAtChart');
     let clone = divisionUl.cloneNode(true)
 
-    for (i = 0; i < 2; i++) {
+    //taskList 랜덤생성(0~5)
+    let ranNum = (Math.random() * 4) + 1;
+    for (i = 0; i < ranNum; i++) {
         clone = divisionUl.cloneNode(true)
         taskArea.appendChild(clone);
     }
 
-    let divisionUlAll = document.querySelectorAll('.divisionUl');
+    divisionUl = document.querySelectorAll('.divisionUl');
 
     //taskArea division 변경, 랜덤색상 지정
-    for (let i = 0; i < divisionUlAll.length; i++) {
-        divisionUlAll[i].querySelector('.taskAtList').querySelector('div').style.backgroundColor = randomColor();
-        divisionUlAll[i].querySelector('.taskAtList').querySelector('p').innerHTML = `division${(i + 1)}`
+    for (let i = 0; i < divisionUl.length; i++) {
+        divisionUl[i].querySelector('.taskAtList').querySelector('div').style.backgroundColor = randomColor();
+        divisionUl[i].querySelector('.taskAtList').querySelector('p').innerHTML = `division${(i + 1)}`;
+    }
 
-        let getColor = window.getComputedStyle(divisionUlAll[i].querySelector('.taskAtList').querySelector('div')).backgroundColor;
-        taskAtChart[i].querySelector('div').style.backgroundColor = getColor;
 
-    }//색깔 지정 함수 수정한거 checkTodo.js로 옮기기!
 
 
     //랜덤색상 함수
@@ -33,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         return `rgb(${red}, ${green}, ${blue})`;
     }
+
+
 
 
 })

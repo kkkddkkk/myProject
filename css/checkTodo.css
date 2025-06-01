@@ -31,13 +31,10 @@ body {
 
 /* 원형 그래프 */
 .pieChart {
-    width: 50%;
+    width: 60%;
     aspect-ratio: 1/1;
     border-radius: 100%;
-    margin: 10% 25%;
-
-    /* 임시 */
-    background-color: aquamarine;
+    margin: 10% 20%;
 }
 
 
