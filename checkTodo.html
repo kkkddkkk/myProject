@@ -14,6 +14,33 @@
 <body>
     <div id="header"></div>
 
+    <div class="modalBGAtCheckTodo">
+
+        <div class="workingFriendsModal BGColor">
+            <div class="innerModalAtCheckTodo">
+                <div class="workingFriendsImgDiv borderColor">
+                    <img class="workingFriendsImg" src="img/otter10.jpg">
+                    <img class="workingFriendsImg" src="img/otter11.jpg">
+                    <img class="workingFriendsImg" src="img/otter.jpg">
+                    <img class="workingFriendsImg" src="img/otter3.jpg">
+                    <img class="workingFriendsImg" src="img/otter.jpg">
+                    <img class="workingFriendsImg" src="img/otter3.jpg">
+                </div>
+                <div class="friendsAtSubDivision">
+                    <p>subdivision1</p>
+                    <div>
+                        <p>task1</p>
+                        <div class="friendsAtTask">
+                            <img class="workingFriendsImg" src="img/otter10.jpg">
+                            <img class="workingFriendsImg" src="img/otter11.jpg">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
     <div class="wrap BGColor">
         <div class="chartArea">
             <div class="forFixed">
@@ -21,18 +48,21 @@
                 <div class="taskAtChartDiv">
                     <div class="taskAtChart taskEven">
                         <div class="taskColor"></div>
-                        <p class="taskTxt">division1</p>
+                        <input type="number" class="taskScore" placeholder="1~100" value="100" disabled>
+                        <i class="fa-solid fa-pen-to-square"></i>
                     </div>
                     <div class="taskAtChart taskOdd">
                         <div class="taskColor"></div>
-                        <p class="taskTxt">division2</p>
+                        <input type="number" class="taskScore" placeholder="1~100" value="100" disabled>
+                        <i class="fa-solid fa-pen-to-square"></i>
                     </div>
                 </div>
             </div>
         </div>
         <div class="taskArea">
-            <input type="checkbox">내 업무만 확인
-
+            <div class="checkBoxDiv">
+                <input type="checkbox">내 업무만 확인
+            </div>
             <ul class="divisionUl">
                 <li class="divisionLi">
                     <div>

@@ -23,6 +23,17 @@ document.addEventListener('DOMContentLoaded', () => {
         divisionUl[i].querySelector('.taskAtList').querySelector('p').innerHTML = `division${(i + 1)}`;
     }
 
+    //내 업무 랜덤으로 추가
+    let taskLi = document.querySelectorAll('.taskLi');
+    let randomTask = Math.floor(Math.random()*2);
+
+    for(let i=0;i<taskLi.length;i++){
+        randomTask = Math.floor(Math.random()*2);
+        if(randomTask == 1){
+            taskLi[i].classList.add('myTask');
+        }
+    }
+
 
 
 
