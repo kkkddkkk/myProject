@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //taskArea
     let taskArea = document.querySelector('.taskArea');
-    let divisionUl = document.querySelectorAll('.divisionUl');
+    let divisionLi = document.querySelectorAll('.divisionLi');
     let checkBoxDiv = document.querySelector('.checkBoxDiv');
 
     //chartArea - taskArea 기본세팅
@@ -21,22 +21,22 @@ document.addEventListener('DOMContentLoaded', () => {
     let dataArr2 = new Array();
     let sum = 0;
 
-    for (let i = 0; i < divisionUl.length; i++) {
+    for (let i = 0; i < divisionLi.length; i++) {
         //taskArea 갯수에 따른 chartArea - division 추가
-        if (i % 2 == 0 && i < divisionUl.length - 2) {
+        if (i % 2 == 0 && i < divisionLi.length - 2) {
             clone = document.querySelector('.taskEven').cloneNode(true);
             taskAtChartDiv.appendChild(clone);
-        } else if ((i % 2 != 0 && i < divisionUl.length - 2)) {
+        } else if ((i % 2 != 0 && i < divisionLi.length - 2)) {
             clone = document.querySelector('.taskOdd').cloneNode(true);
             taskAtChartDiv.appendChild(clone);
         }
         taskAtChart = document.querySelectorAll('.taskAtChart');
 
         //chartArea의 listImg 색 통일
-        let getColor = window.getComputedStyle(divisionUl[i].querySelector('.listImg')).backgroundColor;
+        let getColor = window.getComputedStyle(divisionLi[i].querySelector('.listImg')).backgroundColor;
 
         //chart 생성용 배열 작성
-        divisionArr[i] = divisionUl[i].querySelector('.taskAtList').querySelector('p').innerHTML;
+        divisionArr[i] = divisionLi[i].querySelector('.taskAtList').querySelector('p').innerHTML;
         dataArr1[i] = parseInt(taskAtChart[i].querySelector('input').value);
         taskAtChart[i].querySelector('div').style.backgroundColor = getColor;
         colorArr[i] = getColor;
@@ -81,6 +81,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let taskLi = document.querySelectorAll('.taskLi');//업무목록
     let subDivisionLi = document.querySelectorAll('.subDivisionLi');//subdivision list
 
+    //modalArea
+    let modalBGAtCheckTodo = document.querySelector('.modalBGAtCheckTodo');//모달 배경
+    let checkAtModal = document.querySelector('.checkAtModal');//모달 - 확인 버튼
+    let divisionAtModal = document.querySelector('.divisionAtModal');//division명
+    let subdivisionAtModal = document.querySelector('.subdivisionAtModal');//subdivision명
+    let subdivisionUlAtModal = document.querySelector('.subdivisionUlAtModal')//subdivisionUl
+    let subdivisionliAtModal = document.querySelector('.subdivisionliAtModal');//subdivisionList
+
     //중요도에 변경에 따른 pieChart update 이벤트
     //#region
 
@@ -124,17 +132,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //#endregion ========================================================> 중요도에 변경에 따른 pieChart update 이벤트 끝.
 
-    //taskArea 접기 - 펴기 버튼 이벤트
+    //taskArea 접기 - 펴기 버튼 이벤트, 모달 open 이벤트
+    //#region
     taskArea.addEventListener('click', (event) => {
-        let subDivisionUl = event.target.parentNode.parentNode.parentNode.parentNode.querySelector('.subDivisionUl');
-        let taskUl = event.target.parentNode.parentNode.parentNode.querySelector('.taskUl');
-        let upperDivision = event.target.parentNode.parentNode.parentNode.parentNode;
+        if (event.target.tagName == 'I') {
+            let subDivisionUl = event.target.parentNode.parentNode.parentNode.parentNode.querySelector('.subDivisionUl');
+            let taskUl = event.target.parentNode.parentNode.parentNode.querySelector('.taskUl');
+            let upperDivision = event.target.parentNode.parentNode.parentNode.parentNode;
 
-        foldUpDown(event, subDivisionUl);
-        foldUpDown(event, taskUl, upperDivision);
+            foldUpDown(event, subDivisionUl);
+            foldUpDown(event, taskUl, upperDivision);
+        }
+        if (event.target.classList.contains('forOpenModal')) {
+            let divisionDiv = event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+            let divisionName = divisionDiv.querySelector('.taskAtList').querySelector('p');
+            let subDivisionName = divisionDiv.querySelectorAll('.subDivisionLi');
+            let clone = subdivisionliAtModal.cloneNode(true);
+            clone.style.display = 'block'
+
+            modalBGAtCheckTodo.style.display = 'block';
+
+            //모달 내용 update
+            divisionAtModal.innerHTML = divisionName.innerHTML;//division명 복사
+            for (let i = 0; i < subDivisionName.length; i++) {
+                let taskName = subDivisionName[i].querySelectorAll('.taskName');
+
+                //cloneNode 생성+붙여넣기
+                clone = subdivisionliAtModal.cloneNode(true);
+                clone.style.display = 'block'
+                subdivisionUlAtModal.appendChild(clone);
+
+                //모달 초기화용 CLASS 삭제
+                clone.classList.add('forDel');
+
+                //subDivision명 복사
+                clone.querySelector('.subdivisionAtModal').innerHTML = subDivisionName[i].querySelector('.subDiviList').children[1].innerHTML
+            }
+        }
     })
+    //#endregion =======================================> taskArea 접기 - 펴기 버튼 이벤트 끝.
 
     //내 업무만 확인 토글 시 myTask 제외 display none
+    //#region
+
     checkBoxDiv.addEventListener('click', (event) => {
         if (event.target.tagName == 'INPUT') {//inputDiv 구역 클릭 시 input value 바뀜.
         } else {
@@ -173,6 +213,40 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     })
+
+    //#endregion =====================================================> 내 업무만 확인 토글 시 myTask 제외 display none
+
+    //모달 내부 이벤트
+    //#region
+
+
+
+    //모달 close
+    checkAtModal.addEventListener('click', () => {//확인버튼 클릭 시
+        let forDel = document.querySelectorAll('.forDel');
+        for (let i = 0; i < forDel.length; i++) {
+            if (forDel[i].classList.contains('forDel')) {
+                subdivisionUlAtModal.removeChild(forDel[i]);
+            }
+        }
+        modalBGAtCheckTodo.style.display = 'none';
+
+    })
+    modalBGAtCheckTodo.addEventListener('click', (event) => {//모달 외 구역 클릭 시
+        if (event.target == modalBGAtCheckTodo) {
+            let forDel = document.querySelectorAll('.forDel');
+            for (let i = 0; i < forDel.length; i++) {
+                if (forDel[i].classList.contains('forDel')) {
+                    subdivisionUlAtModal.removeChild(forDel[i]);
+                }
+            }
+
+            modalBGAtCheckTodo.style.display = 'none';
+        }
+    })
+
+
+    //#endregion =================================> 모달open/close 이벤트 끝.
 
 
     //함수

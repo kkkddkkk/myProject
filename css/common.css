@@ -1,29 +1,38 @@
+:root{
+    --bgColor: white;
+    --textColor: black;
+}
+
 /* 테마 CSS */
 /* 배경색 */
 .BGColor {
-    background-color: white;
+    background-color: var(--bgColor);
 }
 
 .textColorBut {
-    background-color: black;
+    background-color: var(--textColor);
 }
 
 /* 텍스트 색 + 버튼 보더 색 + 스크롤바 색*/
 .textColor {
-    color: black;
+    color: var(--textColor);
+}
+
+input[type="checkbox"]{
+    
 }
 
 .BGColorBut{
-    color: white;
+    color: var(--bgColor);
 }
 
 .borderColor {
-    border: 1px solid black;
+    border: 1px solid var(--textColor);
 }
 
 .alarmDiv::-webkit-scrollbar-thumb,
 .friendArea::-webkit-scrollbar-thumb, 
 .innerModalAtCheckTodo::-webkit-scrollbar-thumb {
-    background-color: black;
+    background-color: var(--textColor);
     border-radius: 10px;
 }
