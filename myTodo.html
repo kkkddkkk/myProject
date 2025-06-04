@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/myTodo.css">
+</head>
+
+<body class="BGColor">
+    <div id="header"></div>
+
+    <div class="titleDiv">
+        <div class="titleIconLeft"></div>
+        <p class="title textColor">업무 관리</p>
+        <div class="titleIconRight"></div>
+    </div>
+
+    <div class="modalBGAtPage blurBGColor">
+        <div class="modalAtPage BGColor">
+
+
+            <div class="checkAtModalDiv BGColor">
+                <button class="BGColor textColor borderColor checkAtModal">확인</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="wrap">
+        <div class="innerWrap">
+            <div class="chooseDivision">
+                <select class="dropDown textColor borderColor BGColor">
+                    <option class="dropMenu">test</option>
+                    <option class="addNewTask" selected>새 업무 추가</option>
+                </select>
+                <button class="saveBtn textColor borderColor BGColor">저&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;장</button>
+            </div>
+
+            <div class="showDivision">
+                <div class="divisionName">
+                    <div class="divisionColor"></div>
+                    <p class="textColor">division1</p>
+                </div>
+
+                <div class="divisionBtns">
+                    <i class="fa-solid fa-pen-to-square textColor"></i>
+                    <i class="fa-solid fa-xmark textColor"></i>
+                    <i class="fa-solid fa-plus textColor"></i>
+                </div>
+            </div>
+
+            <ul class="subDivisionUl">
+                <li class="subDivisionLi blurLineColor">
+                    <div class="showSubDivision">
+                        <div class="subDivisionName">
+                            <i class="fa-solid fa-angle-right textColor"></i>
+                            <p>subDivision1</p>
+                        </div>
+                        <div class="subDivisionBtns">
+                            <i class="fa-solid fa-pen-to-square textColor"></i>
+                            <i class="fa-solid fa-xmark textColor"></i>
+                            <i class="fa-solid fa-plus textColor"></i>
+                            <i class="fa-solid fa-angle-down textColor"></i>
+                        </div>
+                    </div>
+
+                    <ul class="taskUl">
+                        <li class="taskLi">
+                            <div class="taskName">
+                                <i class="fa-solid fa-angles-right textColor"></i>
+                                <p class="textColor">task1</p>
+                            </div>
+                            <div class="taskBtns">
+                                <p class="until textColor">~2025.06.04 19:00</p>
+                                <i class="fa-solid fa-pen-to-square textColor"></i>
+                                <i class="fa-solid fa-xmark textColor"></i>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="js/common.js"></script>
+    <script src="js/testForMyTodo.js"></script>
+    <script src="js/myTodo.js"></script>
+</body>
+
+</html>

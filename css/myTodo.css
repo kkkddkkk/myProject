@@ -1,0 +1,179 @@
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+    display: inline-block;
+}
+
+p {
+    display: inline-block;
+    margin: 0;
+}
+
+i {
+    cursor: pointer;
+}
+
+.wrap {
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.innerWrap {
+    width: 60%;
+    max-width: 500px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 5%;
+}
+
+/* division 선택 드롭다운 메뉴 */
+.chooseDivision {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 3% 0;
+}
+
+.dropDown {
+    width: 70%;
+    aspect-ratio: 7/1;
+    margin-right: 4%;
+    border-radius: 5px;
+    font-size: 18px;
+    padding-left: 1%;
+}
+
+.dropMenu {
+    display: none;
+}
+
+.saveBtn {
+    width: 30%;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* divisionName 구역 */
+.showDivision {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 5%;
+}
+
+.divisionName {
+    display: flex;
+    align-items: center;
+}
+
+.divisionColor {
+    width: 35px;
+    aspect-ratio: 1/1;
+    background-color: aqua;
+    margin-right: 8px;
+}
+
+.divisionName p {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.divisionBtns {
+    display: flex;
+}
+
+.divisionBtns i {
+    font-size: 25px;
+    margin-left: 15px;
+}
+
+
+/* subDivision 구역 */
+.subDivisionUl {
+    width: 80%;
+    margin: 0;
+}
+
+.subDivisionLi {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 5% 0;
+    border-bottom: 1px solid;
+
+    display: none;
+}
+
+.showSubDivision {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4%;
+}
+
+.subDivisionName {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.subDivisionName i {
+    margin-right: 5px;
+}
+
+.subDivisionBtns i {
+    font-size: 20px;
+    margin-left: 8px;
+}
+
+/* task 구역 */
+.taskUl {
+    width: 90%;
+    margin-bottom: 5%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+}
+
+.taskLi {
+    width: 100%;
+    /* display: flex; */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 2% 0;
+    display: none;
+}
+
+.taskName i {
+    margin-right: 5px;
+}
+
+/* .until{
+    display: flex;
+    margin-right: 2%;
+} */
+
+.taskBtns {
+    display: flex;
+    align-items: center;
+}
+
+.until {
+    /* margin-right: 5px; */
+}
+
+.taskBtns i {
+    font-size: 18px;
+    margin-left: 15px;
+}

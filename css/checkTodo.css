@@ -1,34 +1,4 @@
-* {
-    /* border: 0.5px solid red; */
-}
 
-body {
-    margin: 0 !important;
-}
-
-.wrap {
-    width: 75%;
-    display: flex;
-}
-
-.titleDiv {
-    width: 75%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 2%;
-}
-
-.titleDiv i {
-    font-size: 2vw;
-}
-
-.title {
-    display: inline-block;
-    font-size: 1.8vw;
-    font-weight: bold;
-    margin: 0;
-}
 
 /* ==============차트 영역============== */
 
@@ -42,7 +12,7 @@ body {
 }
 
 .forFixed {
-    border: 2px solid rgba(0, 0, 0, 0.2);
+    border: 2px solid;
     border-radius: 15px;
     border-style: dashed;
     width: 30vw;
@@ -144,7 +114,7 @@ li p {
 .divisionLi {
     margin-left: 5%;
     padding-bottom: 2%;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid;
 }
 
 .taskAtListDiv {
@@ -288,26 +258,6 @@ li p {
 
 
 /* 친구 확인 모달 */
-.modalBGAtCheckTodo {
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.2);
-    z-index: 5;
-    position: fixed;
-    top: 0;
-
-    display: none;
-}
-
-.workingFriendsModal {
-    aspect-ratio: 3/2;
-    height: 70%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 15px;
-}
 
 .innerModalAtCheckTodo {
     width: 80%;
@@ -327,7 +277,7 @@ li p {
 
 .divisionAtModal {
     text-align: center;
-    font-size: 3vw;
+    font-size: 2.5vw;
     font-weight: bold;
     margin: 3% 0;
 }
@@ -382,13 +332,4 @@ li p {
 .friendsAtTask p {
     font-size: 16px;
     font-weight: normal;
-}
-
-.checkAtModal {
-    width: 30%;
-    height: 8%;
-    font-size: 18px;
-    border-radius: 30px;
-    margin: 2% 35%;
-    cursor: pointer;
 }

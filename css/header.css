@@ -91,7 +91,6 @@ header li div {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
     z-index: 1;
 }
 
@@ -188,7 +187,7 @@ header li {
     height: 31%;
     min-height: 200px;
     max-height: 250px;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid;
     position: relative;
 }
 
@@ -334,8 +333,8 @@ header li {
 }
 
 .likeFriendDiv{
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid;
+    border-bottom: 1px solid;
 }
 
 
@@ -361,7 +360,6 @@ header li {
     z-index: 3;
     position: fixed;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.1);
     backdrop-filter:blur(1px);
     display: none;
 }
@@ -400,7 +398,6 @@ header li {
 
 .searchId {
     font-style: italic;
-    color: rgba(0, 0, 0, 0.4);
 }
 
 .searchUser .askFriend {
@@ -473,7 +470,6 @@ header li {
 .requestFriend {
     margin: 0 0 4% 0;
     width: 98%;
-    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .forDate {
@@ -511,7 +507,6 @@ header li {
 }
 
 .alarmGoBtn {
-    background-color: rgba(0, 0, 0, 0.3);
     border: none;
     border-radius: 20px;
     width: 15%;
@@ -544,7 +539,7 @@ header li {
     bottom: 0;
     width: 80%;
     margin: 5% 10% 7% 10%;
-    border-top: 2px solid rgba(0, 0, 0, 0.2);
+    border-top: 2px solid;
 }
 
 .logOutBtn {
@@ -601,7 +596,6 @@ header li {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
 
@@ -618,7 +612,7 @@ header li {
     height: 50px;
     border-radius: 5px;
     font-size: 17px;
-    border: 1.5px solid black;
+    border: 1.5px solid;
     margin: 10% 0 0 0;
     padding-left: 3%;
 

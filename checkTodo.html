@@ -7,15 +7,21 @@
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="css/checkTodo.css">
     <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/checkTodo.css">
 </head>
 
 <body class="BGColor">
     <div id="header"></div>
 
-    <div class="modalBGAtCheckTodo">
-        <div class="workingFriendsModal BGColor">
+    <div class="titleDiv">
+        <div class="titleIconLeft"></div>
+        <p class="title textColor">세부 업무 확인</p>
+        <div class="titleIconRight"></div>
+    </div>
+
+    <div class="modalBGAtPage blurBGColor">
+        <div class="modalAtPage BGColor">
             <p class="divisionAtModal textColor">DIVISION1</p>
             <div class="innerModalAtCheckTodo">
                 <div class="workingFriendsImgDiv borderColor">
@@ -34,19 +40,19 @@
                                 <li class="taskLiAtModal">
                                     <div class="friendsAtTask">
                                         <img class="workingFriendsImg" src="img/otter10.jpg">
-                                        <p>NAME1</p>
-                                        <p>&nbsp;|&nbsp;</p>
-                                        <p>task1</p>
+                                        <p class="textColor">NAME1</p>
+                                        <p class="textColor">&nbsp;|&nbsp;</p>
+                                        <p class="textColor">task1</p>
                                     </div>
                                 </li>
                                 <li class="taskLiAtModal">
                                     <div class="friendsAtTask">
                                         <img class="workingFriendsImg" src="img/otter11.jpg">
-                                        <p>NAME2</p>
-                                        <p>&nbsp;|&nbsp;</p>
-                                        <p>task1</p>
-                                        <p>,&nbsp;</p>
-                                        <p>task2</p>
+                                        <p class="textColor">NAME2</p>
+                                        <p class="textColor">&nbsp;|&nbsp;</p>
+                                        <p class="textColor">task1</p>
+                                        <p class="textColor">,&nbsp;</p>
+                                        <p class="textColor">task2</p>
                                     </div>
                                 </li>
                             </ul>
@@ -54,17 +60,16 @@
                     </ul>
                 </div>
             </div>
-            <button class="BGColor textColor borderColor checkAtModal">확인</button>
+            <div class="checkAtModalDiv BGColor">
+                <button class="BGColor textColor borderColor checkAtModal">확인</button>
+            </div>
+
         </div>
     </div>
-    <div class="titleDiv">
-        <i class="fa-solid fa-fire textColor"></i>
-        <p class="title textColor">&nbsp;&nbsp;&nbsp;세부 업무 확인&nbsp;&nbsp;&nbsp;</p>
-        <i class="fa-solid fa-fire textColor"></i>
-    </div>
+
     <div class="wrap BGColor">
         <div class="chartArea">
-            <div class="forFixed">
+            <div class="forFixed blurLineColor">
                 <canvas class="pieChart"></canvas>
                 <div class="taskAtChartDiv">
                     <div class="taskAtChart taskEven">
@@ -87,7 +92,7 @@
                 <input type="checkbox">내 업무만 확인
             </div>
             <ul class="divisionUl">
-                <li class="divisionLi">
+                <li class="divisionLi blurLineColor">
                     <div>
                         <div class="taskAtListDiv">
                             <div class="forFlex">
