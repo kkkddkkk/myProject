@@ -16,6 +16,7 @@ i {
     cursor: pointer;
 }
 
+
 .wrap {
     justify-content: center;
     flex-wrap: wrap;
@@ -98,6 +99,7 @@ i {
 .subDivisionUl {
     width: 80%;
     margin: 0;
+    display: none;
 }
 
 .subDivisionLi {
@@ -169,11 +171,176 @@ i {
     align-items: center;
 }
 
-.until {
-    /* margin-right: 5px; */
-}
-
 .taskBtns i {
     font-size: 18px;
     margin-left: 15px;
+}
+
+/* 모달구역 */
+.modalWrap {
+    display: flex;
+    justify-content: center;
+}
+
+/* x버튼 */
+.xBtn {
+    width: 4%;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    right: 3%;
+    top: 3%;
+}
+
+.xBtn i {
+    font-size: 22px;
+}
+
+/* division/subdivision 수정 모달 */
+.modiDiviModal {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 3%;
+}
+
+.diviName {
+    /* box-sizing: border-box; */
+    margin: 20px 0;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 60%;
+    height: 40px;
+}
+
+.diviName label {
+    display: inline-block;
+    position: absolute;
+    top: -10px;
+    left: 12px;
+    padding: 0 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.diviNameInput {
+    border-radius: 3px;
+    width: 98%;
+    height: 100%;
+    padding: 0 0 0 3%;
+    outline: none;
+    font-size: 18px;
+}
+
+.withFriends {
+    width: 100%;
+    display: none;/*flex*/
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.friendsListDiv {
+    height: 35vh;
+    overflow-y: scroll;
+
+    display: none;
+}
+
+.scroll::-webkit-scrollbar {
+    width: 10px;
+}
+
+.scroll::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+}
+
+.friendsListDiv,
+.friendsListTitle,
+.searchFriendDiv {
+    width: 60%;
+    margin-bottom: 3%;
+}
+
+.friendsList,
+.friendsListTitle,
+.searchFriendTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.friendsListTitle p {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.friendsListTitle button, .searchFriendTitle button {
+    width: 20%;
+    aspect-ratio: 5/2;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.friendsList {
+    width: 100%;
+    display: none;
+}
+
+
+/* 친구목록 */
+.friendsProfile {
+    display: flex;
+    align-items: center;
+}
+
+.friendsImg {
+    width: 12%;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+}
+
+.friendsProfile p {
+    margin-left: 2%;
+    font-size: 18px;
+}
+
+.friendsList {
+    margin: 3% 0;
+}
+
+.friendsList i, .searchList i {
+    font-size: 20px;
+    margin-right: 6%;
+}
+
+/* 친구검색 */
+.searchFriendTitle{
+    margin-bottom: 2%;
+}
+
+.searchFriendTitle input {
+    width: 75%;
+    height: 3.5vh;
+    border-radius: 3px;
+    padding-left: 2%;
+    outline: none;
+}
+
+.searchList {
+    display: none;/*flex*/
+    align-items: center;
+    justify-content: space-between;
+    margin: 3% 0;
+}
+
+.searchListDiv {
+    height: 32vh;
+    overflow-y: scroll;
 }

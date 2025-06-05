@@ -47,7 +47,6 @@ body {
 /* 흐린 윤곽선 */
 .blurLineColor{
     border-color: var(--blurColor) !important;
-    /* border-bottom-color: var(--blurColor); */
 }
 
 /* 흐린 배경 */
@@ -62,7 +61,7 @@ body {
 /* 스크롤바 색*/
 .alarmDiv::-webkit-scrollbar-thumb,
 .friendArea::-webkit-scrollbar-thumb,
-.innerModalAtCheckTodo::-webkit-scrollbar-thumb {
+.scroll::-webkit-scrollbar-thumb {
     background-color: var(--textColor);
     border-radius: 10px;
 }
@@ -116,7 +115,7 @@ body {
     position: fixed;
     top: 0;
 
-    /* display: none; */
+    display: none;
 }
 .modalAtPage {
     aspect-ratio: 3/2;
