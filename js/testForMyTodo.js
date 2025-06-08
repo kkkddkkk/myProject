@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let subDivisionUl = document.querySelector('.subDivisionUl');
     let subDivisionLi = document.querySelector('.subDivisionLi');
-    let clone, cloneDiv, ranNum2;
+    let taskLi = document.querySelector('.taskLi');
+    let clone, cloneDiv, cloneSub, cloneTask, ranNum2, ranNum3;
 
     //division 랜덤생성
     for (let i = 0; i < ranNum; i++) {
@@ -19,48 +20,42 @@ document.addEventListener('DOMContentLoaded', () => {
         //addNewTask 위에 clone 붙이기
         dropDown.insertBefore(clone, addNewTask);
 
-        ranNum2 = parseInt(Math.random() * 5 + 1);
+        //division마다 subDivision 생성
         cloneDiv = subDivisionUl.cloneNode(true);
         cloneDiv.classList.add(clone.value);
-        cloneDiv.style.display = 'block';
-        innerWrap.appendChild(cloneDiv);
-        console.log(innerWrap.innerHTML);
 
+        innerWrap.appendChild(cloneDiv);
+
+        // subDivision 랜덤 생성
+        ranNum2 = parseInt(Math.random() * 4 + 1);
+        for (let j = 0; j < ranNum2; j++) {
+            cloneSub = subDivisionLi.cloneNode(true);
+            cloneSub.style.display = 'flex';
+            cloneSub.classList.add(`subDivision${j + 1}`);
+
+            cloneSub.querySelector('.subDivisionName').querySelector('p').innerHTML = `subDivision${j + 1}`;
+            cloneDiv.appendChild(cloneSub);
+
+            //task 랜덤 생성
+            ranNum3 = parseInt(Math.random() * 3 + 1);
+            for (let k = 0; k < ranNum3; k++) {
+                cloneTask = taskLi.cloneNode(true);
+                cloneTask.style.display = 'flex';
+                cloneTask.classList.add(`task${k + 1}`);
+
+                cloneTask.querySelector('.taskName').querySelector('p').innerHTML = `task${k + 1}`;
+                cloneSub.querySelector('.taskUl').appendChild(cloneTask);
+            }
+        }
     }
+
     dropMenu = document.querySelectorAll('.dropMenu');
+    subDivisionUl = document.querySelectorAll('.subDivisionUl');
+    subDivisionLi = document.querySelectorAll('.subDivisionLi');
     if (ranNum != 0) {
         addNewTask.selected = false;
         dropMenu[1].selected = true;
-
-    }
-
-    //subDivision 랜덤 생성
-    
-
-    for (let i = 0; i < ranNum; i++) {
-        clone = subDivisionLi.cloneNode(true);
-        clone.style.display = 'flex';
-        clone.classList.add(`subDivision${i + 1}`);
-
-        clone.querySelector('.subDivisionName').querySelector('p').innerHTML = `subDivision${i + 1}`;
-        subDivisionUl.appendChild(clone);
-    }
-
-    //task 랜덤생성
-    subDivisionLi = document.querySelectorAll('.subDivisionLi');
-
-    let taskLi = document.querySelector('.taskLi');
-
-    for (let i = 0; i < subDivisionLi.length; i++) {
-        ranNum = parseInt(Math.random() * 3 + 1);
-        for (let j = 0; j < ranNum; j++) {
-            clone = taskLi.cloneNode(true);
-            clone.style.display = 'flex';
-            clone.classList.add(`task${j + 1}`);
-
-            clone.querySelector('.taskName').querySelector('p').innerHTML = `task${j + 1}`;
-            subDivisionLi[i].querySelector('.taskUl').appendChild(clone);
-        }
+        subDivisionUl[1].style.display = 'block';
     }
 
     //팀원 랜덤생성
