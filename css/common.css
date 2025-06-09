@@ -1,6 +1,7 @@
 :root {
     --bgColor: white;
     --textColor: black;
+    --pointColor: pink;
     /* 다크모드 시 blurColor rgba(255, 255, 255, 0.4) */
     --blurColor: rgba(0, 0, 0, 0.2);
     --titleIconLeft: url('../img/rocketLeft.png');
@@ -44,17 +45,26 @@ body {
     border: 1px solid var(--textColor);
 }
 
+/* 포인트컬러 */
+.pointColorForText {
+    color: var(--pointColor);
+}
+
+.pointColorForBorder{
+    border: 1px solid var(--pointColor);
+}
+
 /* 흐린 윤곽선 */
-.blurLineColor{
+.blurLineColor {
     border-color: var(--blurColor) !important;
 }
 
 /* 흐린 배경 */
-.blurBGColor{
+.blurBGColor {
     background-color: var(--blurColor);
 }
 
-.blurTextColor{
+.blurTextColor {
     color: var(--blurColor);
 }
 
@@ -117,6 +127,7 @@ body {
 
     display: none;
 }
+
 .modalAtPage {
     aspect-ratio: 3/2;
     height: 70%;
@@ -141,6 +152,6 @@ body {
     height: 90%;
     font-size: 18px;
     border-radius: 30px;
-    margin:0 35%;
+    margin: 0 35%;
     cursor: pointer;
 }

@@ -239,7 +239,8 @@ i {
 
 .withFriends {
     width: 100%;
-    display: none;/*flex*/
+    display: none;
+    /*flex*/
     justify-content: center;
     flex-wrap: wrap;
     align-items: flex-start;
@@ -280,7 +281,8 @@ i {
     font-weight: bold;
 }
 
-.friendsListTitle button, .searchFriendTitle button {
+.friendsListTitle button,
+.searchFriendTitle button {
     width: 20%;
     aspect-ratio: 5/2;
     border-radius: 3px;
@@ -315,7 +317,8 @@ i {
     margin: 3% 0;
 }
 
-.friendsList i, .searchList i {
+.friendsList i,
+.searchList i {
     font-size: 20px;
     margin-right: 6%;
 
@@ -323,7 +326,7 @@ i {
 }
 
 /* 친구검색 */
-.searchFriendTitle{
+.searchFriendTitle {
     margin-bottom: 2%;
 }
 
@@ -336,7 +339,8 @@ i {
 }
 
 .searchList {
-    display: none;/*flex*/
+    display: none;
+    /*flex*/
     align-items: center;
     justify-content: space-between;
     margin: 3% 0;
@@ -345,4 +349,76 @@ i {
 .searchListDiv {
     height: 32vh;
     overflow-y: scroll;
+}
+
+/* TASK 관련 모달 내용 */
+.modiTask {
+    width: 60%;
+    height: 42vh;
+    overflow-y: scroll;
+
+    display: none;
+}
+
+.friendsListAtTask {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5%;
+}
+
+.modiTask p {
+    margin-bottom: 2%;
+}
+
+.friendsListAtTask .friendsProfile {
+    display: flex;
+    width: 50px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.friendsListAtTask .friendsProfile p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.deadLindTime {
+    width: 80%;
+    margin: 0 10% 10% 10%;
+    display: flex;
+
+    justify-content: center;
+}
+
+.deadLindTime input {
+    width: 15%;
+    height: 30px;
+    font-size: 18px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid;
+    text-align: center;
+}
+
+.deadLindTime p {
+    margin: 0 3%;
+}
+
+.deadLineCheckBox {
+    width: 80%;
+    margin: 0 10% 5% 10%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.radioForMonth {
+    width: 80%;
+    margin: 5% 10%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.forMonth{
+    width: 100%;
 }

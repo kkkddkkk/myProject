@@ -1,0 +1,40 @@
+p {
+    display: inline-block;
+    font-weight: bold;
+}
+
+.calanderTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 10% 5% 10%;
+}
+
+.calanderTitle p {
+    font-weight: bold;
+}
+
+table {
+    width: 80%;
+    margin: 0 10% 10% 10%;
+    height: 28vh;
+    table-layout: fixed;
+}
+
+th {
+    font-size: 14px;
+}
+
+.week td {
+    text-align: center;
+    cursor: pointer;
+}
+
+.sunColor {
+    color: rgb(255, 88, 88);
+}
+
+.satColor {
+    color: rgb(50, 179, 230);
+}

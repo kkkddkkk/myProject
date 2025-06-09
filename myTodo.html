@@ -30,8 +30,8 @@
                     <div class="diviName">
                         <label for="diviNameInput" class="BGColor textColor"><span class="textColor">*
                             </span>구분&nbsp;</label>
-                        <input type="text" class="diviNameInput BGColor textColor borderColor" required spellcheck="false"
-                            placeholder="스케줄명을 입력해주세요.">
+                        <input type="text" class="diviNameInput BGColor textColor borderColor" required
+                            spellcheck="false" placeholder="스케줄명을 입력해주세요.">
                     </div>
                     <div class="withFriends">
                         <div class="friendsListTitle">
@@ -63,6 +63,49 @@
                                     </div>
                                     <i class="fa-solid fa-plus"></i>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modiTask scroll">
+                        <p class="textColor">
+                            *&nbsp;함께하는 사람들&nbsp;&nbsp;
+                            <i class="fa-solid fa-pen-to-square textColor"></i>
+                        </p>
+                        <div class="friendsListAtTask">
+                            <div class="friendsProfile">
+                                <img class="friendsImg" src="img/otter10.jpg">
+                                <p class="textColor">NAME</p>
+                            </div>
+                        </div>
+                        <div class="deadLineDiv">
+                            <p class="textColor">*&nbsp;마감기한</p>
+                            <div id="calendar"></div>
+                            <p class="textColor">*&nbsp;마감시간</p>
+                            <div class="deadLindTime">
+                                <input type="text" maxlength="2">
+                                <p>:</p>
+                                <input type="text" maxlength="2">
+                            </div>
+                            <div class="deadLineCheckBox">
+                                <label class="textColor" for="period">
+                                    <input type="radio" name="period" class="textColor BGColor textColor"> 매주 기억하기
+                                </label>
+                                <label class="textColor" for="period">
+                                    <input type="radio" name="period" class="textColor BGColor textColor"> 매달 기억하기
+                                </label>
+                                <div class="radioForMonth">
+                                    <label for="forMonth" class="forMonth">
+                                        <input type="radio" name="forMonth" checked>
+                                        매달 n일 반복
+                                    </label>
+                                    <label for="forMonth" class="forMonth">
+                                        <input type="radio" name="forMonth">
+                                        매달 n주 n요일 반복
+                                    </label>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
@@ -134,6 +177,7 @@
     <script src="js/common.js"></script>
     <script src="js/testForMyTodo.js"></script>
     <script src="js/myTodo.js"></script>
+    <script src="js/calendarForMyTodo.js"></script>
 </body>
 
 </html>

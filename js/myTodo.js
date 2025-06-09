@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let withFriends = document.querySelector('.withFriends');//친구 추가 div
     let friendsListDiv = document.querySelector('.friendsListDiv');//친구 list 전체
     let searchFriendDiv = document.querySelector('.searchFriendDiv');//검색 결과 list 전체
+    let modiTask = document.querySelector('.modiTask');//task 추가/수정 div
 
     let diviNameInput = document.querySelector('.diviNameInput');//division 명 수정 input
 
@@ -102,8 +103,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         //task 추가
-        if (event.target.classList.contains('fa-plus')) {
+        if (event.target.classList.contains('fa-plus') && event.target.closest('.showSubDivision')) {
+            clicked = event.target.parentNode.parentNode.querySelector('p');
+            clickedIcon = 'fa-plus';
 
+            //모달 setting
+            modalBGAtPage.style.display = 'block';
+            withFriends.style.display = 'none';
+            friendsListDiv.style.display = 'none';
+            searchFriendDiv.style.display = 'none';
+            modiTask.style.display = 'block';
+
+            diviNameInput.value = '';
         }
 
         //task 펼치기, 접기
@@ -122,18 +133,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
             thisTaskUl.style.maxHeight = null;
         }
+
+        //taskBtns 클릭 이벤트
+        if (event.target.classList.contains('fa-pen-to-square') && event.target.closest('.taskBtns')) {
+            clicked = event.target.parentNode.parentNode.querySelector('p');
+            clickedIcon = 'fa-pen-to-square';
+
+            //모달 setting
+            modalBGAtPage.style.display = 'block';
+            withFriends.style.display = 'none';
+            friendsListDiv.style.display = 'none';
+            searchFriendDiv.style.display = 'none';
+            modiTask.style.display = 'block';
+
+            diviNameInput.value = clicked.innerHTML;
+        }
     })
 
-    //#endregion =================================> subDivisionBtns 클릭 이벤트 끝.
+    //#endregion =================================> subDivisionBtns, taskBtns 클릭 이벤트 끝.
 
-    //taskBtns 클릭 이벤트
-    //#region
-    taskBtns.addEventListener('click', (event) => {
-
-    })
-
-
-    //#endregion =================================> taskBtns 클릭 이벤트 끝.
 
     //모달 이벤트
     //#region
@@ -223,9 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
-
-
     //function
     //#region[function]
 
@@ -274,6 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
             withFriends.style.display = 'flex';
             friendsListDiv.style.display = 'block';
             searchFriendDiv.style.display = 'none';
+            modiTask.style.display = 'none';
 
             diviNameInput.value = name;
 
