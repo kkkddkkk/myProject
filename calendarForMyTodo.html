@@ -43,174 +43,29 @@
                 </tr>
             </tbody>
         </table>
+        <div class="deadLineCheckBox">
+            <label class="textColor" for="period">
+                <input type="radio" name="period" class="textColor BGColor textColor"> 매주 반복
+            </label>
+            <label class="textColor" for="period">
+                <input type="radio" name="period" class="textColor BGColor textColor"> 매달 반복
+            </label>
+            <div class="radioForMonth">
+                <label for="forMonth" class="forMonth">
+                    <input type="radio" name="forMonth" checked>
+                    매달 n일 반복
+                </label>
+                <label for="forMonth" class="forMonth">
+                    <input type="radio" name="forMonth">
+                    매달 n주 n요일 반복
+                </label>
+            </div>
+        </div>
     </div>
 
 
 
-    <script>
-        const date = new Date();
-        let thisYear = date.getFullYear();
-        let thisMonth = date.getMonth();
-        let day;
-        let sum = 0;
-        let week = document.querySelectorAll('.week');
-        let num = 0;
-
-        document.querySelector('.year').innerHTML = thisYear;
-        document.querySelector('.month').innerHTML = thisMonth + 1;
-
-        calander();
-
-        let calendarTable = document.querySelector('table');
-        let checkedDate = new Array();
-        let thisDate;
-
-        calendarTable.addEventListener('click', (event) => {
-            if (event.target.tagName == 'TD' && event.target.innerHTML != '') {
-                if (event.target.classList.contains('pointColorForBorder')) {
-                    event.target.classList.remove('pointColorForBorder')
-                    checkedDate.pop(thisDate);
-                } else {
-                    event.target.classList.add('pointColorForBorder');
-
-                    thisDate = new Date(thisYear, thisMonth, parseInt(event.target.innerHTML));
-                    checkedDate.push(thisDate);
-                }
-            }
-        })
-
-        let tBody = document.querySelector('tbody');
-        let before = document.querySelector('.before');
-        let after = document.querySelector('.after');
-
-        //지난달로 이동 버튼
-        before.addEventListener('click', () => {
-            thisMonth--;
-            document.querySelector('.month').innerHTML = thisMonth + 1;
-            if (thisMonth == -1) {
-                thisYear--;
-                thisMonth = 11;
-                document.querySelector('.month').innerHTML = thisMonth + 1;
-                document.querySelector('.year').innerHTML = thisYear;
-            }
-
-            for (let i = 0; i < week.length - 1; i++) {
-                tBody.removeChild(week[i]);
-            }
-
-            week = document.querySelectorAll('.week');
-            week[0].classList.remove('added');
-            for (let i = 0; i < week[0].children.length; i++) {
-                week[0].children[i].innerHTML = '';
-            }
-
-            num = 0;
-            calander();
-
-            // for (let i = 0; i < checkedDate.length; i++) {
-            //     if (checkedDate[i].getFullYear() == thisYear) {
-            //         if (checkedDate[i].getMonth() == thisMonth) {
-            //             console.log(document.querySelectorAll('td'));
-            //             for (let j = 0; j <= document.querySelectorAll('td').length; j++) {
-            //                 console.log(document.querySelectorAll('td'))[34];
-            //                 if (document.querySelectorAll('td')[j].innerHTML == checkedDate[i].getDate()) {
-            //                     document.querySelectorAll('td')[j].classList.add('pointColorForBorder');
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }
-        })
-
-        //다음달로 이동 버튼
-        after.addEventListener('click', () => {
-            thisMonth++;
-            document.querySelector('.month').innerHTML = thisMonth + 1;
-            if (thisMonth == 12) {
-                thisYear++;
-                thisMonth = 0;
-                document.querySelector('.month').innerHTML = thisMonth + 1;
-                document.querySelector('.year').innerHTML = thisYear;
-            }
-
-            for (let i = 0; i < week.length - 1; i++) {
-                tBody.removeChild(week[i]);
-            }
-
-            week = document.querySelectorAll('.week');
-            week[0].classList.remove('added');
-            for (let i = 0; i < week[0].children.length; i++) {
-                week[0].children[i].innerHTML = '';
-            }
-
-            num = 0;
-            calander();
-
-            // for (let i = 0; i < checkedDate.length; i++) {
-            //     if (checkedDate[i].getFullYear() == thisYear) {
-            //         if (checkedDate[i].getMonth() == thisMonth) {
-            //             for (let j = 0; j <= document.querySelectorAll('td').length; j++) {
-            //                 console.log(document.querySelectorAll('td'));
-            //                 if (document.querySelectorAll('td')[j].innerHTML == checkedDate[i].getDate()) {
-            //                     document.querySelectorAll('td')[j].classList.add('pointColorForBorder');
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }
-        })
-
-
-
-
-
-        function calander() {
-            for (let i = 1; i <= 31; i++) {
-                let testDate = new Date(thisYear, thisMonth, i);
-                if (testDate.getMonth() != thisMonth) {
-                    testDate = null;
-                }
-                if (testDate == null) break;
-
-                switch (testDate.getDay()) {
-                    case 0: day = 'sun';
-                        break;
-                    case 1: day = 'mon';
-                        break;
-                    case 2: day = 'tue';
-                        break;
-                    case 3: day = 'wed';
-                        break;
-                    case 4: day = 'thu';
-                        break;
-                    case 5: day = 'fri';
-                        break;
-                    case 6: day = 'sat';
-                        break;
-                }
-
-                for (let j = 0; j < week[num].children.length; j++) {
-                    if (week[num].children[j].classList.contains(day)) {
-                        week[num].children[j].innerHTML = i;
-
-                        if (day === 'sat') {
-                            week[num].classList.add('added');
-
-                            let clone = week[0].cloneNode(true);
-                            for (let k = 0; k < 7; k++) {
-                                clone.children[k].innerHTML = '';
-                            }
-
-                            week[num].parentNode.appendChild(clone);
-                            week = document.querySelectorAll('.week');
-                            num++;
-                        }
-                        break;
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="js/calendarForMyTodo.js"></script>
 </body>
 
 </html>

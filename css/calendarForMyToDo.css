@@ -38,3 +38,22 @@ th {
 .satColor {
     color: rgb(50, 179, 230);
 }
+
+
+.deadLineCheckBox {
+    width: 80%;
+    margin: 0 10% 5% 10%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.radioForMonth {
+    width: 80%;
+    margin: 5% 10%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.forMonth{
+    width: 100%;
+}
