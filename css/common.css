@@ -54,6 +54,10 @@ body {
     border: 1px solid var(--pointColor);
 }
 
+.pointColorForBG{
+    background-color: var(--pointColor);
+}
+
 /* 흐린 윤곽선 */
 .blurLineColor {
     border-color: var(--blurColor) !important;

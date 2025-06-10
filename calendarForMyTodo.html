@@ -44,12 +44,19 @@
             </tbody>
         </table>
         <div class="deadLineCheckBox">
-            <label class="textColor" for="period">
-                <input type="radio" name="period" class="textColor BGColor textColor"> 매주 반복
+            <label class="periodLabel textColor BGColor borderColor" for="period">
+                <input type="radio" name="period" class="period">
+                <span class="textColor">매일</span>
             </label>
-            <label class="textColor" for="period">
-                <input type="radio" name="period" class="textColor BGColor textColor"> 매달 반복
+            <label class="periodLabel textColor BGColor borderColor" for="period">
+                <input type="radio" name="period" class="period">
+                <span class="textColor">매주</span>
             </label>
+            <label class="periodLabel textColor BGColor borderColor" for="period">
+                <input type="radio" name="period" class="period">
+                <span class="textColor">매달</span>
+            </label>
+            <button class="initBtn BGColor borderColor textColor">초기화</button>
             <div class="radioForMonth">
                 <label for="forMonth" class="forMonth">
                     <input type="radio" name="forMonth" checked>
