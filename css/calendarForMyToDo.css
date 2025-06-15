@@ -15,6 +15,23 @@ p {
     font-weight: bold;
 }
 
+.before, .after{
+    display: flex;
+    align-items: center;
+}
+
+.beforeYear{
+    margin-right: 10px;
+}
+
+.afterYear{
+    margin-left: 10px;
+}
+
+.beforeMonth, .afterMonth{
+    font-size: 14px;
+}
+
 table {
     width: 80%;
     margin: 0 10% 10% 10%;
@@ -28,7 +45,7 @@ th {
 
 .week td {
     text-align: center;
-    cursor: pointer;
+    cursor: auto;
 }
 
 .sunColor {
@@ -80,4 +97,8 @@ th {
 .deadLineCheckBox button {
     border-radius: 20px;
     font-size: 14px;
+}
+
+.initBtn{
+    cursor: pointer;
 }

@@ -13,13 +13,22 @@
 <body>
     <div class="calander">
         <div class="calanderTitle">
-            <i class="fa-solid fa-chevron-left before textColor"></i>
+            <div class="before">
+                <i class="fa-solid fa-angles-left beforeYear textColor"></i>
+                <i class="fa-solid fa-chevron-left beforeMonth textColor"></i>
+            </div>
+
             <div class="thisYearMonth">
                 <p class="year textColor"></p>
                 <p class="textColor">.&nbsp;</p>
                 <p class="month textColor"></p>
             </div>
-            <i class="fa-solid fa-chevron-right after textColor"></i>
+
+            <div class="after">
+                <i class="fa-solid fa-chevron-right afterMonth textColor"></i>
+                <i class="fa-solid fa-angles-right afterYear textColor"></i>
+            </div>
+
         </div>
         <table class="calanderTable">
             <thead>
@@ -33,38 +42,45 @@
             </thead>
             <tbody>
                 <tr class="week">
-                    <td class="sun sunColor"></td>
-                    <td class="mon textColor"></td>
-                    <td class="tue textColor"></td>
-                    <td class="wed textColor"></td>
-                    <td class="thu textColor"></td>
-                    <td class="fri textColor"></td>
-                    <td class="sat satColor"></td>
+                    <td></td>
+                    <td class="textColor"></td>
+                    <td class="textColor"></td>
+                    <td class="textColor"></td>
+                    <td class="textColor"></td>
+                    <td class="textColor"></td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
         <div class="deadLineCheckBox">
-            <label class="periodLabel textColor BGColor borderColor" for="period">
-                <input type="radio" name="period" class="period">
+            <label class="periodLabel textColor BGColor borderColor" for="everyDay">
+                <input type="checkbox" name="period" id="everyDay">
                 <span class="textColor">매일</span>
             </label>
-            <label class="periodLabel textColor BGColor borderColor" for="period">
-                <input type="radio" name="period" class="period">
+            <label class="periodLabel textColor BGColor borderColor" for="everyWeek">
+                <input type="checkbox" name="period" id="everyWeek">
                 <span class="textColor">매주</span>
             </label>
-            <label class="periodLabel textColor BGColor borderColor" for="period">
-                <input type="radio" name="period" class="period">
+            <label class="periodLabel textColor BGColor borderColor" for="everyMonth">
+                <input type="checkbox" name="period" id="everyMonth">
                 <span class="textColor">매달</span>
             </label>
             <button class="initBtn BGColor borderColor textColor">초기화</button>
             <div class="radioForMonth">
                 <label for="forMonth" class="forMonth">
                     <input type="radio" name="forMonth" checked>
-                    매달 n일 반복
+                    <span>
+                        매달
+                        <!-- n일 -->
+                    </span>
+
                 </label>
                 <label for="forMonth" class="forMonth">
                     <input type="radio" name="forMonth">
-                    매달 n주 n요일 반복
+                    <span>
+                        매달
+                        <!-- n주 n요일 -->
+                    </span>
                 </label>
             </div>
         </div>

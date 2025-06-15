@@ -1,404 +1,449 @@
-// function calenderScript() {
+function calenderScript() {
 
 const date = new Date();//현재날짜
 let thisYear = date.getFullYear(); //임시 년도 변수
 let thisMonth = date.getMonth(); //임시 월별 변수
-let day;//임시 요일 변수
-let checkedDate = new Array();//선택 날짜 배열
-let dayArray = new Array();//매주 반복 시 요일 배열
-let num = 0;
-let timeChk = false;
 
-let calendarTable = document.querySelector('table');
+let checkedDate = new Array();//선택 날짜 배열
+let autoCheckedDate = new Array();//자동선택 날짜 배열
+let dayArrayForMonth = new Array();//매달 반복 시 데이터 배열
+
 let tBody = document.querySelector('tbody');
 let week = document.querySelectorAll('.week');
 
-let before = document.querySelector('.before');//저번달 버튼
-let after = document.querySelector('.after');//다음달 버튼
-let deadLineCheckBox = document.querySelector('.deadLineCheckBox');
-let period = document.querySelectorAll('.period');
+let before = document.querySelector('.before');//작년/지난달 버튼
+let after = document.querySelector('.after');//내년/다음달 버튼
+let period = document.querySelectorAll('input[name="period"]');//매일/매주/매달 버튼
+
 let radioForMonth = document.querySelector('.radioForMonth');
+let forMonth = document.querySelectorAll('.forMonth');//매달 라디오 메뉴 라벨
 let initBtn = document.querySelector('.initBtn');//초기화버튼
 
-document.querySelector('.year').innerHTML = thisYear;
-document.querySelector('.month').innerHTML = thisMonth + 1;
 
-calander();
+calendar();
+week = document.querySelectorAll('.week');
 let cells = document.querySelectorAll('td');
 
-
-// 요일 체크 이벤트
-
-calendarTable.addEventListener('click', (event) => {
-    if (event.target.tagName == 'TD' && event.target.innerHTML != '') {
-        let getDateAt = event.target.getAttribute('data-date');
-
-        if (event.target.classList.contains('blurTextColor')) return;
-
-        //재클릭 시 해당 데이터 배열에서 삭제
-        if (checkedDate.includes(getDateAt)) {
-            if (checkedDate.indexOf(getDateAt) > -1) {
-                checkedDate.splice(checkedDate.indexOf(getDateAt), 1);
-            }
-        } else if (!checkedDate.includes(getDateAt)) {//중복 데이터 방지
-            //클릭한 날짜를 checkedDate 배열에 담음.
-            checkedDate.push(getDateAt);
-        }
-        // //배열에 담긴 데이터만 달력에 표시
-        setCheckOnCalendar();
-
-        if (period[0].checked) {
-            removeRadio(0);
-        }
-
-        //매주 반복 클릭 상태일 경우
-        if (period[1].checked) {
-            loopEveryWeek();
-
-            //0.1초 뒤 체크됨 표시
-            setTimeout(() => {
-                if (checkedDate.includes(getDateAt)) {
-                    checkedDate.forEach((data) => {
-                        document.querySelector(`[data-date="${data}"]`).classList.add('checkedNow');
-                    })
-                }
-            }, 10)
-
-            console.log('클릭 이벤트 내부: ' + event.target.classList.contains('checkedNow'));
-            console.log(event.target);
-            //체크됨 표식 있을 시 매주 이벤트 삭제
-            if (event.target.classList.contains('checkedNow')) {
-                removeRadio(1);
-                if (checkedDate.indexOf(getDateAt) > -1) {
-                    checkedDate.splice(checkedDate.indexOf(getDateAt), 1);
-                }
-            }
-
-            setCheckOnCalendar();
-        }
-    }
-})
-
-
-
-
-//이동버튼 이벤트
+let clickedData, addedArray;
+//날짜 클릭 이벤트
 //#region
+tBody.addEventListener('click', (event) => {
+    if (event.target.closest('td').style.cursor == '' || event.target.closest('td').style.cursor == 'auto') return;
 
-//지난달로 이동 버튼
-before.addEventListener('click', () => {
-    thisMonth--;
-    document.querySelector('.month').innerHTML = thisMonth + 1;
-    if (thisMonth == -1) {
-        thisYear--;
-        thisMonth = 11;
-        document.querySelector('.month').innerHTML = thisMonth + 1;
-        document.querySelector('.year').innerHTML = thisYear;
+    //날짜 클릭시 border 추가
+    clickedData = event.target.getAttribute('data-date');
+    if (!period[0].checked && !period[1].checked && !period[2].checked) {
+        modiArray(checkedDate, clickedData);
+        checkOnCalendar();
     }
 
-    initCalendar();
-    calander();
-    cells = document.querySelectorAll('td');
-    setCheckOnCalendar();
-    // if (period[0].checked) loopEveryDay();
-    // if (period[1].checked) loopEveryWeek();
+    //재 클릭을 대비한 추가 배열(autoCHeckedDate + checkedDate)
+    addedArray = autoCheckedDate.concat(checkedDate);
+    addedArray.sort();
 
-})
-
-//다음달로 이동 버튼
-after.addEventListener('click', () => {
-    thisMonth++;
-    document.querySelector('.month').innerHTML = thisMonth + 1;
-    if (thisMonth == 12) {
-        thisYear++;
-        thisMonth = 0;
-        document.querySelector('.month').innerHTML = thisMonth + 1;
-        document.querySelector('.year').innerHTML = thisYear;
-    }
-
-    initCalendar();
-    calander();
-    cells = document.querySelectorAll('td');
-    setCheckOnCalendar();
-    // if (period[0].checked) loopEveryDay();
-    // if (period[1].checked) loopEveryWeek();
-})
-
-//#endregion
-
-//매일/매주/매달 반복 이벤트
-deadLineCheckBox.addEventListener('click', (event) => {
-    if (event.target.closest('.periodLabel')) {
-        //매달 체크 시 이벤트
-        if (period[2].checked) {
-            radioForMonth.style.display = 'flex';
-        } else {
-            radioForMonth.style.display = 'none';
-        }
-
-    }
-})
-
-//매일 체크 시 이벤트
-//#region
-
-period[0].parentNode.addEventListener('click', () => {
-    if (!period[0].checked) {
-        addRadio(0);
-        removeRadio(1);
-        removeRadio(2);
-
-        cells = document.querySelectorAll('td');
-        cells.forEach((cell) => {
-            if (!cell.classList.contains('blurTextColor') && cell.innerHTML != '') {
-                cell.classList.add('pointColorForBorder');
-            }
-        })
-    } else {
-        removeRadio(0);
-        setCheckOnCalendar();
-    }
-})
-
-//#endregion
-
-//매주 체크 시 이벤트
-//#region
-
-period[1].parentNode.addEventListener('click', () => {
-    if (!period[1].checked) {
-        addRadio(1);
-        removeRadio(0);
-        removeRadio(2);
-
-        cells.forEach((cell) => {
-            if (!cell.classList.contains('blurTextColor') && cell.innerHTML != '') {
-                cell.classList.remove('checkedNow');
-            }
-        })
-
-        loopEveryWeek();
-
-        checkedDate.forEach((data) => {
-            document.querySelector(`[data-date="${data}"]`).classList.add('checkedNow');
-            console.log('매주 버튼 이벤트 내부: ' + document.querySelector(`[data-date="${data}"]`).classList.contains('checkedNow'));
-            console.log(document.querySelector(`[data-date="${data}"]`));
-        })
-
-    } else {
-        removeRadio(1);
-        setCheckOnCalendar();
-    }
-})
-
-//#endregion
-
-
-//초기화버튼 클릭 이벤트
-initBtn.addEventListener('click', () => {
-    //배열 초기화
-    while (checkedDate.length) {
-        checkedDate.pop();
-    }
-    setCheckOnCalendar();
-
-    //버튼 초기화
-    for (let i = 0; i < period.length; i++) {
-        removeRadio(i);
-    }
-})
-
-
-
-//calendaer 제작 함수 calendar();
-//#region
-
-function calander() {
-    for (let i = 1; i <= 31; i++) {
-        let testDate = new Date(thisYear, thisMonth, i);
-        if (testDate.getMonth() != thisMonth) {
-            testDate = null;
-        }
-        if (testDate == null) break;
-
-        switch (testDate.getDay()) {
-            case 0: day = 'sun'; break;
-            case 1: day = 'mon'; break;
-            case 2: day = 'tue'; break;
-            case 3: day = 'wed'; break;
-            case 4: day = 'thu'; break;
-            case 5: day = 'fri'; break;
-            case 6: day = 'sat'; break;
-        }
-
-        for (let j = 0; j < week[num].children.length; j++) {
-            if (week[num].children[j].classList.contains(day)) {
-                week[num].children[j].innerHTML = i;
-                week[num].children[j].setAttribute('data-date', `${thisYear}-${thisMonth}-${i}`)
-
-                //이전 날짜는 흐리게 + cursor를 auto로
-                let targetDate = new Date(thisYear, thisMonth, i, 23, 59, 59);
-                if (date >= targetDate) {
-                    week[num].children[j].classList.add('blurTextColor');
-                    week[num].children[j].style.cursor = 'auto';
-                }
-                if (week[num].children[j].classList.contains('blurTextColor') && week[num].children[j].classList.contains('sunColor')) {
-                    week[num].querySelector('.sun').classList.remove('sunColor');
-                } else if (week[num].children[j].classList.contains('blurTextColor') && week[num].children[j].classList.contains('satColor')) {
-                    week[num].querySelector('.sat').classList.remove('satColor');
-                }
-
-                //토요일까지 다 채우면 새 line 생성
-                if (day === 'sat') {
-                    let clone = week[0].cloneNode(true);
-                    for (let k = 0; k < 7; k++) {
-                        clone.children[k].innerHTML = '';
-                        clone.children[k].setAttribute('data-date', '');
-                        clone.children[k].classList.remove('blurTextColor');
-
-                        clone.querySelector('.sun').classList.add('sunColor');
-                        clone.querySelector('.sat').classList.add('satColor');
-
-                        clone.children[k].style.cursor = 'pointer';
-                    }
-
-                    week[num].parentNode.appendChild(clone);
-                    week = document.querySelectorAll('.week');
-                    num++;
-                }
-                break;
-            }
-        }
-
-
-
-    }
-}
-
-//#endregion
-
-//달력 초기화 initCalendar();
-//#region
-
-function initCalendar() {
-    for (let i = 0; i < week.length - 1; i++) {
-        tBody.removeChild(week[i]);
-    }
-
-    week = document.querySelectorAll('.week');
-    for (let i = 0; i < week[0].children.length; i++) {
-        week[0].children[i].innerHTML = '';
-        week[0].children[i].classList.remove('pointColorForBorder');
-    }
-    num = 0;
-}
-
-//#endregion
-
-//setCheckOnCalendar();
-function setCheckOnCalendar() {
-    cells.forEach((cell) => {
-        cell.classList.remove('pointColorForBorder');
-    })
-    checkedDate.forEach((date) => {
-        if (document.querySelector(`[data-date="${date}"]`)) {
-            document.querySelector(`[data-date="${date}"]`).classList.add('pointColorForBorder');
-            document.querySelector(`[data-date="${date}"]`).classList.remove('checkedNow');
-        }
-    })
-}
-
-//removeRadio(i), addRadio(i)
-//#region
-
-function removeRadio(i) {
-    period[i].checked = false;
-
-    period[i].parentNode.classList.remove('pointColorForBG');
-    period[i].parentNode.classList.add('BGColor');
-
-}
-function addRadio(i) {
-    if (!period[i].checked) {
-        period[i].checked = true;
-
-        period[i].parentNode.classList.remove('BGColor');
-        period[i].parentNode.classList.add('pointColorForBG');
-    }
-}
-
-function radioEvent(i, func) {
-    period[i].parentNode.addEventListener('click', () => {
-
-        if (period[i].checked) {
-            removeRadio(i);
-
-            setCheckOnCalendar();
+    if (period[0].checked) {//매일 반복 추가/제거 이벤트
+        if (!addedArray.includes(clickedData)) {//배열에 포함되지 않은 날짜는 추가하여 다시 정리
+            autoCheckedDate = [];
+            checkedDate.push(clickedData);
+            checkedDate.sort();
+            loopEveryDay();
+            checkOnCalendar();
             return;
         }
+        removeItAtPeriod(0);
+    }
+    if (period[1].checked) {//매주 반복 추가/제거 이벤트
+        if (!addedArray.includes(clickedData)) {//배열에 포함되지 않은 날짜는 추가하여 다시 정리
+            autoCheckedDate = [];
+            checkedDate.push(clickedData);
+            checkedDate.sort();
+            loopEveryWeek();
+            checkOnCalendar();
+            return;
+        }
+        removeItAtPeriod(1);
+    }
+    if (period[2].checked) {//매달 반복 추가/제거 이벤트
+        if (!checkedDate.includes(clickedData)) {
+            checkedDate.push(clickedData);
+            checkedDate.sort();
+            forMonth[0].querySelector('span').innerHTML = '매달 ';
+            forMonth[1].querySelector('span').innerHTML = '매달 ';
+            loopEveryMonth();
+            checkOnCalendar();
+            return;
+        }
+        removeItAtPeriod(2);
+    }
+    checkedDate = [];
+    autoCheckedDate = [];
+    dayArrayForMonth = [];
 
-        //토글 기능
-        switch (i) {
-            case 0:
-                addRadio(0)
-                removeRadio(1);
-                removeRadio(2);
-                func();
-                break;
-            case 1:
-                removeRadio(0);
-                addRadio(1)
-                removeRadio(2);
-                func();
-                break;
-            default:
-                removeRadio(0);
-                removeRadio(1);
-                addRadio(2);
-                func();
-                break;
+    while (addedArray.length)
+        modiArray(checkedDate, addedArray.pop());
+})
+
+//#endregion
+
+//매일/매주/매달 버튼 클릭 이벤트
+//#region
+period.forEach((p) => {
+    p.addEventListener('change', (event) => {
+        period.forEach((innerP) => {//토글 기능
+            if (innerP != event.target) {
+                innerP.checked = false;
+                innerP.parentNode.classList.remove('pointColorForBG');
+            }
+        })
+
+        if (p.id == 'everyDay') {
+            if (p.checked) loopEveryDay();
+            else autoCheckedDate = [];
+        } else if (p.id == 'everyWeek') {
+            if (p.checked) loopEveryWeek();
+            else autoCheckedDate = [];
+        } else if (p.id == 'everyMonth') {
+            if (p.checked) loopEveryMonth();
+            else autoCheckedDate = [];
+        }
+
+        if (!period[2].checked) {
+            radioForMonth.style.display = 'none';
+            forMonth[0].querySelector('span').innerHTML = '매달 ';
+            forMonth[1].querySelector('span').innerHTML = '매달 ';
+        }
+        checkOnCalendar();
+
+        //선택 시 배경 설정
+        if (p.checked) {
+            p.parentNode.classList.remove('BGColor');
+            p.parentNode.classList.add('pointColorForBG');
+        } else {
+            p.parentNode.classList.remove('pointColorForBG');
+            p.parentNode.classList.add('BGColor');
+        }
+    })
+})
+
+
+//#endregion
+
+//초기화 버튼 클릭 이벤트
+//#region
+initBtn.addEventListener('click', () => {
+    period.forEach((p) => {//전체 버튼 선택 해제
+        p.checked = false;
+        p.parentNode.classList.remove('pointColorForBG');
+    })
+    radioForMonth.style.display = 'none';
+    checkedDate = [];//배열 초기화
+    autoCheckedDate = [];
+    dayArrayForWeek = [];
+    dayArrayForMonth = [];
+    checkOnCalendar();
+})
+
+//#endregion
+
+//이동버튼 클릭 이벤트
+//#region
+before.addEventListener('click', (event) => {
+    if (event.target.classList.contains('beforeYear')) {
+        thisYear--;
+    }
+    else if (event.target.classList.contains('beforeMonth')) {
+        thisMonth--;
+        if (thisMonth == -1) {
+            thisYear--;
+            thisMonth = 11;
+        }
+    }
+    newCalendar();
+    period0WhenMove();
+    period1WhenMove();
+    period2WhenMove();
+
+    checkOnCalendar();
+})
+
+after.addEventListener('click', (event) => {
+    if (event.target.classList.contains('afterYear')) thisYear++;
+    else if (event.target.classList.contains('afterMonth')) {
+        thisMonth++;
+        if (thisMonth == 12) {
+            thisYear++;
+            thisMonth = 0;
+        }
+    }
+    newCalendar();
+    period0WhenMove();
+    period1WhenMove();
+    period2WhenMove();
+
+    checkOnCalendar();
+})
+
+//#endregion
+
+
+//#region[함수구역]
+
+//배열 함수 modiArray(data); checkOnCalendar();
+//#region
+//배열 수정
+function modiArray(array, data) {
+    if (!array.includes(data)) array.push(data);
+    else array.splice(array.indexOf(data), 1);
+    array.sort();
+}
+
+//배열 데이터에 border 표기
+function checkOnCalendar() {
+    cells.forEach((c) => {
+        c.classList.remove('pointColorForBorder');
+    })
+    checkedDate.forEach((cd) => {
+        if (document.querySelector(`[data-date="${cd}"]`))
+            document.querySelector(`[data-date="${cd}"]`).classList.add('pointColorForBorder');
+    })
+    autoCheckedDate.forEach((acd) => {
+        if (document.querySelector(`[data-date="${acd}"]`)) {
+            document.querySelector(`[data-date="${acd}"]`).classList.add('pointColorForBorder');
+        }
+
+    })
+}
+
+//#endregion
+
+//calendar 제작 함수 calendar(); newCalendar();
+//#region
+
+function calendar() {
+    let num = 0;
+    document.querySelector('.year').innerHTML = thisYear;
+    document.querySelector('.month').innerHTML = thisMonth + 1;
+    let checkedYear = parseInt(document.querySelector('.year').innerHTML);
+    let checkedMonth = parseInt(document.querySelector('.month').innerHTML) - 1;
+
+    for (let i = 1; i <= 31; i++) {
+        let testDate = new Date(checkedYear, checkedMonth, i);
+        if (testDate.getMonth() != checkedMonth) {
+            testDate = null;
+            break;
+        }
+        let cell = week[num].children[testDate.getDay()];
+        cell.innerHTML = i;
+        cell.setAttribute('data-date', `${checkedYear}-${(checkedMonth + 1).toString().padStart(2, '0')}-${i.toString().padStart(2, '0')}`);
+
+        //이전 날짜는 흐리게 처리
+        let targetDate = new Date(thisYear, thisMonth, i, 23, 59, 59);
+        if (date >= targetDate) {
+            if (cell == week[num].children[0]) cell.classList.remove('sunColor');
+            else if (cell == week[num].children[6]) cell.classList.remove('satColor');
+            cell.classList.add('blurTextColor');
+        } else {
+            cell.style.cursor = 'pointer';
+            if (cell == week[num].children[0]) cell.classList.add('sunColor');
+            else if (cell == week[num].children[6]) cell.classList.add('satColor');
+        }
+
+        //토요일까지 다 채우면 새 line 생성
+        if (testDate.getDay() == 6) {
+            let clone = week[0].cloneNode(true);
+            Array.from(clone.children).forEach((c) => {
+                c.innerHTML = '';
+                c.setAttribute('data-date', '');
+                c.classList.remove('blurTextColor');
+                c.style.cursor = 'auto';
+            })
+
+            week[num].parentNode.appendChild(clone);
+            week = document.querySelectorAll('.week');
+            num++;
+        }
+    }
+}
+
+function newCalendar() {
+    document.querySelector('.year').innerHTML = thisYear;
+    document.querySelector('.month').innerHTML = thisMonth + 1;
+    let clone = week[0].cloneNode(true);
+    Array.from(clone.children).forEach((c) => {
+        c.innerHTML = '';
+        c.setAttribute('data-date', '');
+        c.classList.remove('blurTextColor');
+        c.style.cursor = 'auto';
+    })
+
+    week.forEach((w) => {
+        w.parentNode.removeChild(w);
+    })
+
+    tBody.appendChild(clone);
+    week = document.querySelectorAll('.week');
+
+    calendar();
+    week = document.querySelectorAll('.week');
+    cells = document.querySelectorAll('td');
+}
+
+
+//#endregion
+
+//매일 반복 함수 loopEveryDay();
+//#region
+function loopEveryDay() {
+    cells = document.querySelectorAll('td');
+    cells.forEach((cell) => {
+        if (checkedDate[0]) {
+            if (checkedDate[0] < cell.getAttribute('data-date')) {//자동체크배열에 추가
+                modiArray(autoCheckedDate, cell.getAttribute('data-date'));
+                checkedDate.forEach((cd) => {
+                    if (autoCheckedDate.includes(cd))
+                        autoCheckedDate.splice(autoCheckedDate.indexOf(cd), 1);
+                })
+            }
+        } else {
+            if (cell.style.cursor != '' && cell.style.cursor != 'auto')//전체날짜 추가
+                modiArray(autoCheckedDate, cell.getAttribute('data-date'));
         }
     })
 }
 
 //#endregion
 
-
-//매주 반복 체크 loopEveryWeek();
+//매주 반복 함수 loopEveryWeek();
 //#region
-
 function loopEveryWeek() {
-    let targetDate, targetDay;
-    if (checkedDate[0]) {
-        checkedDate.forEach((date) => {
-            targetDate = new Date(date);
-            targetDate.setMonth(targetDate.getMonth() + 1);
-            targetDay = targetDate.getDay();
+    cells = document.querySelectorAll('td');
+    if (!checkedDate[0]) {
+        alert('반복할 날짜를 먼저 선택해주세요.');
+        period[1].checked = false;
+        period[1].classList.remove('pointColorForBG');
+        return;
+    } else {
+        checkedDate.forEach((cd) => {
+            let cdDate = new Date(cd);
+            let cdDay = cdDate.getDay();
 
-            week.forEach((w) => {
-                let compareData = w.children[targetDay].getAttribute('data-date');
-                let compareDate = new Date(compareData);
-                compareDate.setMonth(compareDate.getMonth() + 1);
-
-                if (!w.children[targetDay]) return;
-
-                if (compareDate >= targetDate) {
-                    if (!checkedDate.includes(compareData)) {//중복 데이터 방지
-                        checkedDate.push(compareData);
-                    }
-                }
+            cells.forEach((cell) => {
+                let cdNode = cell.parentNode.children[cdDay];
+                if (cd < cell.getAttribute('data-date') && cell === cdNode)
+                    modiArray(autoCheckedDate, cdNode.getAttribute('data-date'));
             })
         })
-        setCheckOnCalendar();
+    }
+}
 
-        if (!dayArray.includes(targetDay)) {
-            dayArray.push(targetDay);
+//#endregion
+
+//매달 반복 함수 loopEveryMonth();
+//#region
+function loopEveryMonth() {
+    cells = document.querySelectorAll('td');
+    if (!checkedDate[0]) {
+        alert('반복할 날짜를 먼저 선택해주세요.');
+        period[2].checked = false;
+        return;
+    } else {
+        let everyNDate = forMonth[0].querySelector('span');
+        let everyNDay = forMonth[1].querySelector('span')
+        radioForMonth.style.display = 'block';
+
+        for (let i = 0; i < checkedDate.length; i++) {
+            let cdNode = document.querySelector(`[data-date="${checkedDate[i]}"]`);
+            if (!cdNode) continue;
+
+            let data = `${checkedDate[i]}+${cdNode.parentNode.rowIndex}+${cdNode.cellIndex}`;
+            if (!dayArrayForMonth.includes(data)) dayArrayForMonth.push(data);
+        }
+        for (let i = 0; i < dayArrayForMonth.length; i++) {
+            everyNDate.innerHTML += dayArrayForMonth[i].split('+')[0].split('-')[2];
+            everyNDay.innerHTML += dayArrayForMonth[i].split('+')[1] + '주 ';
+
+            console.log(checkedDate);
+            switch (dayArrayForMonth[i].split('+')[2]) {
+                case 0: everyNDay.innerHTML += '일요일'; break;
+                case 1: everyNDay.innerHTML += '월요일'; break;
+                case 2: everyNDay.innerHTML += '화요일'; break;
+                case 3: everyNDay.innerHTML += '수요일'; break;
+                case 4: everyNDay.innerHTML += '목요일'; break;
+                case 5: everyNDay.innerHTML += '금요일'; break;
+                case 6: everyNDay.innerHTML += '토요일'; break;
+            }
+            everyNDate.innerHTML += ', ';
+            everyNDay.innerHTML += ', ';
+        }
+
+        everyNDate.innerHTML = everyNDate.innerHTML.slice(0, -2);
+        everyNDate.innerHTML += ' 일';
+        everyNDay.innerHTML = everyNDay.innerHTML.slice(0, -2);
+    }
+}
+
+//#endregion
+
+// 달력 클릭 + 매일/매주/매달 반복 연계함수 removeItAtPeriod(i);
+//#region
+function removeItAtPeriod(i) {
+    if (checkedDate.includes(clickedData)) {
+        checkedDate.splice(checkedDate.indexOf(clickedData), 1);
+    } else if (autoCheckedDate.includes(clickedData)) {
+        autoCheckedDate.splice(autoCheckedDate.indexOf(clickedData), 1);
+    }
+    addedArray.splice(addedArray.indexOf(clickedData), 1);
+    checkOnCalendar();
+
+    period[i].checked = false;
+    period[i].parentNode.classList.remove('pointColorForBG');
+    period[i].parentNode.classList.add('BGColor');
+    radioForMonth.style.display = 'none';
+    forMonth[0].querySelector('span').innerHTML = '매달 ';
+    forMonth[1].querySelector('span').innerHTML = '매달 ';
+}
+
+//#endregion
+
+//이전+다음 버튼 클릭 + 매일/매주/매달 반복 연계함수 period0/1/2WhenMove();
+//#region
+function period0WhenMove() {//매일 반복 버튼 클릭되어있을 시
+    if (period[0].checked) {
+        autoCheckedDate = [];
+        loopEveryDay();
+        checkOnCalendar();
+    }
+}
+function period1WhenMove() {//매주 반복 버튼 클릭되어있을 시
+    if (period[1].checked) {
+        autoCheckedDate = [];
+        loopEveryWeek();
+        checkOnCalendar();
+    }
+}
+function period2WhenMove() {//매달 반복 버튼 클릭되어있을 시
+    if (period[2].checked) {
+        if (forMonth[0].querySelector('input').checked) {
+            dayArrayForMonth.forEach((dafm) => {
+                cells.forEach((cell) => {
+                    if (cell.classList.contains('blurTextColor')) return;
+                    if (cell.getAttribute('data-date').split('-')[2] == dafm.split('+')[0].split('-')[2])
+                        autoCheckedDate.push(cell.getAttribute('data-date'));
+                })
+            })
+        } else if (forMonth[1].querySelector('input').checked) {
+            dayArrayForMonth.forEach((dafm) => {
+                let haveToCheckDate = week[dafm.split('+')[1] - 1].children[dafm.split('+')[2]];
+                if (haveToCheckDate.classList.contains('blurTextColor')) return;
+                autoCheckedDate.push(haveToCheckDate.getAttribute('data-date'));
+            })
         }
     }
 }
 
-
+//#endregion
 
 //#endregion
 
-// }
+return checkedDate;
+}

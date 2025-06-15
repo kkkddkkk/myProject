@@ -235,6 +235,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        //마감기한 설정
+        console.log(document.querySelector('table'));
+
 
     })
     //#endregion =================================> 모달 이벤트 끝.
