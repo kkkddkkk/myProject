@@ -383,6 +383,16 @@ i {
     font-weight: normal;
 }
 
+.untilWhen{
+    margin-bottom: 5%;
+    padding: 5%;
+}
+
+.untilWhen p{
+    font-size: 14px;
+    font-weight: normal;
+}
+
 .deadLindTime {
     width: 80%;
     margin: 0 10% 10% 10%;

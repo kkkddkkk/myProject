@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let friendsListDiv = document.querySelector('.friendsListDiv');//친구 list 전체
     let searchFriendDiv = document.querySelector('.searchFriendDiv');//검색 결과 list 전체
     let modiTask = document.querySelector('.modiTask');//task 추가/수정 div
+    let calendar = document.querySelector('#calendar');
+    let untilWhen = document.querySelector('.untilWhen');
 
     let diviNameInput = document.querySelector('.diviNameInput');//division 명 수정 input
 
@@ -113,8 +115,9 @@ document.addEventListener('DOMContentLoaded', () => {
             friendsListDiv.style.display = 'none';
             searchFriendDiv.style.display = 'none';
             modiTask.style.display = 'block';
-
             diviNameInput.value = '';
+
+            calendarScript();
         }
 
         //task 펼치기, 접기
@@ -234,12 +237,53 @@ document.addEventListener('DOMContentLoaded', () => {
                 modalBGAtPage.style.display = 'none';
             }
         }
-
-        //마감기한 설정
-        console.log(document.querySelector('table'));
-
-
     })
+
+    //task 추가 - 마감기한 모달
+    calendar.addEventListener('click', (event) => {
+        untilWhen.querySelector('p').innerHTML = '';
+        for (let i = 0; i < checkedDate.length; i++) {
+            let cdDate = new Date(checkedDate[i]);
+            let cdDay;
+            switch (cdDate.getDay()) {
+                case 0: cdDay = '일요일'; break;
+                case 1: cdDay = '월요일'; break;
+                case 2: cdDay = '화요일'; break;
+                case 3: cdDay = '수요일'; break;
+                case 4: cdDay = '목요일'; break;
+                case 5: cdDay = '금요일'; break;
+                case 6: cdDay = '토요일'; break;
+            }
+
+            if (period[0].checked) {
+                untilWhen.querySelector('p').innerHTML = '* ' + checkedDate[0] + '부터 매일';
+            } else if (period[1].checked) {
+                untilWhen.querySelector('p').innerHTML += '* ' + checkedDate[i] + '부터 매주 ' + cdDay + '<br>';
+            } else if (period[2].checked) {
+                console.log(forMonth[1]);
+                if (forMonth[0].querySelector('input').checked) {
+                    untilWhen.querySelector('p').innerHTML += '* ' + checkedDate[i] + '부터 매월 ' + cdDate.getDate() + ' 일<br>';
+                }
+                if (forMonth[1].querySelector('input').checked) {
+                    let cdWeek = document.querySelector(`[data-date="${checkedDate[i]}"]`);
+                    let cdWeekNum
+                    for (let i = 0; i < cdWeek.parentNode.children.length; i++) {
+                        if (cdWeek.parentNode.children[i] == cdWeek) cdWeekNum = i;
+                    }
+                    console.log(cdWeekNum);
+                    // let cdWeek = parseInt(checkedDate)-1;
+                    untilWhen.querySelector('p').innerHTML += '* ' + checkedDate[i] + '부터 매월 ' + cdWeekNum + '주 ' + cdDay + '<br>';
+                }
+            } else {
+                untilWhen.querySelector('p').innerHTML += '* ' + checkedDate[i] + '<br>'
+            }
+        }
+
+        if (!period[0].checked)
+            untilWhen.querySelector('p').innerHTML = untilWhen.querySelector('p').innerHTML.slice(0, -2);
+    })
+
+
     //#endregion =================================> 모달 이벤트 끝.
 
 
@@ -257,7 +301,6 @@ document.addEventListener('DOMContentLoaded', () => {
             for (let i = 0; i < subDivisionUl.length; i++) {
                 subDivisionUl[i].style.display = 'none';
             }
-
         }
 
         dropDown.addEventListener('change', () => {
@@ -266,11 +309,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 showDivision.style.display = 'flex';
                 for (let i = 0; i < subDivisionUl.length; i++) {
-                    if (subDivisionUl[i].classList.contains(dropDown.value)) {
-                        subDivisionUl[i].style.display = 'block';
-                    } else {
-                        subDivisionUl[i].style.display = 'none';
-                    }
+                    if (subDivisionUl[i].classList.contains(dropDown.value)) subDivisionUl[i].style.display = 'block';
+                    else subDivisionUl[i].style.display = 'none';
                 }
             } else {
                 showDivision.style.display = 'none';
@@ -295,23 +335,19 @@ document.addEventListener('DOMContentLoaded', () => {
             modiTask.style.display = 'none';
 
             diviNameInput.value = name;
-
         }
     }
 
     //function hoverIcon(eventDiv, closest)
     function hoverIcon(eventDiv, closest) {
         eventDiv.addEventListener('mouseover', (event) => {
-            if (event.target.closest(`.${closest}`)) {
+            if (event.target.closest(`.${closest}`))
                 event.target.closest(`.${closest}`).querySelector('i').style.display = 'block';
-            }
         })
         eventDiv.addEventListener('mouseout', (event) => {
-            if (event.target.closest(`.${closest}`)) {
+            if (event.target.closest(`.${closest}`))
                 event.target.closest(`.${closest}`).querySelector('i').style.display = 'none';
-            }
         })
-
     }
 
     //#endregion
