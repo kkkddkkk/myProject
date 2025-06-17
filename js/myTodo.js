@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let checkAtModal = document.querySelector('.checkAtModal');//확인버튼
 
     let clone;
+    let hasRun = false;
 
     //dropdown 메뉴 이벤트
     dropDownMenu();
@@ -42,7 +43,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let clicked, clickedIcon;
     divisionBtns.addEventListener('click', (event) => {
-
         clickAddModiIcon('fa-pen-to-square', event, document.querySelector('.divisionName').children[1].innerHTML);//수정 Icon 클릭 이벤트
         clickAddModiIcon('fa-plus', event, '');//addIcon 클릭 이벤트
 
@@ -116,8 +116,10 @@ document.addEventListener('DOMContentLoaded', () => {
             searchFriendDiv.style.display = 'none';
             modiTask.style.display = 'block';
             diviNameInput.value = '';
-
-            calendarScript();
+            if (hasRun == false) {
+                calendarScript();
+                hasRun = true;
+            }
         }
 
         //task 펼치기, 접기
@@ -203,6 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
         //닫기 버튼
         if (event.target.closest('.xBtn')) {
             modalBGAtPage.style.display = 'none';
+            initBtn.click();
         }
 
         //division/subDivision/task 구역 설정
@@ -241,7 +244,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //task 추가 - 마감기한 모달
     calendar.addEventListener('click', (event) => {
-        untilWhen.querySelector('p').innerHTML = '';
+        let untilWhenP = untilWhen.querySelector('p');
+
+        //마감기한 reset
+        if (!untilWhenP.innerHTML.includes('매') || event.target.closest('.initBtn'))
+            untilWhenP.innerHTML = '';
+
         for (let i = 0; i < checkedDate.length; i++) {
             let cdDate = new Date(checkedDate[i]);
             let cdDay;
@@ -256,31 +264,36 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (period[0].checked) {
-                untilWhen.querySelector('p').innerHTML = '* ' + checkedDate[0] + '부터 매일';
+                untilWhenP.innerHTML = '* ' + checkedDate[0] + '부터 매일<br>';
             } else if (period[1].checked) {
-                untilWhen.querySelector('p').innerHTML += '* ' + checkedDate[i] + '부터 매주 ' + cdDay + '<br>';
+                untilWhenP.innerHTML += '* ' + checkedDate[i] + '부터 매주 ' + cdDay + '<br>';
             } else if (period[2].checked) {
                 console.log(forMonth[1]);
                 if (forMonth[0].querySelector('input').checked) {
-                    untilWhen.querySelector('p').innerHTML += '* ' + checkedDate[i] + '부터 매월 ' + cdDate.getDate() + ' 일<br>';
+                    untilWhenP.innerHTML += '* ' + checkedDate[i] + '부터 매월 ' + cdDate.getDate() + ' 일<br>';
                 }
                 if (forMonth[1].querySelector('input').checked) {
-                    let cdWeek = document.querySelector(`[data-date="${checkedDate[i]}"]`);
-                    let cdWeekNum
+                    let cdWeek = document.querySelector(`[data-date="${checkedDate[i]}"]`).parentNode;
+                    let cdWeekNum;
                     for (let i = 0; i < cdWeek.parentNode.children.length; i++) {
-                        if (cdWeek.parentNode.children[i] == cdWeek) cdWeekNum = i;
+                        if (cdWeek.parentNode.children[i] == cdWeek) cdWeekNum = i + 1;
                     }
-                    console.log(cdWeekNum);
-                    // let cdWeek = parseInt(checkedDate)-1;
-                    untilWhen.querySelector('p').innerHTML += '* ' + checkedDate[i] + '부터 매월 ' + cdWeekNum + '주 ' + cdDay + '<br>';
+                    untilWhenP.innerHTML += '* ' + checkedDate[i] + '부터 매월 ' + cdWeekNum + '주 ' + cdDay + '<br>';
                 }
             } else {
-                untilWhen.querySelector('p').innerHTML += '* ' + checkedDate[i] + '<br>'
+                if (event.target.tagName != ('TD')) return;
+                if (untilWhenP.innerHTML.includes('매')) {
+                    let targetDate = event.target.getAttribute('data-date');
+
+                    if (untilWhenP.innerHTML.includes(targetDate + ' ')) {
+                        untilWhenP.innerHTML = untilWhenP.innerHTML.replace('&nbsp;&nbsp;&nbsp;(' + targetDate + ' 제외)<br>', '');
+                    } else
+                        untilWhenP.innerHTML += "&nbsp;&nbsp;&nbsp;(" + targetDate + " 제외)<br>";
+                    return;
+                } else
+                    untilWhenP.innerHTML += '* ' + checkedDate[i] + '<br>';
             }
         }
-
-        if (!period[0].checked)
-            untilWhen.querySelector('p').innerHTML = untilWhen.querySelector('p').innerHTML.slice(0, -2);
     })
 
 

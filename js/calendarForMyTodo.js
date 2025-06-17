@@ -1,7 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // calendarScript;
     window.calendarScript = function () {
 
         const date = new Date();//현재날짜
@@ -21,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let radioForMonth = document.querySelector('.radioForMonth');
         window.forMonth = document.querySelectorAll('.forMonth');//매달 라디오 메뉴 라벨
-        let initBtn = document.querySelector('.initBtn');//초기화버튼
+        window.initBtn = document.querySelector('.initBtn');//초기화버튼
 
 
         calendar();
@@ -373,7 +372,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         case 5: everyNDay.innerHTML += '금요일, '; break;
                         case 6: everyNDay.innerHTML += '토요일, '; break;
                     }
-                    
+
                 }
 
                 everyNDate.innerHTML = everyNDate.innerHTML.slice(0, -2);
@@ -440,9 +439,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
+
+        //#endregion
+
+        //#endregion
     }
-
-    //#endregion
-
-    //#endregion
 })
