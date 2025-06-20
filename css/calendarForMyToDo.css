@@ -15,20 +15,22 @@ p {
     font-weight: bold;
 }
 
-.before, .after{
+.before,
+.after {
     display: flex;
     align-items: center;
 }
 
-.beforeYear{
+.beforeYear {
     margin-right: 10px;
 }
 
-.afterYear{
+.afterYear {
     margin-left: 10px;
 }
 
-.beforeMonth, .afterMonth{
+.beforeMonth,
+.afterMonth {
     font-size: 14px;
 }
 
@@ -79,13 +81,13 @@ th {
 }
 
 .periodLabel {
-    width: 24%;
+    width: 23%;
     height: 5vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 20px;
-    font-size: 14px;
+    font-size: 1.1vw;
+    font-weight: bold;
     cursor: pointer;
 }
 
@@ -95,10 +97,11 @@ th {
 }
 
 .deadLineCheckBox button {
-    border-radius: 20px;
-    font-size: 14px;
+    font-size: 1.1vw;
+    font-weight: bold;
+    width: 23%;
 }
 
-.initBtn{
+.initBtn {
     cursor: pointer;
 }

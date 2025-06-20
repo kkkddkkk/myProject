@@ -50,20 +50,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (confirm('정말 삭제하시겠습니까?\n삭제 후 해당 스케줄을 되돌릴 수 없습니다.')) {
                 //subDivision 삭제
                 for (let i = 0; i < subDivisionUl.length; i++) {
-                    if (subDivisionUl[i].classList.contains(dropDown.value)) {
-                        innerWrap.removeChild(subDivisionUl[i]);
-                    }
+                    if (subDivisionUl[i].classList.contains(dropDown.value)) innerWrap.removeChild(subDivisionUl[i]);
                 }
 
                 for (let i = 0; i < dropMenu.length; i++) {
                     //드롭메뉴 삭제
                     if (document.querySelector('.divisionName').children[1].innerHTML == dropMenu[i].innerHTML) {
                         dropDown.removeChild(dropMenu[i]);
-                        if (dropMenu[i + 1] == null) {
-                            addNewTask.selected = true;
-                        } else {
-                            dropMenu[i + 1].selected = true;
-                        }
+                        if (dropMenu[i + 1] == null) addNewTask.selected = true;
+                        else dropMenu[i + 1].selected = true;
                     }
                     dropDownMenu();//드롭메뉴 재정리
                 }
@@ -73,9 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 //해당 subdivision 목록을 block으로
                 for (let i = 0; i < subDivisionUl.length; i++) {
-                    if (subDivisionUl[i].classList.contains(dropDown.value)) {
-                        subDivisionUl[i].style.display = 'block';
-                    }
+                    if (subDivisionUl[i].classList.contains(dropDown.value)) subDivisionUl[i].style.display = 'block';
                 }
             }
         }
@@ -97,9 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.classList.contains('fa-xmark') && event.target.parentNode.parentNode.parentNode.tagName == 'LI') {
             if (confirm('정말 삭제하시겠습니까?\n삭제 후 해당 스케줄을 되돌릴 수 없습니다.')) {
                 for (let i = 0; i < subDivisionUl.length; i++) {
-                    if (subDivisionUl[i].style.display == 'block') {
-                        subDivisionUl[i].removeChild(event.target.parentNode.parentNode.parentNode);
-                    }
+                    if (subDivisionUl[i].style.display == 'block') subDivisionUl[i].removeChild(event.target.parentNode.parentNode.parentNode);
                 }
             }
         }
@@ -108,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.classList.contains('fa-plus') && event.target.closest('.showSubDivision')) {
             clicked = event.target.parentNode.parentNode.querySelector('p');
             clickedIcon = 'fa-plus';
+            clickedClosest = event.target.parentNode;
 
             //모달 setting
             modalBGAtPage.style.display = 'block';
@@ -166,9 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //친구삭제 버튼 클릭 시 친구삭제
     friendsListDiv.addEventListener('click', (event) => {
-        if (event.target.closest('.friendsList')) {
-            friendsListDiv.removeChild(event.target.closest('.friendsList'));
-        }
+        if (event.target.closest('.friendsList')) friendsListDiv.removeChild(event.target.closest('.friendsList'));
     })
 
     //친구추가 버튼 클릭 시 친구검색 화면으로 이동
@@ -213,29 +203,41 @@ document.addEventListener('DOMContentLoaded', () => {
         //확인 버튼
         if (event.target.classList.contains('checkAtModal')) {
             //수정 시 이벤트
+            if (diviNameInput.value == '') {
+                alert('스케줄명을 입력해주세요.');
+                return;
+            }
             if (confirm('저장하시겠습니까?')) {
                 if (clickedIcon == 'fa-pen-to-square') {
                     //division 명 수정 시 dropmenu도 변경
                     if (clicked.parentNode.classList.contains('divisionName')) {
                         for (let i = 0; i < dropMenu.length; i++) {
-                            if (clicked.innerHTML == dropMenu[i].innerHTML) {
-                                dropMenu[i].innerHTML = diviNameInput.value;
-                            }
+                            if (clicked.innerHTML == dropMenu[i].innerHTML) dropMenu[i].innerHTML = diviNameInput.value;
                         }
                     }
                     clicked.innerHTML = diviNameInput.value;//변경된 division명 저장
                     dropDownMenu();
-                } else {//division- 추가버튼 클릭 시 subDivision 추가
-                    clone = document.querySelectorAll('.subDivisionLi')[0].cloneNode(true);
-                    let thisDiviUl;
-                    for (let i = 0; i < subDivisionUl.length; i++) {
-                        if (subDivisionUl[i].style.display == 'block') {
-                            thisDiviUl = subDivisionUl[i];
-                        }
+                } else {
+                    if (clickedClosest.classList.contains('divisionBtns')) {//division- 추가버튼 클릭 시 subDivision 추가;
+                        clone = document.querySelectorAll('.subDivisionLi')[0].cloneNode(true);
+                        clone.style.display = 'flex';
+                        clone.querySelector('.subDivisionName').querySelector('p').innerHTML = diviNameInput.value;
+
+                        subDivisionUl.forEach((thisDiviUl) => {
+                            if (thisDiviUl.style.display == 'block') thisDiviUl.appendChild(clone);
+                        })
+                    } else if (clickedClosest.classList.contains('subDivisionBtns')) {
+                        clone = document.querySelectorAll('.taskLi')[0].cloneNode(true);
+                        clone.style.display = 'flex';
+                        clone.querySelector('.taskName').querySelector('p').innerHTML = diviNameInput.value;
+                        console.log(checkedDate[0]);
+                        clone.querySelector('.until').innerHTML = "~" + checkedDate[0];
+
+                        let thisTaskUl = clicked.parentNode.parentNode.parentNode.querySelector('.taskUl');
+                        thisTaskUl.appendChild(clone);
+                        if (clickedClosest.children[3].classList.contains('fa-angle-up'))
+                            thisTaskUl.style.maxHeight = thisTaskUl.scrollHeight + 'px';
                     }
-                    clone.style.display = 'block';
-                    clone.querySelector('.subDivisionName').querySelector('p').innerHTML = diviNameInput.value;
-                    thisDiviUl.appendChild(clone);
                 }
                 modalBGAtPage.style.display = 'none';
             }
@@ -339,6 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.classList.contains(icon)) {
             clicked = event.target.parentNode.parentNode.querySelector('p');
             clickedIcon = icon;
+            clickedClosest = event.target.parentNode;
 
             //모달 setting
             modalBGAtPage.style.display = 'block';
